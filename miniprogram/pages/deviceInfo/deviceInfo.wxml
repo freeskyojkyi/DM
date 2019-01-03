@@ -1,2 +1,8 @@
 <!--pages/deviceInfo/deviceInfo.wxml-->
-<text>pages/deviceInfo/deviceInfo.wxml</text>
+
+<view class='picture-container'>
+  
+</view>
+<view class='device-inforamtion-container'>
+
+</view>
