@@ -1,8 +1,23 @@
 <!--pages/deviceInfo/deviceInfo.wxml-->
 
 <view class='picture-container'>
-  
+  ssssss
 </view>
-<view class='device-inforamtion-container'>
-
+<view class='device-information-container'>
+  <view class='device-information'>
+    <view class='informaion-title'>
+      {{name_title}} 
+    </view>
+    <view class='infomation-content'>
+      {{name}}
+    </view>
+  </view>
+  <view class='device-information'>
+    <view class='informaion-title'>
+      {{os_title}}
+    </view>
+    <view class='infomation-content'>
+      {{os}}
+    </view>
+  </view>  
 </view>

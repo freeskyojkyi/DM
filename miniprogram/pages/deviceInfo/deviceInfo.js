@@ -5,7 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    picUrl: 'cloud://testcloud-27877a.7465-testcloud-27877a/deviceImage/default.jpeg',
+    
+    name_title: 'Device Name:',
+    name: 'GZ_Macbook Pro_F',
 
+    os_title: 'System:',
+    os: 'Mac OS 10.13.3'
   },
 
   /**
