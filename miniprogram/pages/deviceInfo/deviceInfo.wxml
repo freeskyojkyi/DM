@@ -10,7 +10,7 @@
       <text class='device-name-ch'>{{name_title_ch}}</text> 
     </view>
     <view class='infomation-content'>
-      {{name}}
+      <text class='device-name-content'>{{name}}</text>
     </view>
   </view>
   <view class='device-information'>

@@ -34,19 +34,19 @@
 }
 
 .device-information{
-  padding: 0rpx 0rpx;
+  padding: 20rpx;
   margin: 0rpx;
   width: 100%;
+
+  height: 150rpx;
 
   display: flex;
   flex-direction: row;
 }
 
 .informaion-title{
-  padding: 0rpx;
-  margin: 0rpx;
-
-  margin-right: 10rpx;
+  margin-right: 20rpx;
+  padding: 30rpx 20rpx;
 
   width: 28%;
 
@@ -55,8 +55,6 @@
 }
 
 .device-name{
-  padding: 30rpx 20rpx;
-
   background-color: #ddbf7c;
   color: #fef8de
 }
@@ -65,26 +63,32 @@
   padding: 0rpx;
   margin: 0rpx;
 
-  font-size: 30rpx;
+  font-size: 25rpx;
 }
 
 .device-name-ch{
   padding: 0rpx;
   margin: 0rpx;
 
-  font-size: 50rpx;
+  font-size: 40rpx;
 
   font-family: '微软雅黑';
   font-weight: bold;
 }
 
 .information-content{
+  padding: 20rpx;
+
+  width: 60%;
+}
+
+.device-name-content{
   padding: 0rpx;
   margin: 0rpx;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  font-size:45rpx;
+
+  background-color: #f8f6f9;
 }
 
 .actionItems{
