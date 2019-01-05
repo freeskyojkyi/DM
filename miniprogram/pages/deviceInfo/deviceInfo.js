@@ -7,11 +7,15 @@ Page({
   data: {
     picUrl: 'cloud://testcloud-27877a.7465-testcloud-27877a/deviceImage/default.jpeg',
     
-    name_title: 'Device Name:',
+    name_title_en: 'DEVICE NAME',
+    name_title_ch: '名字',
     name: 'GZ_Macbook Pro_F',
 
     os_title: 'System:',
-    os: 'Mac OS 10.13.3'
+    os: 'Mac OS 10.13.3',
+
+    borrow_button_name: 'Scan',
+    return_button_name: 'Return'
   },
 
   /**

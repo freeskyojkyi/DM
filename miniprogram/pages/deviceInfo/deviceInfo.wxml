@@ -5,11 +5,12 @@
 </view>
 <view class='device-information-container'>
   <view class='device-information'>
-    <view class='informaion-title'>
-      {{name_title}} 
+    <view class='informaion-title device-name'>
+      <text class='device-name-en'>{{name_title_en}}</text>
+      <text class='device-name-ch'>{{name_title_ch}}</text> 
     </view>
     <view class='infomation-content'>
-      {{name}}
+      <text class='device-name-content'>{{name}}</text>
     </view>
   </view>
   <view class='device-information'>
@@ -20,4 +21,8 @@
       {{os}}
     </view>
   </view>  
+</view>
+<view class='actionItems'>
+  <button class='fixedButton'>扫码</button>
+  <button class='fixedButton'>还机</button>
 </view>
