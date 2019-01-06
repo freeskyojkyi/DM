@@ -180,7 +180,7 @@
 }
 
 .fixedButton{
-  width: 100%;  
+  width: 100%;
   
   background-color: #415858;
   color: #fff;
