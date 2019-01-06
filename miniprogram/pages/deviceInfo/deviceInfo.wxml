@@ -1,5 +1,5 @@
 <!--pages/deviceInfo/deviceInfo.wxml-->
-<view class='background-pic'>
+<view class='page-container'>
   <view class='picture-container'>
     <image class='device-picture' src="{{pic_default}}" mode="{{mode}}"></image>
   </view>
@@ -24,7 +24,17 @@
     </view>  
   </view>
   <view class='actionItems'>
-    <button class='fixedButton'>扫码</button>
-    <button class='fixedButton'>还机</button>
+    <view class='scan'>   
+      <button class='fixedButton'>
+        <image class='scan_icon' src='{{scan_icon}}' mode='{{mode}}'></image>
+        <view>扫码</view>     
+      </button>
+    </view>
+    <view class='return'>
+      <button class='fixedButton'>
+        <image class='return_icon' src='{{return_icon}}' mode='{{mode}}'></image>
+        <view>还机</view>
+      </button>
+    </view>
   </view>
 </view>

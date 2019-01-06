@@ -16,6 +16,9 @@ Page({
     borrow_button_name: 'Scan',
     return_button_name: 'Return',
 
+    scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
+    return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
+
     pic_default:'cloud://test-f05377.7465-test-f05377/resources/images/default_pic_iphonexmax.png',
     mode: 'aspectFit',
   },
