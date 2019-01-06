@@ -4,25 +4,27 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    picUrl: 'cloud://testcloud-27877a.7465-testcloud-27877a/deviceImage/default.jpeg',
-    
+  data: {    
     name_title_en: 'DEVICE NAME',
     name_title_ch: '名字',
     name: 'GZ_Macbook Pro_F',
 
-    os_title: 'System:',
+    os_title_en: 'SYSTEM',
+    os_title_ch: '系统',
     os: 'Mac OS 10.13.3',
 
     borrow_button_name: 'Scan',
-    return_button_name: 'Return'
+    return_button_name: 'Return',
+
+    pic_default:'cloud://test-f05377.7465-test-f05377/resources/images/default_pic_iphonexmax.png',
+    mode: 'aspectFit',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
