@@ -27,13 +27,13 @@
     <view class='scan'>   
       <button class='fixedButton'>
         <image class='scan_icon' src='{{scan_icon}}' mode='{{mode}}'></image>
-        <view>扫码</view>     
+        <view>{{borrow_button_label}}</view>     
       </button>
     </view>
     <view class='return'>
       <button class='fixedButton'>
         <image class='return_icon' src='{{return_icon}}' mode='{{mode}}'></image>
-        <view>还机</view>
+        <view>{{return_button_label}}</view>
       </button>
     </view>
   </view>
