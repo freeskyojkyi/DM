@@ -1,11 +1,14 @@
 /* pages/deviceInfo/deviceInfo.wxss */
 
+.background-pic{
+  height: 100%;
+  width: 100%;
+
+  background-image: url("cloud://test-f05377.7465-test-f05377/resources/images/backgroud.jpg");
+}
+
 .picture-container{
   width: 100%;
-  height: 60%;
-
-  background-color: #e64d4d;
-  color: #fff; 
 
   display: flex;
   flex-direction: row;
@@ -13,11 +16,17 @@
 }
 
 .device-picture{
-  padding: 0rpx;
+  position: fixed;
+
+  padding: 20rpx;
   margin: 0rpx;
 
-  height: 700rpx;
-  width: 400rpx;
+  width: 500rpx;
+  height: 62%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .device-information-container{
@@ -28,27 +37,31 @@
   border-right: 0px;
   border-style: solid;
   border-color: #e2dada8e;
+  /* background-color: #fff; */
 
   position: fixed;
-  bottom: 200rpx;
+  bottom: 130rpx;
 }
 
 .device-information{
-  padding: 20rpx;
   margin: 0rpx;
   width: 100%;
 
-  height: 150rpx;
+  height: 120rpx;
 
   display: flex;
   flex-direction: row;
 }
 
+.name-padding{
+  padding: 20rpx 20rpx 0rpx 20rpx;
+}
+
 .informaion-title{
   margin-right: 20rpx;
-  padding: 30rpx 20rpx;
+  padding: 15rpx 20rpx;
 
-  width: 28%;
+  width: 22%;
 
   display: flex;
   flex-direction: column;
@@ -56,7 +69,9 @@
 
 .device-name{
   background-color: #ddbf7c;
-  color: #fef8de
+  color: #fef8de;
+
+  border-radius: 5px;
 }
 
 .device-name-en{
@@ -76,19 +91,77 @@
   font-weight: bold;
 }
 
-.information-content{
-  padding: 20rpx;
+.device-os{
+  background-color: #ba5d51;
+  color: #f8e1d8;
 
-  width: 60%;
+  border-radius: 5px;
+}
+
+.os-padding{
+  padding: 10rpx 20rpx 20rpx 20rpx;
+}
+
+.information-title-en{
+  padding: 0rpx;
+  margin: 0rpx;
+
+  font-size: 25rpx;
+}
+
+.information-title-ch{
+  padding: 0rpx;
+  margin: 0rpx;
+
+  font-size: 40rpx;
+
+  font-family: '微软雅黑';
+  font-weight: bold;
+}
+
+.information-content{
+  width: 65%;
+  background-color: #f8f6f9;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  font-family: 'Calibri';
+  
+  border-radius: 5px;
+  
+  font-weight: bold;
 }
 
 .device-name-content{
   padding: 0rpx;
   margin: 0rpx;
 
+  font-family: 'Calibri';
   font-size:45rpx;
 
-  background-color: #f8f6f9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  color: #460202b6;
+}
+
+.device-os-content{
+  padding: 0rpx;
+  margin: 0rpx;
+
+  font-family: 'Calibri';
+  font-size:45rpx;
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  color: #460202b6;
+  
+  border-radius: 5px;
 }
 
 .actionItems{
@@ -107,7 +180,7 @@
 }
 
 .fixedButton{
-  width: 50%;
+  width: 50%;  
   
   background-color: #757575;
   color: #fff;
