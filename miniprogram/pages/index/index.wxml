@@ -39,10 +39,11 @@
       <text>快速新建云函数</text>
     </navigator>
   </view> -->
-<button size="mini" type="default" bindtap="myDevice">My devices</button>===========\r\n\r\n\r\n
+<!-- <button size="mini" type="default" bindtap="myDevice">My devices</button>===========\r\n\r\n\r\n -->
 <!-- <scroll-view wx:if="{{mydevices}}">{{mydevices}}</scroll-view> -->
- <view class='history-table-wrap' wx:if="{{mydevices}}">
+ <view class='history-table-wrap' wx:if="{{alldevices}}">
     <view class="table">
+    My Device:
       <view class="tr">
           <view class="th th1">id</view>
           <view class="th th2">name</view>
@@ -50,15 +51,28 @@
       </view>
       <view class="tr" wx:for="{{mydevices}}" wx:key="">
           <view class="td td1">{{item._id}}</view>
-          <view class="td td2">{{item.deviceName}}</view>
+          <view class="td td2">{{item.device_name}}</view>
+          <view class="td td3">{{item.os}}</view>
+      </view>
+    </view>
+    <view class="table">
+    All Device:
+      <view class="tr">
+          <view class="th th1">id</view>
+          <view class="th th2">name</view>
+          <view class="th th3">os</view>
+      </view>
+      <view class="tr" wx:for="{{alldevices}}" wx:key="">
+          <view class="td td1">{{item._id}}</view>
+          <view class="td td2">{{item.device_name}}</view>
           <view class="td td3">{{item.os}}</view>
       </view>
     </view>
  </view>
 
-<button size="mini" type="default" bindtap="allDevices">All devices</button>
+<!-- <button size="mini" type="default" bindtap="allDevices">All devices</button> -->
 <!-- <scroll-view wx:if="{{alldevices}}">{{alldevices}}</scroll-view> -->
- <view class='history-table-wrap' wx:if="{{alldevices}}">
+ <!-- <view class='history-table-wrap' wx:if="{{alldevices}}">
     <view class="table">
       <view class="tr">
           <view class="th th1">id</view>
@@ -71,5 +85,5 @@
           <view class="td td3">{{item.os}}</view>
       </view>
     </view>
- </view>
+ </view> -->
 </view>

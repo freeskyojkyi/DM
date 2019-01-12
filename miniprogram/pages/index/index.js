@@ -7,13 +7,6 @@ Page({
   },
 
   onLoad: function() {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
-    }
-
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -44,6 +37,68 @@ Page({
         wx.navigateTo({
           url: '../deployFunctions/deployFunctions',
         })
+      }
+    })
+    var nthis = this
+    // 本地函数，已经改用云函数
+    // const db = wx.cloud.database({
+    //   env: 'test-f05377'
+    // })
+    // db.collection('devices').where({
+    //   holding_open_id: app.globalData.openid
+    // }).field({
+    //   _id:true,name:true,os:true
+    // }).get({
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'getmyDevices',
+      // 传给云函数的参数
+      data: {
+      },
+      success: res => {
+        console.log(res)
+        nthis.setData({
+          mydevices: res.result.data,
+        })
+        console.log('[数据库] [查询记录] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+    var nthis = this
+    // 本地函数，已经改用云函数
+    // const db = wx.cloud.database({
+    //   env: 'test-f05377'
+    // })
+    // db.collection('devices').where({
+    //   holding_open_id: app.globalData.openid
+    // }).field({
+    //   _id:true,name:true,os:true
+    // }).get({
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'getAllDevices',
+      // 传给云函数的参数
+      data: {
+      },
+      success: res => {
+        console.log(res)
+        nthis.setData({
+          alldevices: res.result.data,
+        })
+        console.log('[数据库] [查询记录] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
       }
     })
   },
@@ -100,8 +155,8 @@ Page({
   //     }
   //   })
   // },
-    myDevice: function () {
-      var nthis = this
+    // myDevice: function () {
+    //   var nthis = this
     // 本地函数，已经改用云函数
     // const db = wx.cloud.database({
     //   env: 'test-f05377'
@@ -111,60 +166,60 @@ Page({
     // }).field({
     //   _id:true,name:true,os:true
     // }).get({
-      wx.cloud.callFunction({
-        // 云函数名称
-        name: 'getmyDevices',
-        // 传给云函数的参数
-        data: {
-        },
-      success: res => {
-        console.log(res)
-        nthis.setData({
-          mydevices: res.result.data,
-        })
-        console.log('[数据库] [查询记录] 成功: ', res)
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    })
-  },
+  //     wx.cloud.callFunction({
+  //       // 云函数名称
+  //       name: 'getmyDevices',
+  //       // 传给云函数的参数
+  //       data: {
+  //       },
+  //     success: res => {
+  //       console.log(res)
+  //       nthis.setData({
+  //         mydevices: res.result.data,
+  //       })
+  //       console.log('[数据库] [查询记录] 成功: ', res)
+  //     },
+  //     fail: err => {
+  //       wx.showToast({
+  //         icon: 'none',
+  //         title: '查询记录失败'
+  //       })
+  //       console.error('[数据库] [查询记录] 失败：', err)
+  //     }
+  //   })
+  // },
 
-  allDevices: function () {
-    var nthis = this
-    // 本地函数，已经改用云函数
-    // const db = wx.cloud.database({
-    //   env: 'test-f05377'
-    // })
-    // db.collection('devices').where({
-    //   holding_open_id: app.globalData.openid
-    // }).field({
-    //   _id:true,name:true,os:true
-    // }).get({
-    wx.cloud.callFunction({
-      // 云函数名称
-      name: 'getAllDevices',
-      // 传给云函数的参数
-      data: {
-      },
-      success: res => {
-        console.log(res)
-        nthis.setData({
-          mydevices: res.result.data,
-        })
-        console.log('[数据库] [查询记录] 成功: ', res)
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    })
-  },
+  // allDevices: function () {
+  //   var nthis = this
+  //   // 本地函数，已经改用云函数
+  //   // const db = wx.cloud.database({
+  //   //   env: 'test-f05377'
+  //   // })
+  //   // db.collection('devices').where({
+  //   //   holding_open_id: app.globalData.openid
+  //   // }).field({
+  //   //   _id:true,name:true,os:true
+  //   // }).get({
+  //   wx.cloud.callFunction({
+  //     // 云函数名称
+  //     name: 'getAllDevices',
+  //     // 传给云函数的参数
+  //     data: {
+  //     },
+  //     success: res => {
+  //       console.log(res)
+  //       nthis.setData({
+  //         mydevices: res.result.data,
+  //       })
+  //       console.log('[数据库] [查询记录] 成功: ', res)
+  //     },
+  //     fail: err => {
+  //       wx.showToast({
+  //         icon: 'none',
+  //         title: '查询记录失败'
+  //       })
+  //       console.error('[数据库] [查询记录] 失败：', err)
+  //     }
+  //   })
+  // },
 })

@@ -1,6 +1,6 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
-
+cloud.init()
 exports.main = (event, context) => {
   console.log(event)
   console.log(context)
@@ -17,8 +17,6 @@ exports.main = (event, context) => {
     unionid: wxContext.UNIONID,
   }
 }
-
-cloud.init()
 const db = cloud.database()
 exports.main = async (event, context) => db.collection('devices').where({
   holding_open_id: this.openid
