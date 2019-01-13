@@ -41,37 +41,7 @@
   </view> -->
 <!-- <button size="mini" type="default" bindtap="myDevice">My devices</button>===========\r\n\r\n\r\n -->
 <!-- <scroll-view wx:if="{{mydevices}}">{{mydevices}}</scroll-view> -->
-My Device
-<van-cell-group wx:for="{{mydevices}}">
-  <van-cell
-    title="{{item.device_name}}"
-    value="{{item._id}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
-    size="large"
-    is-link
-    url="../addFunction/addFunction?id={{item._id}}"
-  />
-</van-cell-group>
-All Device
-<van-cell-group wx:for="{{alldevices}}">
-  <van-cell
-    title="{{item.device_name}}"
-    value="{{item._id}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
-    size="large"
-    is-link
-    url="../addFunction/addFunction?id={{item._id}}"
-  />
-</van-cell-group>
-<!-- <van-cell-group wx:if="{{mydevices}}" wx:for="{{mydevices}}">
-  <van-field
-          id="{{item.device_name}}"
-          name="{{item.device_name}}"
-          os="{{item.device_name}}"
-          icon="{{item.device_name}}"
-        />
-</van-cell-group> -->
- <!-- <view class='history-table-wrap' wx:if="{{alldevices}}">
+ <view class='history-table-wrap' wx:if="{{alldevices}}">
     <view class="table">
     My Device:
       <view class="tr">
@@ -98,7 +68,7 @@ All Device
           <view class="td td3">{{item.os}}</view>
       </view>
     </view>
- </view> -->
+ </view>
 
 <!-- <button size="mini" type="default" bindtap="allDevices">All devices</button> -->
 <!-- <scroll-view wx:if="{{alldevices}}">{{alldevices}}</scroll-view> -->

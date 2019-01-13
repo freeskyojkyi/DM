@@ -1,7 +1,7 @@
 @import '../common/index.wxss';
 
 .van-cell{
-  width:100%;
+  width: 100vw;
   display:-webkit-flex;
   display:flex;
   flex-direction: row;
