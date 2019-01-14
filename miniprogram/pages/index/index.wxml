@@ -49,7 +49,7 @@ My Device
     label="{{item.location_id}}\n{{item.holding_open_id}}"
     size="large"
     is-link
-    url="../addFunction/addFunction?id={{item._id}}"
+    url="../deviceInfo/deviceInfo?id={{item._id}}"
   />
 </van-cell-group>
 All Device
@@ -60,7 +60,7 @@ All Device
     label="{{item.location_id}}\n{{item.holding_open_id}}"
     size="large"
     is-link
-    url="../addFunction/addFunction?id={{item._id}}"
+    url="../deviceInfo/deviceInfo?id={{item._id}}"
   />
 </van-cell-group>
 <!-- <van-cell-group wx:if="{{mydevices}}" wx:for="{{mydevices}}">
