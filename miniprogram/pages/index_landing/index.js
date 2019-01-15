@@ -152,6 +152,33 @@ Page({
            console.error('[数据库] [查询alldevices] 失败：', err)
          }
        })
-     }
+     },
   
+  getDevice: function (e) {
+    console.log("This is getDevice")
+    console.log(e.currentTarget.dataset.id)
+
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'getDeviceInfo',
+      // 传给云函数的参数
+      data: {
+        "id": e.currentTarget.dataset.id,
+      },
+      success(res) {
+        console.log(res)
+        wx.navigateTo({
+          url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id,
+        })
+      },
+      fail()
+      {
+        wx.showModal({
+          title: '提示',
+          content: '找不到详细资料，请稍后再尝试',
+          showCancel:false, 
+        })
+      },
+    })
+  }
 })

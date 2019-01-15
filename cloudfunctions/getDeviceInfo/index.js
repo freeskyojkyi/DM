@@ -7,6 +7,8 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  console.log("-----------------------")
   console.log(event.id)
+  console.log("-----------------------")
   return db.collection('devices').doc(event.id).get()
 }

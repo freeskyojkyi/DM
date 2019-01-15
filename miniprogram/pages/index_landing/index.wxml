@@ -48,7 +48,8 @@ My Device
     label="{{item.location_id}}\n{{item.holding_open_id}}"
     size="large"
     is-link
-    url="../deviceInfo/deviceInfo?id={{item._id}}"
+    data-id="{{item._id}}"
+    bindtap="getDevice"
   />
 </van-cell-group>
 All Device
@@ -58,7 +59,8 @@ All Device
     label="{{item.location_id}}\n{{item.holding_open_id}}"
     size="large"
     is-link
-    url="../deviceInfo/deviceInfo?id={{item._id}}"
+    data-id="{{item._id}}"
+    bindtap="getDevice"
   />
 </van-cell-group>
   
