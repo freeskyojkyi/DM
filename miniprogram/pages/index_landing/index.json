@@ -10,5 +10,6 @@
   "van-goods-action": "/lib/vant/goods-action/index",
   "van-panel": "/lib/vant/panel/index",
   "van-goods-action-button": "/lib/vant/goods-action-button/index"
+   
   }
 }

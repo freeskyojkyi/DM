@@ -20,36 +20,26 @@
 
  <!-- 借机  -->
 
-<van-goods-action>
-  <van-goods-action-button
-    type="default"
-    text="{{log_name}}"
-    font-size='30'
-    open-type="getUserInfo" 
+  <view class='actionItems'>
+    <view class='wording'>   
+      <button class='fixedButton'>
+        <image class='_icon' src='{{log_icon}}' mode='{{mode}}'></image>
+        <view>{{log_button_label}}</view>     
+      </button>
+    </view>
+   <view class='wording'>   
+      <button class='fixedButton'>
+        <image class='_icon' src='{{scan_icon}}' mode='{{mode}}'></image>
+        <view>{{borrow_button_label}}</view>     
+      </button>
+ </view>
+ <view class='wording'>
+      <button class='fixedButton'>
+        <image class='_icon' src='{{return_icon}}' mode='{{mode}}'></image>
+        <view>{{return_button_label}}</view>
+      </button>
+    </view>
+  </view>
+
+
   
-  />
-
-  <van-goods-action-button
-    text="{{lDevice_name}}"
-    type="default"
-    class= ""
-    bind:click="onClickButton"
-  />
-
-<image src='{{scan_icon}}' class='scanQR'></image>
-
-  <van-goods-action-button
-    text="{{rDevice_name}}"
-    type="default"
-    class= ""
-    bind:click="onClickButton"
-  />
-
-  <van-goods-action-button
-    text="{{kDevice_name}}"
-    type="default"
-    class='returndevive'
-    bind:click="onClickButton"
-  />
-</van-goods-action>
-

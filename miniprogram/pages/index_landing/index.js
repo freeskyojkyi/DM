@@ -3,9 +3,22 @@ const app = getApp()
 
 Page({
   data: {
+    //参数信息
+    select: false,
+    grade_name: '--请选择Device Group--',
+    currentTab: 0,
+    borrow_button_name: 'Scan',
+    borrow_button_label: '借机',
+    log_button_name: 'Log',
+    log_button_label: '日志',
+    return_button_name: 'Return',
+    return_button_label: '还机',
+    scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
+    return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
+    log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon.png',
+
     //added checkbox value
     items: [
-
       { name: 'group A', value: 'Group A ' },
       { name: 'group B', value: 'Group B', checked: 'true' },
       { name: 'group C', value: 'Group C', checked: 'true' },
@@ -16,9 +29,8 @@ Page({
     checkboxChange(e) {
       console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     },
-    select: false,
-    grade_name: '--请选择Device Group--',
-
+    
+//navigation bar information
     navData: [
       {
         text: '机器列表'
@@ -28,15 +40,8 @@ Page({
       },
 
     ],
-    currentTab: 0,
-
-    log_name: '日志',
-    lDevice_name: '借机',
-    rDevice_name: '还机',
-    kDevice_name: '持有',
-    scan_icon: 'https://7465-test-f05377-1258443323.tcb.qcloud.la/resources/images/scanQR.png',
-  },
-
+    
+},
    
   switchNav(event) {
     var cur = event.currentTarget.dataset.current;
@@ -76,9 +81,7 @@ Page({
       show: !this.data.show
     });
   },
-  onLoad: function (options) {
-
-  },
+  
   /**
  *  点击下拉框
  */
@@ -97,6 +100,58 @@ Page({
       grade_name: name,
       select: false
     })
-  }
+  },
+ 
+  //pull down to refresh page to show my devices
+  onPullDownRefresh: function () {
+    this.onLoad()
+  },
+  onLoad: function () {
 
+       var nthis = this
+       wx.cloud.callFunction({
+         // 获取我的设备
+         name: 'getmyDevices',
+         // 传给云函数的参数
+         data: {
+         },
+         success: res => {
+           console.log(res)
+           nthis.setData({
+             mydevices: res.result.data,
+           })
+           console.log('[数据库] [查询mydevices] 成功: ', res)
+         },
+         fail: err => {
+           wx.showToast({
+             icon: 'none',
+             title: '查询mydevices失败'
+           })
+           console.error('[数据库] [查询mydevices] 失败：', err)
+         }
+       })
+
+       wx.cloud.callFunction({
+         // 获取全部设备
+         name: 'getAllDevices',
+         // 传给云函数的参数
+         data: {
+         },
+         success: res => {
+           console.log(res)
+           nthis.setData({
+             alldevices: res.result.data,
+           })
+           console.log('[数据库] [查询alldevices] 成功: ', res)
+         },
+         fail: err => {
+           wx.showToast({
+             icon: 'none',
+             title: '查询alldevices失败'
+           })
+           console.error('[数据库] [查询alldevices] 失败：', err)
+         }
+       })
+     }
+  
 })
