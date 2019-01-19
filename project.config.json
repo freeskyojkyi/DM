@@ -28,12 +28,20 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "扫描二维码进入",
+					"pathName": "pages/index_landing/index",
+					"query": "Scene=0002",
+					"scene": "1011"
 				}
 			]
 		}
