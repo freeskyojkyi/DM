@@ -28,10 +28,11 @@
       </button>
     </view>
    <view class='wording'>   
-      <button class='fixedButton'>
+      <!--button class='fixedButton'-->
+      <button wx:if="{{canIUse}}" class='fixedButton'open-type="getUserInfo" bindgetuserinfo="borrowDevice">
         <image class='_icon' src='{{scan_icon}}' mode='{{mode}}'></image>
         <view>{{borrow_button_label}}</view>     
-      </button>
+      </button><view wx:else>请升级微信版本</view>
  </view>
  <view class='wording'>
       <button class='fixedButton'>

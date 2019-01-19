@@ -4,7 +4,7 @@ const app = getApp()
 Page({
   data: {
     //参数信息
-    select: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     grade_name: '--请选择Device Group--',
     currentTab: 0,
     borrow_button_name: 'Scan',
@@ -106,8 +106,9 @@ Page({
   onPullDownRefresh: function () {
     this.onLoad()
   },
-  onLoad: function () {
-
+  onLoad: function (options) {
+  
+    console.log(options.id)
        var nthis = this
        wx.cloud.callFunction({
          // 获取我的设备
@@ -152,6 +153,33 @@ Page({
            console.error('[数据库] [查询alldevices] 失败：', err)
          }
        })
+    if (options.id) { console.log("HAS ID")
+    wx.showModal({
+      title: 'Borrow Device?',
+      content: 'Are you confirm to borrow device ID =' + options.id + '?',
+      confirmText: 'Confirm',
+      cancelText: 'Cancel',
+      success: function (res) {
+        if (res.confirm) { console.log("确定借机")
+          wx.cloud.callFunction({
+            name: 'setDeviceBorrow',
+            data: {
+              deviceid: options.id,
+              operationtype: 0,
+            },
+            success(res) {
+              wx.showToast({
+                title: "Confirmed",
+                icon: 'success',
+                duration: 3000
+              })
+            },
+            fail: console.error
+          })
+           } else { console.log("取消")}
+      }
+    })
+    } else { console.log("No ID")}
      },
   
   getDevice: function (e) {
@@ -180,5 +208,68 @@ Page({
         })
       },
     })
+  },
+
+  borrowDevice: function (e) {
+    if (e.detail.userInfo) {
+      var that = this;
+      var show; 
+      wx.scanCode({
+        success: (res) => {
+          //const scene = decodeURIComponent(res.result.scene)
+         console.log(res.path),
+          //if (res.result.indexOf("data") != -1) {
+            //app.globalData.cResult = res.result.slice(7);
+            //if (app.globalData.operatorInfo == undefined) {
+              //wx.getUserInfo({
+                //success: function (res2) {
+                  //console.log(res2.userInfo.nickName)
+                 // app.globalData.operatorInfo = res2.userInfo.nickName
+                  //console.log(app.globalData.operatorInfo)
+                //}
+              //})
+            //}
+            //wx.navigateTo({
+              //url: "../addFunction/addFunction?id=" + "NA",
+              //success: function (res) { },
+              //fail: function (res) { },
+              //complete: function (res) { },
+            //})
+            wx.showToast({
+              title: '扫码成功',
+              icon: 'success',
+              duration: 2000
+            })
+          if (res.path) {
+            console.log(res.path)
+            wx.navigateTo({
+              url: '/'+res.path})
+              }else{
+            wx.showToast({
+              title: "无效二维码",
+              icon: 'none',
+              duration: 2000
+            })
+              }
+          //} else {
+            //wx.showToast({
+              //title: "无效DMS二维码",
+              //icon: 'none',
+              //duration: 2000
+           // })
+          //}
+        },
+        fail: (res) => {
+          wx.showToast({
+            title: "扫码失败",
+            icon: 'none',
+            duration: 2000
+          })
+        },
+        complete: (res) => {
+        }
+      }) 
+    }else{}
   }
 })
+  
