@@ -33,5 +33,4 @@ exports.main = async (event, context) => {
     return his._id;
   }catch(e){console.log(e)
   }
-  
 }
