@@ -9,7 +9,6 @@ Page({
   onLoad: function() {
 
     var nthis = this
-
     wx.cloud.callFunction({
       // 获取我的设备
       name: 'getmyDevices',
