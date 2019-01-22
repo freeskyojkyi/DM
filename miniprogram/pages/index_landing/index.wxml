@@ -50,7 +50,7 @@ My Device
     size="large"
     is-link
     data-id="{{item._id}}"
-    bindtap="getDevice"
+    bindtap="gotoDeviceInfo"
   />
 </van-cell-group>
 All Device
@@ -61,7 +61,7 @@ All Device
     size="large"
     is-link
     data-id="{{item._id}}"
-    bindtap="getDevice"
+    bindtap="gotoDeviceInfo"
   />
 </van-cell-group>
   

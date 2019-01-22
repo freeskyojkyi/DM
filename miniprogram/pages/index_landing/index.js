@@ -222,6 +222,12 @@ Page({
     } else { console.log("No ID")}
      },
   
+  gotoDeviceInfo: function(e) {
+    wx.navigateTo({
+      url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id,
+    })
+  },
+
   getDevice: function (e) {
     console.log("This is getDevice")
     console.log(e.currentTarget.dataset.id)
@@ -249,6 +255,7 @@ Page({
       },
     })
   },
+
   getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {
