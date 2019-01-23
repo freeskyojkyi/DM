@@ -53,6 +53,11 @@ Page({
           title: '提示',
           content: '找不到详细资料，请稍后再尝试',
           showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 2
+            })
+          }
         })
       },
     })
