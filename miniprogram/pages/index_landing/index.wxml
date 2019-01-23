@@ -9,13 +9,13 @@
   <view class='top1' >
     <!--checkbox add from here-->
     <!-- 下拉需要显示的列表 -->
+    <checkbox-group bindchange="checkboxChange">
     <view class="select_box" wx:if="{{select}}">
-
-         <label class="checkbox" wx:for="{{items}}" >
-     {{item.value}}      
-    <checkbox value="{{item.name}}" checked="{{item.checked}}" style='{{index==selectData.length-1&&"border:0;"}}'/>
+         <label class="checkbox" wx:for="{{items}}" >{{item.value}}      
+    <checkbox value="{{item.name}}" checked="{{item.checked}}" style='{{index==selectData.length-1&&"border:0;"}}' />
   </label>
       </view>
+      </checkbox-group>
     </view>
 
  <!-- 借机  -->
@@ -42,22 +42,23 @@
     </view>
   </view>
 
-My Device
+<block wx:if="{{mydevices.item._id}}">My Device
 <van-cell-group wx:for="{{mydevices}}" wx:key="{{item._id}}">
   <van-cell
-    title="{{item.device_name}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
+    title="{{item._id}}.{{item.os}} {{item.device_name}}"
+    label="{{item.holding_open_id}}"
     size="large"
     is-link
     data-id="{{item._id}}"
     bindtap="getDevice"
   />
 </van-cell-group>
-All Device
+</block>
+<label wx:if="{{alldevices}}">All Device</label>
 <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
   <van-cell
-    title="{{item.device_name}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
+    title="{{item._id}}.{{item.os}} {{item.device_name}}"
+    label="{{item.holding_open_id}}"
     size="large"
     is-link
     data-id="{{item._id}}"

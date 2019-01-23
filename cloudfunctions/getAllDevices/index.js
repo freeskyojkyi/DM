@@ -21,4 +21,5 @@ exports.main = (event, context) => {
 cloud.init()
 const db = cloud.database()
 exports.main = async (event, context) => db.collection('devices').where({
+  // location_id: "1"
 }).get()

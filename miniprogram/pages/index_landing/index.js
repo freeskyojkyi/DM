@@ -20,16 +20,12 @@ Page({
     //added checkbox value
     items: [
       { name: 'group A', value: 'Group A ' },
-      { name: 'group B', value: 'Group B', checked: 'true' },
-      { name: 'group C', value: 'Group C', checked: 'true' },
+      { name: '1', value: 'Group C' },
+      { name: 'group C', value: 'Group C' },
       { name: 'group D', value: 'Group D' },
       { name: 'group E', value: 'Group E' },
       { name: ' others', value: ' Others ' },
-    ],
-    checkboxChange(e) {
-      console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    },
-    
+      ],
 //navigation bar information
     navData: [
       {
@@ -42,6 +38,31 @@ Page({
     ],
     
 },
+  checkboxChange: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    wx.cloud.callFunction({
+      // 获取全部设备
+      name: 'getAllDevices',
+      // 传给云函数的参数
+      data: {
+        group: e.detail.value
+      },
+      success: res => {
+        console.log(res)
+        this.setData({
+          alldevices: res.result.data,
+        })
+        console.log('[数据库] [查询alldevices] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询alldevices失败'
+        })
+        console.error('[数据库] [查询alldevices] 失败：', err)
+      }
+    })
+  },
    
   switchNav(event) {
     var cur = event.currentTarget.dataset.current;
@@ -104,7 +125,27 @@ Page({
  
   //pull down to refresh page to show my devices
   onPullDownRefresh: function () {
-    this.onLoad()
+    wx.cloud.callFunction({
+      // 获取全部设备
+      name: 'getAllDevices',
+      // 传给云函数的参数
+      data: { group: this.e.detail.value
+      },
+      success: res => {
+        console.log(res)
+        this.setData({
+          alldevices: res.result.data,
+        })
+        console.log('[数据库] [查询alldevices] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询alldevices失败'
+        })
+        console.error('[数据库] [查询alldevices] 失败：', err)
+      }
+    })
   },
   onLoad: function (options) {
     var nthis = this
@@ -113,6 +154,7 @@ Page({
       name: 'getmyDevices',
          // 传给云函数的参数
       data: {
+        // group : this.e.detail.value
          },
       success: res => {
         console.log(res)
