@@ -9,7 +9,4 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   console.log(event.id)
   return db.collection('devices').doc(event.id).get()
-  // return db.collection('devices').where({
-  //   _id: '7'
-  // }).get()
 }

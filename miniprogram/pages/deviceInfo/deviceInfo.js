@@ -34,21 +34,14 @@ Page({
   onLoad: function (options) {
     var that = this
 
-    console.log(options.id)
-
     wx.cloud.callFunction({
       // 云函数名称
       name: 'getDeviceInfo',
       // 传给云函数的参数
       data: {
-      //  id: options.id,
-        id: "7",
+        id: options.id,
       },
       success(res) {
-        console.log("------------"),
-        console.log(options.id),
-        console.log(res),
-      
         that.setData({
           name: res.result.data.device_name,
           os: res.result.data.os
