@@ -24,7 +24,8 @@ Page({
     scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
 
-    pic_default:'cloud://test-f05377.7465-test-f05377/resources/images/default_pic_iphonexmax.png',
+    // pic_default:'cloud://test-f05377.7465-test-f05377/resources/images/default_pic_iphonexmax.png',
+    pic_default: '',
     mode: 'aspectFit',
   },
 
@@ -33,6 +34,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    var url
 
     wx.cloud.callFunction({
       // 云函数名称
@@ -42,9 +44,19 @@ Page({
         id: options.id,
       },
       success(res) {
+        if(res.result.data.pic_url != undefined)
+        {
+          url = "cloud://test-f05377.7465-test-f05377/resources/device_image/"+ res.result.data.pic_url
+        }
+        else
+        {
+          url = 'cloud://test-f05377.7465-test-f05377/resources/images/default_pic_iphonexmax.png'
+        }
+
         that.setData({
           name: res.result.data.device_name,
-          os: res.result.data.os
+          os: res.result.data.os,
+          pic_default: url,
         })
       },
       fail(e) {
