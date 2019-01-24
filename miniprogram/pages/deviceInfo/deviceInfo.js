@@ -44,7 +44,7 @@ Page({
         id: options.id,
       },
       success(res) {
-        if(res.result.data.pic_url != undefined)
+        if(res.result.data.pic_url != undefined && res.result.data.pic_url != "")
         {
           url = "cloud://test-f05377.7465-test-f05377/resources/device_image/"+ res.result.data.pic_url
         }
