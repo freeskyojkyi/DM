@@ -19,12 +19,12 @@ Page({
 
     //added checkbox value
     items: [
-      { name: 'group A', value: 'Group A ' },
-      { name: '1', value: 'Group C' },
-      { name: 'group C', value: 'Group C' },
-      { name: 'group D', value: 'Group D' },
-      { name: 'group E', value: 'Group E' },
-      { name: ' others', value: ' Others ' },
+      { name:'0', value:'Group 0' },
+      { name:'1', value:'Group 1' },
+      { name:'2', value:'Group 2' },
+      { name:'group D', value:'Group D' },
+      { name:'group E', value:'Group E' },
+      { name:'others', value:'Others ' },
       ],
 //navigation bar information
     navData: [
@@ -40,19 +40,20 @@ Page({
 },
   checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    var filter = e.detail.value
     wx.cloud.callFunction({
       // 获取全部设备
       name: 'getAllDevices',
       // 传给云函数的参数
       data: {
-        group: e.detail.value
+        a: filter,
       },
       success: res => {
         console.log(res)
         this.setData({
           alldevices: res.result.data,
         })
-        console.log('[数据库] [查询alldevices] 成功: ', res)
+        console.log('[数据库] [查询alldevices] 成功: ',filter,res)
       },
       fail: err => {
         wx.showToast({
@@ -129,7 +130,7 @@ Page({
       // 获取全部设备
       name: 'getAllDevices',
       // 传给云函数的参数
-      data: { group: this.e.detail.value
+      data: {
       },
       success: res => {
         console.log(res)

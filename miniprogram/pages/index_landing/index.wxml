@@ -54,7 +54,7 @@
   />
 </van-cell-group>
 </block>
-<label wx:if="{{alldevices}}">All Device</label>
+<block wx:if="{{alldevices}}">All Device
 <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
   <van-cell
     title="{{item._id}}.{{item.os}} {{item.device_name}}"
@@ -65,4 +65,4 @@
     bindtap="getDevice"
   />
 </van-cell-group>
-  
+</block>
