@@ -1,0 +1,10 @@
+<!--miniprogram/pages/deviceLogList/deviceLogList.wxml-->
+<block wx:for="{{checkSummary}}">
+          <van-cell
+            title="{{item.deviceid}}     {{item.date}}"
+            label="from: {{item.userfrom}} to: {{item.userto}}"
+            value="{{item.operationtype}}"
+            size="small"
+          />
+        </block>
+
