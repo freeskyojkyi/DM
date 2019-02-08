@@ -20,6 +20,8 @@ Page({
 
     return_button_name: 'Return',
     return_button_label: '还机',
+    pageid: '',
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
 
     scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
@@ -35,7 +37,90 @@ Page({
   onLoad: function (options) {
     var that = this
     var url
-
+    this.pageid = options.id
+    if (options.qr) { 
+      //console.log(options.qr)
+      wx.cloud.callFunction({
+        name: 'ownByMe',
+        data: {
+          deviceid: options.id,
+        },
+        success(res) {
+          //console.log(res)
+          if (res.result) {
+            //pop up to start return flow
+            wx.showModal({
+              title: 'Return Device?',
+              content: 'You are already holding device ID =' + options.id + '. Are you want to Return Device?',
+              confirmText: 'Confirm',
+              cancelText: 'Cancel',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log("确定还机")
+                  wx.cloud.callFunction({
+                    name: 'setDeviceReturn',
+                    data: {
+                      deviceid: options.id,
+                      returnTo: "GZAdmin",
+                      operationtype: 1,
+                    },
+                    success(res) {
+                      wx.showToast({
+                        title: "Confirmed",
+                        icon: 'success',
+                        duration: 3000
+                      })
+                      wx.navigateTo({
+                        url: "../index_landing/index",
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
+                      })
+                    },
+                    fail: console.error
+                  })
+                } else { console.log("取消") }
+              }
+            })
+          } else {
+            //pop up to start borrow flow
+            wx.showModal({
+              title: 'Borrow Device?',
+              content: 'Are you confirm to borrow device ID =' + options.id + '?',
+              confirmText: 'Confirm',
+              cancelText: 'Cancel',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log("确定借机")
+                  wx.cloud.callFunction({
+                    name: 'setDeviceBorrow',
+                    data: {
+                      deviceid: options.id,
+                      operationtype: 0,
+                    },
+                    success(res) {
+                      wx.showToast({
+                        title: "Confirmed",
+                        icon: 'success',
+                        duration: 3000
+                      })
+                      wx.navigateTo({
+                        url: "../index_landing/index",
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
+                      })
+                    },
+                    fail: console.error
+                  })
+                } else { console.log("取消") }
+              }
+            })
+          }
+        },
+        fail: console.error
+      })
+    } else { console.log("No QR") }
     wx.cloud.callFunction({
       // 云函数名称
       name: 'getDeviceInfo',
@@ -122,5 +207,142 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+borrowThisDevice:function(e){
+  var that = this
+  wx.cloud.callFunction({
+    name: 'ownByMe',
+    data: {
+      deviceid: that.pageid,
+    },
+    success(res) {
+      //console.log(res)
+      if (res.result) {
+        //pop up to start return flow
+        wx.showModal({
+          title: 'ERROR',
+          content: 'You are already holding this device!',
+          confirmText: 'OK',
+          cancelText: 'Cancel',
+          success: function (res) {
+            if (res.confirm) {
+              wx.navigateTo({
+                url: "../index_landing/index",
+                success: function (res) { },
+                fail: function (res) { },
+                complete: function (res) { },
+              })
+            } else { console.log("取消") }
+          }
+        })
+      } else {
+        //pop up to start borrow flow
+        wx.showModal({
+          title: 'Borrow Device?',
+          content: 'Are you confirm to borrow device ID =' + that.pageid + '?',
+          confirmText: 'Confirm',
+          cancelText: 'Cancel',
+          success: function (res) {
+            if (res.confirm) {
+              console.log("确定借机")
+              wx.cloud.callFunction({
+                name: 'setDeviceBorrow',
+                data: {
+                  deviceid: that.pageid,
+                  operationtype: 0,
+                },
+                success(res) {
+                  wx.showToast({
+                    title: "Confirmed",
+                    icon: 'success',
+                    duration: 3000
+                  })
+                  wx.navigateTo({
+                    url: "../index_landing/index",
+                    success: function (res) { },
+                    fail: function (res) { },
+                    complete: function (res) { },
+                  })
+                },
+                fail: console.error
+              })
+            } else { console.log("取消") }
+          }
+        })
+      }
+    },
+    fail: console.error
+  })
+},
+
+  returnThisDevice:function(e){
+    var that = this
+    if (e.detail.userInfo) {
+      wx.cloud.callFunction({
+        name: 'ownByMe',
+        data: {
+          deviceid: that.pageid,
+        },
+        success(res) {
+          //console.log(res)
+          if (res.result) {
+            //pop up to start return flow
+            wx.showModal({
+              title: 'Return Device?',
+              content: 'You are already holding device ID =' + that.pageid + '. Are you want to Return Device?',
+              confirmText: 'Confirm',
+              cancelText: 'Cancel',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log("确定还机")
+                  wx.cloud.callFunction({
+                    name: 'setDeviceReturn',
+                    data: {
+                      deviceid: that.pageid,
+                      returnTo: "GZAdmin",
+                      operationtype: 1,
+                    },
+                    success(res) {
+                      wx.showToast({
+                        title: "Confirmed",
+                        icon: 'success',
+                        duration: 3000
+                      })
+                      wx.navigateTo({
+                        url: "../index_landing/index",
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
+                      })
+                    },
+                    fail: console.error
+                  })
+                } else { console.log("取消") }
+              }
+            })
+          } else {
+            //pop up to start borrow flow
+            wx.showModal({
+              title: 'ERROR',
+              content: 'You are not currently holding this device!',
+              confirmText: 'OK',
+              cancelText: 'Cancel',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.navigateTo({
+                    url: "../index_landing/index",
+                    success: function (res) { },
+                    fail: function (res) { },
+                    complete: function (res) { },
+                  })
+                } else { console.log("取消") }
+              }
+            })
+          }
+        },
+        fail: console.error
+      })
+    }
   }
 })

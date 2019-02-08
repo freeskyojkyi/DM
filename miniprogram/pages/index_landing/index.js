@@ -151,75 +151,6 @@ Page({
            console.error('[数据库] [查询alldevices] 失败：', err)
          }
        })
-    if (options.id) {
-      wx.cloud.callFunction({
-        name: 'ownByMe',
-        data: {
-          deviceid: options.id,
-        },
-        success(res) {
-          //console.log(res)
-          if(res.result){
-            //pop up to start return flow
-            wx.showModal({
-              title: 'Return Device?',
-              content: 'You are already holding device ID =' + options.id + '. Are you want to Return Device?',
-              confirmText: 'Confirm',
-              cancelText: 'Cancel',
-              success: function (res) {
-                if (res.confirm) {
-                  console.log("确定还机")
-                  wx.cloud.callFunction({
-                    name: 'setDeviceReturn',
-                    data: {
-                      deviceid: options.id,
-                      returnTo: "GZAdmin",
-                      operationtype: 1,
-                    },
-                    success(res) {
-                      wx.showToast({
-                        title: "Confirmed",
-                        icon: 'success',
-                        duration: 3000
-                      })
-                    },
-                    fail: console.error
-                  })
-                } else { console.log("取消") }
-              }
-            })
-            }else{
-            //pop up to start borrow flow
-            wx.showModal({
-              title: 'Borrow Device?',
-              content: 'Are you confirm to borrow device ID =' + options.id + '?',
-              confirmText: 'Confirm',
-              cancelText: 'Cancel',
-              success: function (res) {
-                if (res.confirm) { console.log("确定借机")
-                  wx.cloud.callFunction({
-                    name: 'setDeviceBorrow',
-                    data: {
-                      deviceid: options.id,
-                      operationtype: 0,
-                    },
-                    success(res) {
-                      wx.showToast({
-                        title: "Confirmed",
-                        icon: 'success',
-                        duration: 3000
-                      })
-                    },
-                    fail: console.error
-                  })
-                  } else { console.log("取消")}
-              }
-            })
-          }
-        },
-        fail: console.error
-      })
-    } else { console.log("No ID")}
      },
   
   gotoDeviceInfo: function(e) {
@@ -268,6 +199,18 @@ Page({
           typeof cb == "function" && cb(that.globalData.userInfo)
         }
       })
+    }
+  },
+
+
+  getLogList:function(e){
+    if (e.detail.userInfo) {
+      wx.navigateTo({
+              url: "../deviceLogList/deviceLogList",
+              success: function (res) { },
+              fail: function (res) { },
+              complete: function (res) { },
+            })
     }
   },
 
