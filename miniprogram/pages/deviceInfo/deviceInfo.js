@@ -38,7 +38,16 @@ Page({
     var that = this
     var url
     this.pageid = options.id
+    if (app.globalData.operatorInfo) { } else {
+      //console.log("not yet has userinfo")
+      wx.getUserInfo({
+        success: function (res) {
+          app.globalData.operatorInfo = res.userInfo.nickName
+        }
+      })
+    }
     if (options.qr) { 
+      
       //console.log(options.qr)
       wx.cloud.callFunction({
         name: 'ownByMe',
@@ -63,6 +72,7 @@ Page({
                       deviceid: options.id,
                       returnTo: "GZAdmin",
                       operationtype: 1,
+                      operatorNickname: app.globalData.operatorInfo
                     },
                     success(res) {
                       wx.showToast({
@@ -97,6 +107,7 @@ Page({
                     data: {
                       deviceid: options.id,
                       operationtype: 0,
+                      operatorNickname: app.globalData.operatorInfo
                     },
                     success(res) {
                       wx.showToast({
@@ -251,6 +262,7 @@ borrowThisDevice:function(e){
                 data: {
                   deviceid: that.pageid,
                   operationtype: 0,
+                  operatorNickname: app.globalData.operatorInfo
                 },
                 success(res) {
                   wx.showToast({
@@ -302,6 +314,7 @@ borrowThisDevice:function(e){
                       deviceid: that.pageid,
                       returnTo: "GZAdmin",
                       operationtype: 1,
+                      operatorNickname: app.globalData.operatorInfo
                     },
                     success(res) {
                       wx.showToast({

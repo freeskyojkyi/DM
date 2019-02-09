@@ -6,6 +6,30 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
 try {
+    let checkUser = await db.collection('user').where({
+      openid: event.userInfo.openId}).get();
+    if (checkUser.data.length != 0){
+      //console.log('has this user');
+      if (checkUser.data[0].nickname != event.operatorNickname){
+        //console.log('nickname not updated')
+        let updateUser = await db.collection('user').doc(checkUser.data[0]._id).update({
+          data: {
+            nickname: event.operatorNickname
+          }
+        }); 
+      }else{
+        //console.log('nickname is updated')
+      }
+    }else{
+      //console.log('no this user')
+      let addUser = await db.collection('user')
+        .add({
+          data: {
+            openid: event.userInfo.openId,
+            nickname: event.operatorNickname,
+          }
+        });
+    }
   //Get old holding Open Id
   let old = await db.collection('devices').doc(event.deviceid).get();
   //update history record
