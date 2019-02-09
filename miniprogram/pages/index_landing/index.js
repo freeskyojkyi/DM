@@ -108,6 +108,14 @@ Page({
   },
   onLoad: function (options) {
     var nthis = this
+    if (app.globalData.operatorInfo){} else{
+      //console.log("not yet has userinfo")
+      wx.getUserInfo({
+        success: function (res) {
+          app.globalData.operatorInfo = res.userInfo.nickName
+        }
+      })
+    }
     wx.cloud.callFunction({
          // 获取我的设备
       name: 'getmyDevices',
