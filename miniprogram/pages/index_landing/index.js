@@ -173,6 +173,39 @@ Page({
     })
   },
 
+  returnAllDevice: function (e) {
+    if (app.globalData.operatorInfo) { } else {
+      //console.log("not yet has userinfo")
+      wx.getUserInfo({
+        success: function (res) {
+          app.globalData.operatorInfo = res.userInfo.nickName
+        }
+      })
+    }
+    wx.cloud.callFunction({
+      name: 'returnAllDevice',
+      data: {
+        returnTo: "GZAdmin",
+        operationtype: 1,
+        operatorNickname: app.globalData.operatorInfo
+      },
+      success(res) {
+        wx.showToast({
+          title: "Confirmed",
+          icon: 'success',
+          duration: 3000
+        })
+        wx.navigateTo({
+          url: "../index_landing/index",
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        })
+      },
+      fail: console.error
+    })
+  },
+
   getDevice: function (e) {
     console.log("This is getDevice")
     console.log(e.currentTarget.dataset.id)
