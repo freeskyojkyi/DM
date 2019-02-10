@@ -35,10 +35,10 @@
       </button><view wx:else>请升级微信版本</view>
  </view>
  <view class='wording'>
-      <button class='fixedButton'>
+      <button wx:if="{{canIUse}}" class='fixedButton'open-type="getUserInfo" bindgetuserinfo="returnAllDevice">
         <image class='_icon' src='{{return_icon}}' mode='{{mode}}'></image>
         <view>{{return_button_label}}</view>
-      </button>
+      </button><view wx:else>请升级微信版本</view>
     </view>
   </view>
 
