@@ -18,12 +18,18 @@ exports.main = async (event, context) => {
       userfrom: true,
       userto: true 
     }).orderBy('date', 'desc').get();
+    let checkTransactionType = await db.collection('operationtype').get();
     for (i = 0;i < checkRecord.data.length; i++){
       for (j = 0; j < checkUser.data.length; j++){
         if (checkRecord.data[i].userfrom == checkUser.data[j].openid){
           checkRecord.data[i].userfrom = checkUser.data[j].nickname
         } else if (checkRecord.data[i].userto == checkUser.data[j].openid){
           checkRecord.data[i].userto = checkUser.data[j].nickname
+        }
+      }
+      for (k = 0; k < checkTransactionType.data.length; k++){
+        if (checkRecord.data[i].operationtype == checkTransactionType.data[k]._id) {
+          checkRecord.data[i].operationtype = checkTransactionType.data[k].operation
         }
       }
     }

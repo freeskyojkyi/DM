@@ -107,7 +107,7 @@ Page({
     this.onLoad()
   },
   onLoad: function (options) {
-    var nthis = this
+    var that = this
     if (app.globalData.operatorInfo){} else{
       //console.log("not yet has userinfo")
       wx.getUserInfo({
@@ -124,7 +124,7 @@ Page({
          },
       success: res => {
         console.log(res)
-        nthis.setData({
+        that.setData({
           mydevices: res.result.data,
         })
         console.log('[数据库] [查询mydevices] 成功: ', res)
@@ -146,7 +146,7 @@ Page({
          },
          success: res => {
            console.log(res)
-           nthis.setData({
+           that.setData({ 
              alldevices: res.result.data,
            })
            console.log('[数据库] [查询alldevices] 成功: ', res)
@@ -164,6 +164,12 @@ Page({
   gotoDeviceInfo: function(e) {
     wx.navigateTo({
       url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id,
+    })
+  },
+
+  returnThisDevice: function (e) {
+    wx.navigateTo({
+      url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id + "&qr=y",
     })
   },
 
