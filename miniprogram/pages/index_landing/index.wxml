@@ -42,7 +42,10 @@
     </view>
   </view>
 
-My Device
+    <block wx:if="{{mydevices.length != 0}}">
+      My Device
+    </block>
+
 <van-cell-group wx:for="{{mydevices}}" wx:key="{{item._id}}">
   <van-cell
     title="{{item.device_name}}"
@@ -52,6 +55,12 @@ My Device
     data-id="{{item._id}}"
     bindtap="gotoDeviceInfo"
   />
+  <button
+    class='fixedButton'
+    bindtap="returnThisDevice"
+    data-id="{{item._id}}"
+  >Return</button>
+  
 </van-cell-group>
 All Device
 <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
