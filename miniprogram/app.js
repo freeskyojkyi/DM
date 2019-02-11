@@ -12,7 +12,7 @@ App({
     
 
     this.globalData = {
-      operatorInfo: null
+      userInfo: "null"
     }
   }
 
