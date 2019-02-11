@@ -50,7 +50,7 @@
     size="large"
     is-link
     data-id="{{item._id}}"
-    bindtap="getDevice"
+    bindtap="gotoDeviceInfo"
   />
 </van-cell-group>
 </block>
@@ -62,7 +62,7 @@
     size="large"
     is-link
     data-id="{{item._id}}"
-    bindtap="getDevice"
+    bindtap="gotoDeviceInfo"
   />
 </van-cell-group>
 </block>

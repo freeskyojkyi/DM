@@ -1,4 +1,6 @@
 // pages/deviceInfo/deviceInfo.js
+var app = getApp();
+
 Page({
 
   /**
@@ -7,11 +9,11 @@ Page({
   data: {    
     name_title_en: 'DEVICE NAME',
     name_title_ch: '名字',
-    name: 'GZ_Macbook Pro_F',
+    name: 'Loading',
 
     os_title_en: 'SYSTEM',
     os_title_ch: '系统',
-    os: 'Mac OS 10.13.3',
+    os: 'Loading',
 
     borrow_button_name: 'Scan',
     borrow_button_label: '借机',
@@ -30,7 +32,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this
+
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'getDeviceInfo',
+      // 传给云函数的参数
+      data: {
+        id: options.id,
+      },
+      success(res) {
+        that.setData({
+          name: res.result.data.device_name,
+          os: res.result.data.os
+        })
+      },
+      fail(e) {
+        console.log(e)
+        wx.showModal({
+          title: '提示',
+          content: '找不到详细资料，请稍后再尝试',
+          showCancel: false,
+          success(res) {
+            wx.navigateBack({
+              delta: 2
+            })
+          }
+        })
+      },
+    })
   },
 
   /**
