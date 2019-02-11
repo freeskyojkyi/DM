@@ -19,15 +19,16 @@ Page({
 
     //added checkbox value
     items: [
-      { name: 'group A', value: 'Group A ' },
-      { name: 'group B', value: 'Group B', checked: 'true' },
-      { name: 'group C', value: 'Group C', checked: 'true' },
-      { name: 'group D', value: 'Group D' },
-      { name: 'group E', value: 'Group E' },
-      { name: ' others', value: ' Others ' },
+      { name: 'group A', value: 'Group A'},
+      { name: 'group B', value: 'Group B'},
+      { name: 'group C', value: 'Group C'},
+      { name: 'group D', value: 'Group D'},
+      { name: 'group E', value: 'Group E'},
+      { name: ' others', value: ' Others'},
     ],
     checkboxChange(e) {
       console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+      
     },
     
 //navigation bar information
