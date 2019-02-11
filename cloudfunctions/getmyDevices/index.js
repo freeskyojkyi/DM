@@ -9,7 +9,7 @@ exports.main = async (event, context) => {
 //     //get mydevices by userdata
    const db = cloud.database()
   let mydevices = await db.collection('devices').where({
-    holding_open_id: event.userInfo.openId 
+    holding_open_id: event.userInfo.openId
      }).get();
     return mydevices
    } 

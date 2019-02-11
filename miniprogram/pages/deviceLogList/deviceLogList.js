@@ -24,7 +24,6 @@ Page({
       },
       success(res) {
         console.log(res.result)
-
         nthis.setData({
           checkSummary: res.result.data,
         })

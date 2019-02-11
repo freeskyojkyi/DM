@@ -1,9 +1,9 @@
 // 云函数入口文件
-// const cloud = require('wx-server-sdk')
+const cloud = require('wx-server-sdk')
 
-// exports.main = (event, context) => {
-//   console.log(event)
-//   console.log(context)
+exports.main = (event, context) => {
+  console.log(event)
+  console.log(context)
 
   // 可执行其他自定义逻辑
   // console.log 的内容可以在云开发云函数调用日志查看
@@ -16,32 +16,9 @@
 //     appid: wxContext.APPID,
 //     unionid: wxContext.UNIONID,
 //   }
-// }
-
-// cloud.init()
-// const db = cloud.database()
-// exports.main = async (event, context) => db.collection('devices').where({
-//   location_id:event.filter,
-// }).get()
-
-// 云函数入口文件
-const cloud = require('wx-server-sdk')
-cloud.init()
-exports.main = async (event, context) => {
-  try {
-    //     //Get userdata
-    //     const wxContext = cloud.getWXContext().openid
-    //     let useropenid = await wxContext
-    //     //get mydevices by userdata
-    const db = cloud.database()
-    let alldevices = await db.collection('devices').where({
-      location_id: 
-      // "1"
-       event.a
-    }).get();
-    return alldevices
-  }
-  catch (e) {
-    console.log(e)
-  }
 }
+
+cloud.init()
+const db = cloud.database()
+exports.main = async (event, context) => db.collection('devices').where({
+}).get()
