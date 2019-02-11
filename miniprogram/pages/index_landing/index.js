@@ -20,7 +20,7 @@ Page({
     //added checkbox value
     items: [
       { name:'0', value:'Group 0' },
-      { name:'1', value:'Group 1' },
+      { name: '1', value: 'Group 1'},
       { name:'2', value:'Group 2' },
       { name:'group D', value:'Group D' },
       { name:'group E', value:'Group E' },
@@ -46,7 +46,7 @@ Page({
       name: 'getAllDevices',
       // 传给云函数的参数
       data: {
-        a: filter,
+        a: filter[0],
       },
       success: res => {
         console.log(res)

@@ -36,8 +36,8 @@ exports.main = async (event, context) => {
     const db = cloud.database()
     let alldevices = await db.collection('devices').where({
       location_id: 
-      // "1"
-       event.a
+      // .or(_.eq("2"))
+      event.a
     }).get();
     return alldevices
   }
