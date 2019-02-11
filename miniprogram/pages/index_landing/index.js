@@ -168,42 +168,133 @@ Page({
   },
 
   returnThisDevice: function (e) {
-    wx.navigateTo({
-      url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id + "&qr=y",
-    })
+    var that = this
+    if (e.detail.userInfo) {
+      wx.cloud.callFunction({
+        name: 'ownByMe',
+        data: {
+          deviceid: e.currentTarget.dataset.id,
+        },
+        success(res) {
+          //console.log(res)
+          if (res.result) {
+            //pop up to start return flow
+            wx.showModal({
+              title: 'Return Device?',
+              content: 'You are already holding device ID =' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
+              confirmText: 'Confirm',
+              cancelText: 'Cancel',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log("确定还机")
+                  wx.cloud.callFunction({
+                    name: 'setDeviceReturn',
+                    data: {
+                      deviceid: e.currentTarget.dataset.id,
+                      returnTo: "GZAdmin",
+                      operationtype: 1,
+                      operatorNickname: e.detail.userInfo.nickName
+                    },
+                    success(res) {
+                      wx.showToast({
+                        title: "Confirmed",
+                        icon: 'success',
+                        duration: 3000
+                      })
+                      wx.navigateTo({
+                        url: "../index_landing/index",
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
+                      })
+                    },
+                    fail: console.error
+                  })
+                }
+              }
+            })
+          } else {
+            //pop up to start borrow flow
+            wx.showModal({
+              title: 'ERROR',
+              content: 'You are not currently holding this device!',
+              confirmText: 'OK',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                } else { console.log("取消") }
+              }
+            })
+          }
+        },
+        fail: console.error
+      })
+    }else{}
   },
 
   returnAllDevice: function (e) {
-    if (app.globalData.operatorInfo) { } else {
-      //console.log("not yet has userinfo")
-      wx.getUserInfo({
-        success: function (res) {
-          app.globalData.operatorInfo = res.userInfo.nickName
-        }
-      })
-    }
+    // if (app.globalData.operatorInfo) { } else {
+    //   //console.log("not yet has userinfo")
+    //   wx.getUserInfo({
+    //     success: function (res) {
+    //       app.globalData.operatorInfo = res.userInfo.nickName
+    //     }
+    //   })
+    // }
+    if (e.detail.userInfo) {
+    wx.showModal({
+      title: 'Return Device?',
+      content: 'You are going to return all devices you currently holding',
+      confirmText: 'Confirm',
+      cancelText: 'Cancel',
+      success: function (res) {
+        if (res.confirm) {
+          console.log("确定还ALL机")
     wx.cloud.callFunction({
       name: 'returnAllDevice',
       data: {
         returnTo: "GZAdmin",
         operationtype: 1,
-        operatorNickname: app.globalData.operatorInfo
+        operatorNickname: e.detail.userInfo.nickName
       },
       success(res) {
-        wx.showToast({
-          title: "Confirmed",
-          icon: 'success',
-          duration: 3000
-        })
-        wx.navigateTo({
-          url: "../index_landing/index",
-          success: function (res) { },
-          fail: function (res) { },
-          complete: function (res) { },
-        })
+        if(res.result == 0){
+          console.log("result is 0")
+          wx.showModal({
+            title: 'ERROR',
+            content: 'You dont have any device holding currently',
+            confirmText: 'Confirm',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {}
+            }
+          })
+        }else{
+          wx.showModal({
+            title: 'Confirmation',
+            content: 'Successfully returned device ID:' + res.result,
+            confirmText: 'Confirm',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: "../index_landing/index",
+                  success: function (res) { },
+                  fail: function (res) { },
+                  complete: function (res) { },
+                })
+               }
+            }
+          })
+
+        }
       },
       fail: console.error
     })
+        } else { console.log("取消") }
+      }
+    })
+    }else{}
   },
 
   getDevice: function (e) {

@@ -56,10 +56,12 @@
     bindtap="gotoDeviceInfo"
   />
   <button
+    wx:if="{{canIUse}}"
     class='fixedButton'
-    bindtap="returnThisDevice"
+    open-type="getUserInfo" 
+    bindgetuserinfo="returnThisDevice"
     data-id="{{item._id}}"
-  >Return</button>
+  >Return</button><view wx:else>请升级微信版本</view>
   
 </van-cell-group>
 All Device
