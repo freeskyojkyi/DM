@@ -19,16 +19,14 @@ Page({
 
     //added checkbox value
     items: [
-      { name: 'group A', value: 'Group A ' },
-      { name: 'group B', value: 'Group B', checked: 'true' },
-      { name: 'group C', value: 'Group C', checked: 'true' },
-      { name: 'group D', value: 'Group D' },
-      { name: 'group E', value: 'Group E' },
-      { name: ' others', value: ' Others ' },
+      { name: '0', value: 'Group A'},
+      { name: '1', value: 'Group B'},
+      { name: '2', value: 'Group C'},
+      { name: '3', value: 'Group D'},
+      { name: '4', value: 'Group E'},
+      { name: 'others', value: ' Others'},
     ],
-    checkboxChange(e) {
-      console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    },
+
     
 //navigation bar information
     navData: [
@@ -39,9 +37,33 @@ Page({
         text: '未借出机器'
       },
 
-    ],
-    
+    ],    
 },
+  checkboxChange(e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    wx.cloud.callFunction({
+      // 获取全部设备
+      name: 'getLocationDevices',
+      // 传给云函数的参数
+      data: {
+        locationGroup: e.detail.value,
+      },
+      success: res => {
+        console.log(res)
+        this.setData({
+          alldevices: res.result.data,
+        })
+        console.log('[数据库] [查询alldevices] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询alldevices失败'
+        })
+        console.error('[数据库] [查询alldevices] 失败：', err)
+      }
+    })
+  },
    
   switchNav(event) {
     var cur = event.currentTarget.dataset.current;
@@ -116,27 +138,27 @@ Page({
         }
       })
     }
-    wx.cloud.callFunction({
-         // 获取我的设备
-      name: 'getmyDevices',
-         // 传给云函数的参数
-      data: {
-         },
-      success: res => {
-        console.log(res)
-        that.setData({
-          mydevices: res.result.data,
-        })
-        console.log('[数据库] [查询mydevices] 成功: ', res)
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询mydevices失败'
-        })
-        console.error('[数据库] [查询mydevices] 失败：', err)
-      }
-    })
+    // wx.cloud.callFunction({
+    //      // 获取我的设备
+    //   name: 'getmyDevices',
+    //      // 传给云函数的参数
+    //   data: {
+    //      },
+    //   success: res => {
+    //     console.log(res)
+    //     that.setData({
+    //       mydevices: res.result.data,
+    //     })
+    //     console.log('[数据库] [查询mydevices] 成功: ', res)
+    //   },
+    //   fail: err => {
+    //     wx.showToast({
+    //       icon: 'none',
+    //       title: '查询mydevices失败'
+    //     })
+    //     console.error('[数据库] [查询mydevices] 失败：', err)
+    //   }
+    // })
 
        wx.cloud.callFunction({
          // 获取全部设备
@@ -145,9 +167,18 @@ Page({
          data: {
          },
          success: res => {
+           let fullset = res.result.data
+           console.log(fullset)
+           var holding = []
+          for (var i = 0; i < fullset.length; i++) {
+            if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
+            holding.push(fullset[i])
+          }
+          }
            console.log(res)
-           that.setData({ 
-             alldevices: res.result.data,
+           this.setData({ 
+             alldevices: fullset,
+             mydevices: holding,
            })
            console.log('[数据库] [查询alldevices] 成功: ', res)
          },
@@ -159,7 +190,15 @@ Page({
            console.error('[数据库] [查询alldevices] 失败：', err)
          }
        })
-     },
+    // let mydevices = this.alldevices
+    // var j
+    // for (j = 0; j < mydevices.data.length; j++) {
+    //   if (mydevices.data[j].holding_open_id == app.globalData.operatorInfo) {
+    //     mydevices.data[j] = true
+    //   }
+    //   return mydevices
+    //  }
+  },
   
   gotoDeviceInfo: function(e) {
     wx.navigateTo({
