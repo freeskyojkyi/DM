@@ -138,27 +138,27 @@ Page({
         }
       })
     }
-    wx.cloud.callFunction({
-         // 获取我的设备
-      name: 'getmyDevices',
-         // 传给云函数的参数
-      data: {
-         },
-      success: res => {
-        console.log(res)
-        that.setData({
-          mydevices: res.result.data,
-        })
-        console.log('[数据库] [查询mydevices] 成功: ', res)
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询mydevices失败'
-        })
-        console.error('[数据库] [查询mydevices] 失败：', err)
-      }
-    })
+    // wx.cloud.callFunction({
+    //      // 获取我的设备
+    //   name: 'getmyDevices',
+    //      // 传给云函数的参数
+    //   data: {
+    //      },
+    //   success: res => {
+    //     console.log(res)
+    //     that.setData({
+    //       mydevices: res.result.data,
+    //     })
+    //     console.log('[数据库] [查询mydevices] 成功: ', res)
+    //   },
+    //   fail: err => {
+    //     wx.showToast({
+    //       icon: 'none',
+    //       title: '查询mydevices失败'
+    //     })
+    //     console.error('[数据库] [查询mydevices] 失败：', err)
+    //   }
+    // })
 
        wx.cloud.callFunction({
          // 获取全部设备
@@ -167,9 +167,18 @@ Page({
          data: {
          },
          success: res => {
+           let fullset = res.result.data
+           console.log(fullset)
+           var holding = []
+          for (var i = 0; i < fullset.length; i++) {
+            if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
+            holding.push(fullset[i])
+          }
+          }
            console.log(res)
            this.setData({ 
-             alldevices: res.result.data,
+             alldevices: fullset,
+             mydevices: holding,
            })
            console.log('[数据库] [查询alldevices] 成功: ', res)
          },
@@ -181,7 +190,15 @@ Page({
            console.error('[数据库] [查询alldevices] 失败：', err)
          }
        })
-     },
+    // let mydevices = this.alldevices
+    // var j
+    // for (j = 0; j < mydevices.data.length; j++) {
+    //   if (mydevices.data[j].holding_open_id == app.globalData.operatorInfo) {
+    //     mydevices.data[j] = true
+    //   }
+    //   return mydevices
+    //  }
+  },
   
   gotoDeviceInfo: function(e) {
     wx.navigateTo({

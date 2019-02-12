@@ -1,4 +1,4 @@
-// 旧版getall云函数入口文件
+// 旧getall云函数入口文件
 // const cloud = require('wx-server-sdk')
 
 // exports.main = (event, context) => {
@@ -29,7 +29,7 @@ exports.main = async (event, context) => {
       holding_open_id: true,
       location_id: true,
       os: true,
-    }).orderBy('_id').get();
+    }).limit(50).get();
     // let checkTransactionType = await db.collection('operationtype').get();
     for (i = 0; i < devicelist.data.length; i++) {
       for (j = 0; j < checkUser.data.length; j++) {

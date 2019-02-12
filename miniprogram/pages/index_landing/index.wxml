@@ -51,12 +51,14 @@
 <van-cell-group wx:for="{{mydevices}}" wx:key="{{item._id}}">
   <van-cell
     title="{{item.device_name}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
+    label="No.{{item._id}}\nLocation\n{{item.location_id}}\n"
     size="large"
     is-link
     data-id="{{item._id}}"
     bindtap="gotoDeviceInfo"
-  />
+  >
+    <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+</van-cell>
   <button
     class='fixedButton'
     bindtap="returnThisDevice"
@@ -68,11 +70,14 @@ All Device
 <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
   <van-cell
     title="{{item.device_name}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
+    label="No.{{item._id}}\nLocation\n{{item.location_id}}"
     size="large"
     is-link
     data-id="{{item._id}}"
     bindtap="gotoDeviceInfo"
-  />
+  >
+      <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+
+</van-cell>
 </van-cell-group>
   
