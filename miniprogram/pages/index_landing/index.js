@@ -19,16 +19,14 @@ Page({
 
     //added checkbox value
     items: [
-      { name: 'group A', value: 'Group A ' },
-      { name: 'group B', value: 'Group B', checked: 'true' },
-      { name: 'group C', value: 'Group C', checked: 'true' },
-      { name: 'group D', value: 'Group D' },
-      { name: 'group E', value: 'Group E' },
-      { name: ' others', value: ' Others ' },
+      { name: '0', value: 'Group A'},
+      { name: '1', value: 'Group B'},
+      { name: '2', value: 'Group C'},
+      { name: '3', value: 'Group D'},
+      { name: '4', value: 'Group E'},
+      { name: 'others', value: ' Others'},
     ],
-    checkboxChange(e) {
-      console.log('checkbox发生change事件，携带value值为：', e.detail.value)
-    },
+
     
 //navigation bar information
     navData: [
@@ -39,9 +37,33 @@ Page({
         text: '未借出机器'
       },
 
-    ],
-    
+    ],    
 },
+  checkboxChange(e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    wx.cloud.callFunction({
+      // 获取全部设备
+      name: 'getLocationDevices',
+      // 传给云函数的参数
+      data: {
+        locationGroup: e.detail.value,
+      },
+      success: res => {
+        console.log(res)
+        this.setData({
+          alldevices: res.result.data,
+        })
+        console.log('[数据库] [查询alldevices] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询alldevices失败'
+        })
+        console.error('[数据库] [查询alldevices] 失败：', err)
+      }
+    })
+  },
    
   switchNav(event) {
     var cur = event.currentTarget.dataset.current;
@@ -116,27 +138,27 @@ Page({
         }
       })
     }
-    wx.cloud.callFunction({
-         // 获取我的设备
-      name: 'getmyDevices',
-         // 传给云函数的参数
-      data: {
-         },
-      success: res => {
-        console.log(res)
-        that.setData({
-          mydevices: res.result.data,
-        })
-        console.log('[数据库] [查询mydevices] 成功: ', res)
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询mydevices失败'
-        })
-        console.error('[数据库] [查询mydevices] 失败：', err)
-      }
-    })
+    // wx.cloud.callFunction({
+    //      // 获取我的设备
+    //   name: 'getmyDevices',
+    //      // 传给云函数的参数
+    //   data: {
+    //      },
+    //   success: res => {
+    //     console.log(res)
+    //     that.setData({
+    //       mydevices: res.result.data,
+    //     })
+    //     console.log('[数据库] [查询mydevices] 成功: ', res)
+    //   },
+    //   fail: err => {
+    //     wx.showToast({
+    //       icon: 'none',
+    //       title: '查询mydevices失败'
+    //     })
+    //     console.error('[数据库] [查询mydevices] 失败：', err)
+    //   }
+    // })
 
        wx.cloud.callFunction({
          // 获取全部设备
@@ -145,9 +167,18 @@ Page({
          data: {
          },
          success: res => {
+           let fullset = res.result.data
+           console.log(fullset)
+           var holding = []
+          for (var i = 0; i < fullset.length; i++) {
+            if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
+            holding.push(fullset[i])
+          }
+          }
            console.log(res)
-           that.setData({ 
-             alldevices: res.result.data,
+           this.setData({ 
+             alldevices: fullset,
+             mydevices: holding,
            })
            console.log('[数据库] [查询alldevices] 成功: ', res)
          },
@@ -159,7 +190,15 @@ Page({
            console.error('[数据库] [查询alldevices] 失败：', err)
          }
        })
-     },
+    // let mydevices = this.alldevices
+    // var j
+    // for (j = 0; j < mydevices.data.length; j++) {
+    //   if (mydevices.data[j].holding_open_id == app.globalData.operatorInfo) {
+    //     mydevices.data[j] = true
+    //   }
+    //   return mydevices
+    //  }
+  },
   
   gotoDeviceInfo: function(e) {
     wx.navigateTo({
@@ -168,42 +207,133 @@ Page({
   },
 
   returnThisDevice: function (e) {
-    wx.navigateTo({
-      url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id + "&qr=y",
-    })
+    var that = this
+    if (e.detail.userInfo) {
+      wx.cloud.callFunction({
+        name: 'ownByMe',
+        data: {
+          deviceid: e.currentTarget.dataset.id,
+        },
+        success(res) {
+          //console.log(res)
+          if (res.result) {
+            //pop up to start return flow
+            wx.showModal({
+              title: 'Return Device?',
+              content: 'You are already holding device ID =' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
+              confirmText: 'Confirm',
+              cancelText: 'Cancel',
+              success: function (res) {
+                if (res.confirm) {
+                  console.log("确定还机")
+                  wx.cloud.callFunction({
+                    name: 'setDeviceReturn',
+                    data: {
+                      deviceid: e.currentTarget.dataset.id,
+                      returnTo: "GZAdmin",
+                      operationtype: 1,
+                      operatorNickname: e.detail.userInfo.nickName
+                    },
+                    success(res) {
+                      wx.showToast({
+                        title: "Confirmed",
+                        icon: 'success',
+                        duration: 3000
+                      })
+                      wx.navigateTo({
+                        url: "../index_landing/index",
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
+                      })
+                    },
+                    fail: console.error
+                  })
+                }
+              }
+            })
+          } else {
+            //pop up to start borrow flow
+            wx.showModal({
+              title: 'ERROR',
+              content: 'You are not currently holding this device!',
+              confirmText: 'OK',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                } else { console.log("取消") }
+              }
+            })
+          }
+        },
+        fail: console.error
+      })
+    }else{}
   },
 
   returnAllDevice: function (e) {
-    if (app.globalData.operatorInfo) { } else {
-      //console.log("not yet has userinfo")
-      wx.getUserInfo({
-        success: function (res) {
-          app.globalData.operatorInfo = res.userInfo.nickName
-        }
-      })
-    }
+    // if (app.globalData.operatorInfo) { } else {
+    //   //console.log("not yet has userinfo")
+    //   wx.getUserInfo({
+    //     success: function (res) {
+    //       app.globalData.operatorInfo = res.userInfo.nickName
+    //     }
+    //   })
+    // }
+    if (e.detail.userInfo) {
+    wx.showModal({
+      title: 'Return Device?',
+      content: 'You are going to return all devices you currently holding',
+      confirmText: 'Confirm',
+      cancelText: 'Cancel',
+      success: function (res) {
+        if (res.confirm) {
+          console.log("确定还ALL机")
     wx.cloud.callFunction({
       name: 'returnAllDevice',
       data: {
         returnTo: "GZAdmin",
         operationtype: 1,
-        operatorNickname: app.globalData.operatorInfo
+        operatorNickname: e.detail.userInfo.nickName
       },
       success(res) {
-        wx.showToast({
-          title: "Confirmed",
-          icon: 'success',
-          duration: 3000
-        })
-        wx.navigateTo({
-          url: "../index_landing/index",
-          success: function (res) { },
-          fail: function (res) { },
-          complete: function (res) { },
-        })
+        if(res.result == 0){
+          console.log("result is 0")
+          wx.showModal({
+            title: 'ERROR',
+            content: 'You dont have any device holding currently',
+            confirmText: 'Confirm',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {}
+            }
+          })
+        }else{
+          wx.showModal({
+            title: 'Confirmation',
+            content: 'Successfully returned device ID:' + res.result,
+            confirmText: 'Confirm',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: "../index_landing/index",
+                  success: function (res) { },
+                  fail: function (res) { },
+                  complete: function (res) { },
+                })
+               }
+            }
+          })
+
+        }
       },
       fail: console.error
     })
+        } else { console.log("取消") }
+      }
+    })
+    }else{}
   },
 
   getDevice: function (e) {

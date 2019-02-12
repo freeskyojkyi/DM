@@ -39,7 +39,7 @@ Page({
     var url
     this.pageid = options.id
     if (app.globalData.operatorInfo) { } else {
-      //console.log("not yet has userinfo")
+      console.log("not yet has userinfo")
       wx.getUserInfo({
         success: function (res) {
           app.globalData.operatorInfo = res.userInfo.nickName
@@ -47,7 +47,7 @@ Page({
       })
     }
     if (options.qr) { 
-      
+      //if (options.detail.userInfo) {
       //console.log(options.qr)
       wx.cloud.callFunction({
         name: 'ownByMe',
@@ -131,7 +131,9 @@ Page({
         },
         fail: console.error
       })
-    } else { console.log("No QR") }
+    } else { 
+        //console.log("No QR") 
+      }
     wx.cloud.callFunction({
       // 云函数名称
       name: 'getDeviceInfo',
@@ -169,6 +171,7 @@ Page({
         })
       },
     })
+    console.log(app.globalData.operatorInfo)
   },
 
   /**
@@ -235,16 +238,10 @@ borrowThisDevice:function(e){
           title: 'ERROR',
           content: 'You are already holding this device!',
           confirmText: 'OK',
-          cancelText: 'Cancel',
+          showCancel: false,
           success: function (res) {
             if (res.confirm) {
-              wx.navigateTo({
-                url: "../index_landing/index",
-                success: function (res) { },
-                fail: function (res) { },
-                complete: function (res) { },
-              })
-            } else { console.log("取消") }
+            }
           }
         })
       } else {
@@ -331,7 +328,7 @@ borrowThisDevice:function(e){
                     },
                     fail: console.error
                   })
-                } else { console.log("取消") }
+                }
               }
             })
           } else {
@@ -340,15 +337,9 @@ borrowThisDevice:function(e){
               title: 'ERROR',
               content: 'You are not currently holding this device!',
               confirmText: 'OK',
-              cancelText: 'Cancel',
+              showCancel: false,
               success: function (res) {
                 if (res.confirm) {
-                  wx.navigateTo({
-                    url: "../index_landing/index",
-                    success: function (res) { },
-                    fail: function (res) { },
-                    complete: function (res) { },
-                  })
                 } else { console.log("取消") }
               }
             })

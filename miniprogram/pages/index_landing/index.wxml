@@ -10,13 +10,15 @@
     <!--checkbox add from here-->
     <!-- 下拉需要显示的列表 -->
     <view class="select_box" wx:if="{{select}}">
-
-         <label class="checkbox" wx:for="{{items}}" >
+    <checkbox-group bindchange="checkboxChange">
+      <label class="checkbox" wx:for="{{items}}" >
      {{item.value}}      
     <checkbox value="{{item.name}}" checked="{{item.checked}}" style='{{index==selectData.length-1&&"border:0;"}}'/>
-  </label>
+      </label>
+    </checkbox-group>
       </view>
     </view>
+  
 
  <!-- 借机  -->
 
@@ -49,28 +51,35 @@
 <van-cell-group wx:for="{{mydevices}}" wx:key="{{item._id}}">
   <van-cell
     title="{{item.device_name}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
+    label="No.{{item._id}}\nLocation\n{{item.location_id}}\n"
     size="large"
     is-link
     data-id="{{item._id}}"
     bindtap="gotoDeviceInfo"
-  />
+  >
+    <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+</van-cell>
   <button
+    wx:if="{{canIUse}}"
     class='fixedButton'
-    bindtap="returnThisDevice"
+    open-type="getUserInfo" 
+    bindgetuserinfo="returnThisDevice"
     data-id="{{item._id}}"
-  >Return</button>
+  >Return</button><view wx:else>请升级微信版本</view>
   
 </van-cell-group>
 All Device
 <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
   <van-cell
     title="{{item.device_name}}"
-    label="{{item.location_id}}\n{{item.holding_open_id}}"
+    label="No.{{item._id}}\nLocation\n{{item.location_id}}"
     size="large"
     is-link
     data-id="{{item._id}}"
     bindtap="gotoDeviceInfo"
-  />
+  >
+      <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+
+</van-cell>
 </van-cell-group>
   
