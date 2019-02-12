@@ -29,19 +29,13 @@ exports.main = async (event, context) => {
       holding_open_id: true,
       location_id: true,
       os: true,
-    }).limit(50).get();
-    // let checkTransactionType = await db.collection('operationtype').get();
+    }).limit(999).get();
     for (i = 0; i < devicelist.data.length; i++) {
       for (j = 0; j < checkUser.data.length; j++) {
         if (devicelist.data[i].holding_open_id == checkUser.data[j].openid) {
           devicelist.data[i].holding_open_id = checkUser.data[j].nickname
         }
       }
-      // for (k = 0; k < checkTransactionType.data.length; k++) {
-      //   if (devicelist.data[i].operationtype == checkTransactionType.data[k]._id) {
-      //     devicelist.data[i].operationtype = checkTransactionType.data[k].operation
-      //   }
-      // }
     }
     return devicelist;
   } catch (e) {
