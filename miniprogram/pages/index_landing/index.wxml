@@ -48,7 +48,11 @@
 </view>
 
 <view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
-  My Device
+  我的机器
+</view>
+
+<view wx:if="{{mydevices.length != 0}}" class='my-device-return-label'>
+  {{return_label}}
 </view>
 
 <van-cell-group wx:for="{{mydevices}}" wx:key="{{item._id}}">

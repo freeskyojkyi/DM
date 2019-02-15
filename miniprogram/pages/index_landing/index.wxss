@@ -129,7 +129,6 @@ font-family: "iconfont" !important;
  
  .select_box label{
    margin-left: 0px;
-   
 }
 /* 下拉过度效果 */
 @keyframes myfirst {
@@ -158,6 +157,18 @@ font-family: "iconfont" !important;
   color: #e7e9eb;
 
   text-decoration: underline;
+}
+
+.my-device-return-label{
+  width: 100%-10px;
+  text-align: right;
+
+  background-color: #3a454d;
+  color: #e7e9eb;
+  font-size: 15px;
+  font-style: italic;
+
+  padding-right: 10px;
 }
 
 .all-device-label{

@@ -17,6 +17,7 @@ Page({
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon.png',
 
+    return_label: '<<<<<<左滑以还机',
     nickName: "blank",
 
     //Record down the start point of the swipe,
@@ -153,8 +154,16 @@ Page({
 
   onLoad: function(options) {
     var that = this
-    if (app.globalData.operatorInfo) {} else {
+    if (app.globalData.operatorInfo) {
+      
+      that.setData({
+        nickName: app.globalData.operatorInfo
+      })
+
+    } else {
       //console.log("not yet has userinfo")
+      console.log("operatorInfo1: " + app.globalData.operatorInfo)
+      console.log("nickname: " + that.data.nickName)
       wx.getUserInfo({
         success: function(res) {
           app.globalData.operatorInfo = res.userInfo.nickName
@@ -198,6 +207,10 @@ Page({
         for (var i = 0; i < fullset.length; i++) {
           if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
             holding.push(fullset[i])
+            
+            //删除已借机器
+            fullset.splice(i,1)
+            i--
           }
         }
         console.log(res)
@@ -486,21 +499,18 @@ Page({
 
   touchStart: function(e) {
     var that = this
-    // console.log(e)
-    // console.log("startPoint: " + this.data.startPoint)
     that.setData({
       startPoint: [e.touches[0].pageX, e.touches[0].pageY]
     })
-    // console.log ("startPointUpdated: " + this.data.startPoint)
   },
 
   touchMove: function(e) {
     var that = this;
     var curPoint = [e.touches[0].pageX, e.touches[0].pageY]
     var startPointH = this.data.startPoint
-    var moveLength = curPoint[0] + 10
+    var moveLength = curPoint[0] + 100
 
-    if (curPoint[0] + 30 < startPointH[0] && !this.data.moveToRemove_flag) {
+    if (moveLength < startPointH[0] && !this.data.moveToRemove_flag) {
       this.setData({
         moveToRemove_flag: true,
       })
@@ -539,18 +549,17 @@ Page({
               },
               fail(e) {
                 console.error,
-                that.setData({
-                  moveToRemove_flag: false
-                })
+                  that.setData({
+                    moveToRemove_flag: false
+                  })
               }
             })
-          } 
-          else {
-          that.setData({
-            moveToRemove_flag: false
-          })
+          } else {
+            that.setData({
+              moveToRemove_flag: false
+            })
+          }
         }
-      }
       })
     }
   }
