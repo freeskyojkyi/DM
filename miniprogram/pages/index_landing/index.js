@@ -547,7 +547,7 @@ Page({
           } 
           else {
           that.setData({
-          moveToRemove_flag: false
+            moveToRemove_flag: false
           })
         }
       }
