@@ -18,7 +18,6 @@ Page({
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon.png',
 
     return_label: '<<<<<<左滑以还机',
-    nickName: "blank",
 
     //Record down the start point of the swipe,
     startPoint: [0, 0],
@@ -154,20 +153,10 @@ Page({
 
   onLoad: function(options) {
     var that = this
-    if (app.globalData.operatorInfo) {
-      
-      that.setData({
-        nickName: app.globalData.operatorInfo
-      })
-
-    } else {
+    if (app.globalData.operatorInfo) {} else {
       //console.log("not yet has userinfo")
       wx.getUserInfo({
         success: function(res) {
-          app.globalData.operatorInfo = res.userInfo.nickName
-          that.setData({
-            nickName: res.userInfo.nickName,
-          })
         }
       })
     }
@@ -527,7 +516,7 @@ Page({
                 deviceid: e.currentTarget.dataset.id,
                 returnTo: "GZAdmin",
                 operationtype: 1,
-                operatorNickname: that.data.nickName,
+                operatorNickname: app.globalData.operatorInfo,
               },
               success(res) {
                 wx.showToast({
