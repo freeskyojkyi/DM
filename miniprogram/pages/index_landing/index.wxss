@@ -171,6 +171,10 @@ font-family: "iconfont" !important;
   padding-right: 10px;
 }
 
+.device-gap{
+  margin-bottom: 10px;
+}
+
 .all-device-label{
   display: flex;
   flex-direction: row;
@@ -179,7 +183,6 @@ font-family: "iconfont" !important;
   color: #e7e9eb;
 
   position: relative;
-  margin-top: 10rpx;
 
   text-decoration: underline;
 }

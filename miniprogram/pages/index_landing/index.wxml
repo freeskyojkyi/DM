@@ -55,7 +55,7 @@
   {{return_label}}
 </view>
 
-<van-cell-group wx:for="{{mydevices}}" wx:key="{{item._id}}">
+<van-cell-group wx:if="{{mydevices.length != 0}}" wx:for="{{mydevices}}" wx:key="{{item._id}}">
   <van-cell 
     title="{{item.device_name}}" 
     label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" 
@@ -68,10 +68,13 @@
     bindtouchmove="touchMove">
     <van-tag type="danger">{{item.holding_open_id}}</van-tag>
   </van-cell>
-  <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
-  <view wx:else>请升级微信版本</view>
+  <!-- <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
+  <view wx:else>请升级微信版本</view> -->
 
 </van-cell-group>
+
+<view class="device-gap" wx:if="{{mydevices.length != 0}}"></view>
+
 <view class='all-device-label'>All Device</view>
 
 <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
