@@ -149,3 +149,34 @@ font-family: "iconfont" !important;
   right: 0rpx;
   top: 20rpx;
 }
+
+.my-device-label{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #3a454d;
+  color: #e7e9eb;
+
+  text-decoration: underline;
+}
+
+.all-device-label{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #586978;
+  color: #e7e9eb;
+
+  position: relative;
+  margin-top: 10rpx;
+
+  text-decoration: underline;
+}
+
+.my-device-return{
+  height: 50rpx;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

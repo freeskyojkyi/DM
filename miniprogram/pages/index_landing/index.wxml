@@ -1,85 +1,78 @@
 <!--index.wxml-->
 <!-- 切换页面 -->
-    <view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}" bindtap='bindShowMsg'>
-        <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">     
-            <button iew class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</button>         
-        </block>        
-    </view>
-  
-  <view class='top1' >
-    <!--checkbox add from here-->
-    <!-- 下拉需要显示的列表 -->
-    <view class="select_box" wx:if="{{select}}">
+<view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}" bindtap='bindShowMsg'>
+  <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+    <button iew class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</button>
+  </block>
+</view>
+
+<view class='top1'>
+  <!--checkbox add from here-->
+  <!-- 下拉需要显示的列表 -->
+  <view class="select_box" wx:if="{{select}}">
     <checkbox-group bindchange="checkboxChange">
-      <label class="checkbox" wx:for="{{items}}" >
-     {{item.value}}      
-    <checkbox value="{{item.name}}" checked="{{item.checked}}" style='{{index==selectData.length-1&&"border:0;"}}'/>
+      <label class="checkbox" wx:for="{{items}}">
+        {{item.value}}
+        <checkbox value="{{item.name}}" checked="{{item.checked}}" style='{{index==selectData.length-1&&"border:0;"}}' />
       </label>
     </checkbox-group>
-      </view>
-    </view>
-  
-
- <!-- 借机  -->
-
-  <view class='actionItems'>
-    <view class='wording'>   
-        <button wx:if="{{canIUse}}" class='fixedButton'open-type="getUserInfo" bindgetuserinfo="getLogList">
-        <image class='_icon' src='{{log_icon}}' mode='{{mode}}'></image>
-        <view>{{log_button_label}}</view>     
-      </button><view wx:else>请升级微信版本</view>
-    </view>
-   <view class='wording'>   
-      <!--button class='fixedButton'-->
-      <button wx:if="{{canIUse}}" class='fixedButton'open-type="getUserInfo" bindgetuserinfo="borrowDevice">
-        <image class='_icon' src='{{scan_icon}}' mode='{{mode}}'></image>
-        <view>{{borrow_button_label}}</view>     
-      </button><view wx:else>请升级微信版本</view>
- </view>
- <view class='wording'>
-      <button wx:if="{{canIUse}}" class='fixedButton'open-type="getUserInfo" bindgetuserinfo="returnAllDevice">
-        <image class='_icon' src='{{return_icon}}' mode='{{mode}}'></image>
-        <view>{{return_button_label}}</view>
-      </button><view wx:else>请升级微信版本</view>
-    </view>
   </view>
+</view>
 
-    <block wx:if="{{mydevices.length != 0}}">
-      My Device
-    </block>
+
+<!-- 借机  -->
+
+<view class='actionItems'>
+  <view class='wording'>
+    <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="getLogList">
+      <image class='_icon' src='{{log_icon}}' mode='{{mode}}'></image>
+      <view>{{log_button_label}}</view>
+    </button>
+    <view wx:else>请升级微信版本</view>
+  </view>
+  <view class='wording'>
+    <!--button class='fixedButton'-->
+    <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="borrowDevice">
+      <image class='_icon' src='{{scan_icon}}' mode='{{mode}}'></image>
+      <view>{{borrow_button_label}}</view>
+    </button>
+    <view wx:else>请升级微信版本</view>
+  </view>
+  <view class='wording'>
+    <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="returnAllDevice">
+      <image class='_icon' src='{{return_icon}}' mode='{{mode}}'></image>
+      <view>{{return_button_label}}</view>
+    </button>
+    <view wx:else>请升级微信版本</view>
+  </view>
+</view>
+
+<view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
+  My Device
+</view>
 
 <van-cell-group wx:for="{{mydevices}}" wx:key="{{item._id}}">
-  <van-cell
-    title="{{item.device_name}}"
-    label="No.{{item._id}}\nLocation\n{{item.location_id}}\n"
-    size="large"
-    is-link
-    data-id="{{item._id}}"
-    bindtap="gotoDeviceInfo"
-  >
+  <van-cell 
+    title="{{item.device_name}}" 
+    label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" 
+    size="large" 
+    is-link 
+    data-id="{{item._id}}" 
+    bindtap="gotoDeviceInfo"  
+    open-type="getUserInfo"
+    bindtouchstart="touchStart"
+    bindtouchmove="touchMove">
     <van-tag type="danger">{{item.holding_open_id}}</van-tag>
-</van-cell>
-  <button
-    wx:if="{{canIUse}}"
-    class='fixedButton'
-    open-type="getUserInfo" 
-    bindgetuserinfo="returnThisDevice"
-    data-id="{{item._id}}"
-  >Return</button><view wx:else>请升级微信版本</view>
-  
-</van-cell-group>
-All Device
-<van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
-  <van-cell
-    title="{{item.device_name}}"
-    label="No.{{item._id}}\nLocation\n{{item.location_id}}"
-    size="large"
-    is-link
-    data-id="{{item._id}}"
-    bindtap="gotoDeviceInfo"
-  >
-      <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+  </van-cell>
+  <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
+  <view wx:else>请升级微信版本</view>
 
-</van-cell>
 </van-cell-group>
-  
+<view class='all-device-label'>All Device</view>
+
+<van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
+  <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo">
+    <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+
+  </van-cell>
+</van-cell-group>
