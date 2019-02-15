@@ -157,6 +157,7 @@ Page({
       //console.log("not yet has userinfo")
       wx.getUserInfo({
         success: function(res) {
+          app.globalData.operatorInfo = res.userInfo.nickName
         }
       })
     }
