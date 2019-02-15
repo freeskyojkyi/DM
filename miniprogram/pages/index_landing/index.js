@@ -15,7 +15,7 @@ Page({
     return_button_label: '还机',
     scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
-    log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon.png',
+    log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon_hollowout_white.png',
 
     return_label: '<<<<<<左滑以还机',
 
@@ -409,7 +409,6 @@ Page({
       })
     }
   },
-
 
   getLogList: function(e) {
     if (e.detail.userInfo) {
