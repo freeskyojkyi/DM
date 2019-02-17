@@ -1,1 +1,20 @@
 /* miniprogram/pages/deviceLogList/deviceLogList.wxss */
+van-cell{
+  width: 100vw;
+  display:-webkit-flex;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding:10px 10px 10px 10px;
+  box-sizing:border-box;
+  line-height:24px;
+  position:relative;
+  background-color:#fff;
+  color:#333;
+  font-size:14px
+}
+
+van-cell .title-class{
+  color:red;
+}

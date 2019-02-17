@@ -4,6 +4,7 @@ const cloud = require('wx-server-sdk')
 cloud.init({
 })
 const db = cloud.database()
+// const time = require("../../utils/utils.js");
 exports.main = async (event, context) => {
   try {
     let checkUser = await db.collection('user').field({
@@ -19,6 +20,7 @@ exports.main = async (event, context) => {
       userto: true 
     }).orderBy('date', 'desc').get();
     let checkTransactionType = await db.collection('operationtype').get();
+
     for (i = 0;i < checkRecord.data.length; i++){
       for (j = 0; j < checkUser.data.length; j++){
         if (checkRecord.data[i].userfrom == checkUser.data[j].openid){
@@ -26,13 +28,17 @@ exports.main = async (event, context) => {
         } else if (checkRecord.data[i].userto == checkUser.data[j].openid){
           checkRecord.data[i].userto = checkUser.data[j].nickname
         }
+        checkRecord.data[i].date = time.tsFormatTime(checkRecord.data[i].date, 'Y-M-D h:m:s')
       }
+     
       for (k = 0; k < checkTransactionType.data.length; k++){
         if (checkRecord.data[i].operationtype == checkTransactionType.data[k]._id) {
           checkRecord.data[i].operationtype = checkTransactionType.data[k].operation
         }
       }
-    }
+      // checkRecord.data[i].operationtype = checkRecord.data[i].operationtype ?'Return':'Borrow'
+     
+      }
     return checkRecord;
   } catch (e) {
     console.log(e)
