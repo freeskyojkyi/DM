@@ -35,9 +35,10 @@ Page({
           datas[i].date = time.tsFromatTime(datas[i].date, 'Y-M-D h:m:s')
 
         }
-        thispage.setData({
-          // checkSummary: res.result.data,
           checkSummary:datas
+        console.log(res.result)
+        thispage.setData({
+          checkSummary: res.result.data,
         })
       },
       fail: console.error

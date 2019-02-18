@@ -6,6 +6,7 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   try {
+    var resultReturn = []
     let checkUser = await db.collection('user').where({
     openid: event.userInfo.openId
     }).get();
@@ -33,7 +34,8 @@ exports.main = async (event, context) => {
     let getAllMyDevice = await db.collection('devices').where({
       holding_open_id: event.userInfo.openId
     }).get();
-    console.log(getAllMyDevice)
+    //console.log(getAllMyDevice)
+    if (getAllMyDevice.data.length!=0){
     for (i = 0; i < getAllMyDevice.data.length; i++){
     //Get old holding Open Id
     //let old = await db.collection('devices').doc(getAllMyDevice.data[i]._id).get();
@@ -55,8 +57,12 @@ exports.main = async (event, context) => {
           holding_open_id: event.returnTo
         }
       });
+      resultReturn.push(getAllMyDevice.data[i]._id)
     }
-    return true;
+      return resultReturn;
+    } else {
+        return 0
+      }
   } catch (e) {
     console.log(e)
   }
