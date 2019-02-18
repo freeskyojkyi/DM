@@ -4,6 +4,8 @@ const app = getApp()
 Page({
   data: {
     //参数信息
+    pageIndex: 1,
+    pageSize: 10,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     grade_name: '--请选择Device Group--',
     currentTab: 0,
@@ -185,9 +187,13 @@ Page({
 
     wx.cloud.callFunction({
       // 获取全部设备
-      name: 'getAllDevices',
+      name: 'paginator2',
       // 传给云函数的参数
-      data: {},
+      data: {
+        dbName:"devices",
+        pageIndex:1,
+        pageSize:10,
+      },
       success: res => {
         let fullset = res.result.data
         console.log(fullset)
@@ -216,14 +222,29 @@ Page({
         console.error('[数据库] [查询alldevices] 失败：', err)
       }
     })
-    // let mydevices = this.alldevices
-    // var j
-    // for (j = 0; j < mydevices.data.length; j++) {
-    //   if (mydevices.data[j].holding_open_id == app.globalData.operatorInfo) {
-    //     mydevices.data[j] = true
-    //   }
-    //   return mydevices
-    //  }
+  },
+
+  /**
+ * 上拉分页
+ */
+  onReachBottom: function () {
+//调试中
+  //   //上拉分页,将页码加1，然后调用分页函数loadRoom()
+  //   var that = this;
+  //   var pageNumber = that.data.pageNumber;
+  //   that.setData({
+  //     pageNumber: ++pageNumber
+  //   });
+
+  //   setTimeout(function () {
+  //     wx.showToast({
+  //       title: '加载中..',
+  //     }),
+  //       that.loadRooms();
+  //     that.setData({
+  //       title: "数据加载完毕"
+  //     })
+  //   }, 1000)
   },
 
   gotoDeviceInfo: function(e) {
