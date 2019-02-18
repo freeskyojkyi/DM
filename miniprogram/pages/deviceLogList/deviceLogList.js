@@ -1,5 +1,5 @@
 // miniprogram/pages/deviceLogList/deviceLogList.js
-const time = require("../../utils/timeutils.js");
+const time = require("../../utlis/timeutlis.js");
 Page({
 
   /**
@@ -20,7 +20,7 @@ Page({
     wx.cloud.callFunction({
       // 云函数名称
       name: 'loadLogList',
-    
+
       // 传给云函数的参数
       data: {
       },
@@ -31,10 +31,13 @@ Page({
         console.log(JSON.stringify(res.result))
         var datas = res.result.data
         for (var i = 0; i < datas.length; i++) {
-          datas[i].date = time.tsFormatTime(datas[i].date, 'Y-M-D h:m:s')
+          // datas[i].date = time.tsFormatTime(datas[i].date, 'Y-M-D h:m:s')
+          datas[i].date = time.tsFromatTime(datas[i].date, 'Y-M-D h:m:s')
+
         }
         thispage.setData({
-          checkSummary: res.result.data,
+          // checkSummary: res.result.data,
+          checkSummary:datas
         })
       },
       fail: console.error
