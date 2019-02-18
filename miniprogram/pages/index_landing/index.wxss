@@ -38,8 +38,9 @@ font-family: "iconfont" !important;
   flex-direction: row;
 
   position: fixed;
-  bottom: 30rpx;
-  
+  bottom: 0rpx;
+
+  background-color: #fff;
   z-index: 9999;
 }
 
@@ -52,6 +53,8 @@ font-family: "iconfont" !important;
   font-family: '微软雅黑';
   font-weight: bold;
   font-size: 32rpx;
+
+  bottom: 30rpx;
 
   border: 1rpx;
   border-style: solid;
@@ -197,4 +200,9 @@ font-family: "iconfont" !important;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.all-devices{
+  position: relative;
+  margin-bottom: 120rpx;
 }
