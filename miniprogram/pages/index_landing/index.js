@@ -196,7 +196,7 @@ Page({
       },
       success: res => {
         let fullset = res.result.data
-        console.log(fullset)
+        //console.log(fullset)
         var holding = []
         for (var i = 0; i < fullset.length; i++) {
           if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
@@ -208,6 +208,7 @@ Page({
           }
         }
         console.log(res)
+       // console.log(res)
         this.setData({
           alldevices: fullset,
           mydevices: holding,
