@@ -549,5 +549,12 @@ Page({
         }
       })
     }
+  },
+
+  onShareAppMessage: function () {
+    return {
+      title: '点机坊', // 转发后 所显示的title
+      path: '/pages/index_landing/index'
+    }
   }
 })
