@@ -8,20 +8,21 @@ Page({
     grade_name: '--请选择Device Group--',
     currentTab: 0,
     borrow_button_name: 'Scan',
-    borrow_button_label: '借机',
+    borrow_button_label: 'Borrow',
     log_button_name: 'Log',
-    log_button_label: '日志',
+    log_button_label: 'Log',
     return_button_name: 'Return',
-    return_button_label: '还机',
+    return_button_label: 'Return',
     scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon_hollowout_white.png',
     device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
     my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',      all_device_icon:'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
 
+    placeholder_search: "Please input the keywords",
+
     my_device_label: 'Hand',
     all_device_label: 'Store',
-    return_label: '*通过左滑以快速还机',
 
     device_locale_label: 'Locales',
 
