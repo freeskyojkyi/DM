@@ -18,6 +18,8 @@ Page({
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon_hollowout_white.png',
     device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
 
+    my_device_label: 'My Devices',
+    all_device_label: 'All Devices',
     return_label: '*通过左滑以快速还机',
 
     device_locale_label: '编辑过滤地区',

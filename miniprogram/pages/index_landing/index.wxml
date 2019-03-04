@@ -59,7 +59,7 @@
 </view>
 
 <view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
-  我的机器
+  {{my_device_label}}
 </view>
 
 <view wx:if="{{mydevices.length != 0}}" class='my-device-return-label'>
@@ -73,15 +73,14 @@
   <!-- <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
   <view wx:else>请升级微信版本</view> -->
 
-
-
+  
 </van-cell-group>
 
 <view class="device-gap" wx:if="{{mydevices.length != 0}}"></view>
 
 <view class="all-devices">
   <view class='all-device-label'>
-    All Device
+    {{all_device_label}}
   </view>
 
   <view class='device-locale-container'>
