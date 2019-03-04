@@ -29,7 +29,6 @@
 
 
 <!-- 借机  -->
-
 <view class='actionItems'>
   <view class='wording'>
     <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="getLogList">
@@ -56,13 +55,10 @@
 </view>
 
 <view class='my-devices-container'>
-  <view wx:if="{{mydevices.length != 0}}" class='device-label'>
-    <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}' /> {{my_device_label}}
+  <view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
+    <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}' /> 
+    {{my_device_label}}
   </view>
-
-  <!-- <view wx:if="{{mydevices.length != 0}}" class='my-device-return-label'>
-    {{return_label}}
-  </view> -->
 </view>
 
 <van-cell-group wx:if="{{mydevices.length != 0}}" wx:for="{{mydevices}}" wx:key="{{item._id}}">
@@ -85,8 +81,9 @@
     </view>
 
     <view class='device-locale-container'>
-      <button class='device-locale'>
-        <image class='normal_icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
+      <button class='device-locale-button'>
+        <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> 
+        {{device_locale_label}}
       </button>
     </view>
   </view>

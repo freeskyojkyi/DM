@@ -19,11 +19,11 @@ Page({
     device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
     my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',      all_device_icon:'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
 
-    my_device_label: 'MY Devices',
-    all_device_label: 'ALL Devices',
+    my_device_label: 'Hand',
+    all_device_label: 'Store',
     return_label: '*通过左滑以快速还机',
 
-    device_locale_label: '编辑地区',
+    device_locale_label: 'Locales',
 
     //Record down the start point of the swipe,
     startPoint: [0, 0],

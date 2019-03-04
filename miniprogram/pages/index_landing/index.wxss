@@ -160,19 +160,19 @@ page {
 }
 
 .my-devices-container{
+  height: 50rpx;
+
   padding: 0px;
   margin: 0px;
 
   display: flex;
   flex-direction: row;
   align-items: center;
-
-  width: 100%;
 
   background-color: #3a454d;
 }
 
-.device-label {
+.my-device-label {
   position: relative;
   left: 30rpx;
 
@@ -180,42 +180,30 @@ page {
 
   padding: 0px;
   margin: 0px;
-  width: 100%;
+
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
 
   font-weight:bold;
-  font-size: 50rpx;
-  color: #e7e9eb;
-  text-decoration: underline;
-}
-
-.my-device-return-label {
-  position: relative;
-  top: 18rpx;
-
-  width: 50%;
-  /* width: 100%-10px; */
-  text-align: right;
-  color: #e7e9eb;
-  font-size: 15px;
-  font-style: italic;
-  padding-right: 10px;
+  font-size: 69rpx;
+  color: #e6e6e6;
 }
 
 .all-devices-header-container{
+  height: 50rpx;
   background-color: #586978;
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .all-device-label {
-  color: #e7e9eb;
+  color: #e6e6e6;
   position: relative;
   left: 30rpx;
-  width: 70%;
+  width: 65%;
 
   font-family: '微软雅黑';
 
@@ -227,8 +215,7 @@ page {
   align-items: center;
 
   font-weight:bold;
-  font-size: 50rpx;
-  text-decoration: underline;
+  font-size: 69rpx;
 }
 
 .my-device-return {
@@ -252,17 +239,17 @@ page {
 .device-locale-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  width: 30%;
-  padding: 5px;
+  justify-content: right;
+  width: 35%;
+  padding: 1px;
 }
 
-.device-locale {
+.device-locale-button {
+  height: 20px;
   border-radius: 25px;
   border: 2px;
   width: 90%;
   padding: 0px;
-  height: 40px;
   font-size: 15px;
   display: flex;
   flex-direction: row;
@@ -270,9 +257,16 @@ page {
   align-items: center;
 }
 
+.small-icon{
+  height: 35rpx;
+  width: 35rpx;
+  margin-right: 10px;
+  padding: 0;
+}
+
 .normal_icon {
-  height: 40rpx;
-  width: 40rpx;
-  margin-right: 5px;
+  height: 50rpx;
+  width: 50rpx;
+  margin-right: 10px;
   padding: 0;
 }
