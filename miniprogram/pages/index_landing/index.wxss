@@ -8,6 +8,11 @@ page {
   justify-content: flex-start;
 }
 
+.search{
+  background-color: #000;
+}
+
+
 .container {
   padding: 0 20rpx;
   background-color: #fff;
@@ -210,13 +215,12 @@ page {
   color: #e7e9eb;
   position: relative;
   left: 30rpx;
-  width: 55%
+  width: 70%;
 
   font-family: '微软雅黑';
 
   padding: 0px;
   margin: 0px;
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -249,14 +253,14 @@ page {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 45%;
+  width: 30%;
+  padding: 5px;
 }
 
 .device-locale {
   border-radius: 25px;
   border: 2px;
   width: 90%;
-  margin: 5px;
   padding: 0px;
   height: 40px;
   font-size: 15px;

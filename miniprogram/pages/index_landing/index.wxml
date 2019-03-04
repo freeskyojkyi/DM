@@ -11,7 +11,7 @@
 <!-- 模糊搜索 -->
 
 <form action="/">
-  <van-search v-model="value" placeholder="请输入搜索关键词" show-action cancel="onCancel" search="onSearch" />
+  <van-search v-model="value" placeholder="请输入搜索关键词" show-action cancel="onCancel" search="onSearch" class="search"/>
 </form>
 
 <view class='top1'>
