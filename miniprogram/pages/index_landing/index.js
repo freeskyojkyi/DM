@@ -20,10 +20,8 @@ Page({
     my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',      all_device_icon:'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
 
     placeholder_search: "Please input keywords",
-
     my_device_label: 'Hand',
     all_device_label: 'Store',
-
     device_locale_label: 'Locales',
 
     //added checkbox value
@@ -64,6 +62,7 @@ Page({
 
     ],
   },
+  
   checkboxChange(e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     wx.cloud.callFunction({
