@@ -10,12 +10,9 @@
 
 
 <!-- 模糊搜索 -->
-<view class="tool-bar">
-  <form action="/">
-    <van-search v-model="value" placeholder="请输入搜索关键词" show-action cancel="onCancel" />
-  </form>
-</view>
-
+<form action="/">
+  <van-search v-model="value" placeholder="请输入搜索关键词" show-action cancel="onCancel" search="onSearch" />
+</form>
 
 <view class='top1'>
   <!--checkbox add from here-->
@@ -73,7 +70,7 @@
   <!-- <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
   <view wx:else>请升级微信版本</view> -->
 
-  
+
 </van-cell-group>
 
 <view class="device-gap" wx:if="{{mydevices.length != 0}}"></view>

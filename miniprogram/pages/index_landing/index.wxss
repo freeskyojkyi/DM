@@ -196,12 +196,6 @@ page {
   margin-top: 10px;
 }
 
-.tool-bar {
-  position: relative;
-  flex-direction: row;
-  width: 100%;
-}
-
 .search-field {
   position: relative;
   width: 40px;
