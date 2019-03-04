@@ -7,10 +7,9 @@
   </block>
 </view> -->
 
-
 <!-- 模糊搜索 -->
 <form action="/">
-  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action cancel="onCancel" search="onSearch"/>
+  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action cancel="onCancel" search="onSearch" />
 </form>
 
 <view class='top1'>
@@ -46,42 +45,38 @@
   </view>
   <view class='wording'>
     <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="returnAllDevice">
-      <image class='_icon' src='{{return_icon}}' mode='{{mode}}'/>{{return_button_label}}
+      <image class='_icon' src='{{return_icon}}' mode='{{mode}}' />{{return_button_label}}
     </button>
     <view wx:else>请升级微信版本</view>
   </view>
 </view>
 
 <view class='my-devices-container'>
-  <view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
-    <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}' /> 
-    {{my_device_label}}
+  <view wx:if="{{mydevices.length != 0}}" class='my-devices-title-container'>
+    <view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
+      <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}' /> {{my_device_label}}
+    </view>
   </view>
+
+  <van-swipe-cell wx:if="{{mydevices.length != 0}}" wx:for="{{mydevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
+    <van-cell-group>
+      <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" open-type="getUserInfo">
+        <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+      </van-cell>
+    </van-cell-group>
+    <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_return_device' class='swipe-to-return-label'>Return</view>
+  </van-swipe-cell>
 </view>
-
-<van-cell-group wx:if="{{mydevices.length != 0}}" wx:for="{{mydevices}}" wx:key="{{item._id}}">
-  <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" open-type="getUserInfo" bindtouchstart="touchStart" bindtouchmove="touchMove">
-    <van-tag type="danger">{{item.holding_open_id}}</van-tag>
-  </van-cell>
-  <!-- <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
-  <view wx:else>请升级微信版本</view> -->
-
-
-</van-cell-group>
-
-<view class="device-gap" wx:if="{{mydevices.length != 0}}"></view>
 
 <view class="all-devices">
   <view class='all-devices-header-container'>
     <view class='all-device-label'>
-      <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> 
-      {{all_device_label}}
+      <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> {{all_device_label}}
     </view>
 
     <view class='device-locale-container'>
       <button class='device-locale-button'>
-        <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> 
-        {{device_locale_label}}
+        <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
       </button>
     </view>
   </view>

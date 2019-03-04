@@ -9,6 +9,7 @@ page {
 }
 
 .actionItems {
+  height: 118rpx;
   padding: 0rpx;
   margin: 0rpx;
   width: 100%;
@@ -135,6 +136,10 @@ page {
 }
 
 .my-devices-container{
+  margin-bottom: 10px;
+}
+
+.my-devices-title-container{
   height: 50rpx;
 
   padding: 0px;
@@ -166,6 +171,20 @@ page {
   color: #e6e6e6;
 }
 
+.van-swipe-cell__left,
+.van-swipe-cell__right {
+  width: 65px;
+  height: 44px;
+  font-size: 15px;
+  line-height: 44px;
+  color: #fff;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #f44;
+}
+
 .all-devices-header-container{
   height: 50rpx;
   background-color: #586978;
@@ -193,22 +212,9 @@ page {
   font-size: 69rpx;
 }
 
-.my-device-return {
-  height: 50rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .all-devices {
   position: relative;
   margin-bottom: 120rpx;
-  margin-top: 10px;
-}
-
-.search-field {
-  position: relative;
-  width: 40px;
 }
 
 .device-locale-container {

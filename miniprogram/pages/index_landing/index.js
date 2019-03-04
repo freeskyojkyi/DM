@@ -26,10 +26,6 @@ Page({
 
     device_locale_label: 'Locales',
 
-    //Record down the start point of the swipe,
-    startPoint: [0, 0],
-    moveToRemove_flag: false,
-
     //added checkbox value
     items: [{
         name: '0',
@@ -491,77 +487,66 @@ Page({
     } else {}
   },
 
-  touchStart: function(e) {
-    var that = this
-    that.setData({
-      startPoint: [e.touches[0].pageX, e.touches[0].pageY]
-    })
-  },
-
-  touchMove: function(e) {
-    var that = this;
-    var curPoint = [e.touches[0].pageX, e.touches[0].pageY]
-    var startPointH = this.data.startPoint
-    var moveLength = curPoint[0] + 100
-
-    if (moveLength < startPointH[0] && !this.data.moveToRemove_flag) {
-      this.setData({
-        moveToRemove_flag: true,
-      })
-
-      wx.showModal({
-        title: 'Return Device?',
-        content: 'You are already holding device ID =' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
-        confirmText: 'Confirm',
-        cancelText: 'Cancel',
-        success: function(res) {
-          if (res.confirm) {
-            console.log("确定还机")
-            wx.cloud.callFunction({
-              name: 'setDeviceReturn',
-              data: {
-                deviceid: e.currentTarget.dataset.id,
-                returnTo: "GZAdmin",
-                operationtype: 1,
-                operatorNickname: app.globalData.operatorInfo,
-              },
-              success(res) {
-                wx.showToast({
-                  title: "Confirmed",
-                  icon: 'success',
-                  duration: 3000
-                })
-                wx.navigateTo({
-                  url: "../index_landing/index",
-                  success: function(res) {},
-                  fail: function(res) {},
-                  complete: function(res) {},
-                })
-                that.setData({
-                  moveToRemove_flag: false
-                })
-              },
-              fail(e) {
-                console.error,
-                  that.setData({
-                    moveToRemove_flag: false
-                  })
-              }
-            })
-          } else {
-            that.setData({
-              moveToRemove_flag: false
-            })
-          }
+  swipe_to_return_device: function(e) {
+    wx.showModal({
+      title: 'Return Device?',
+      content: 'You are already holding device ID =' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
+      confirmText: 'Confirm',
+      cancelText: 'Cancel',
+      success: function (res) {
+        if (res.confirm) {
+          console.log("确定还机")
+          wx.cloud.callFunction({
+            name: 'setDeviceReturn',
+            data: {
+              deviceid: e.currentTarget.dataset.id,
+              returnTo: "GZAdmin",
+              operationtype: 1,
+              operatorNickname: app.globalData.operatorInfo,
+            },
+            success(res) {
+              wx.showToast({
+                title: "Confirmed",
+                icon: 'success',
+                duration: 3000
+              })
+              wx.navigateTo({
+                url: "../index_landing/index",
+                success: function (res) { },
+                fail: function (res) { },
+                complete: function (res) { },
+              })
+            },
+            fail(e) {
+              console.error
+            }
+          })
         }
-      })
-    }
+      }
+    })
   },
 
   onShareAppMessage: function() {
     return {
       title: '点机坊', // 转发后 所显示的title
       path: '/pages/index_landing/index'
+    }
+  },
+
+  onClose(event) {
+    const { position, instance } = event.detail;
+    switch (position) {
+      case 'left':
+      case 'cell':
+        instance.close();
+        break;
+      case 'right':
+        Dialog.confirm({
+          message: '确定删除吗？'
+        }).then(() => {
+          instance.close();
+        });
+        break;
     }
   }
 })
