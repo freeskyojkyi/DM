@@ -9,7 +9,10 @@
   "van-action-sheet": "/lib/vant/action-sheet/index",
   "van-goods-action": "/lib/vant/goods-action/index",
   "van-panel": "/lib/vant/panel/index",
-  "van-goods-action-button": "/lib/vant/goods-action-button/index"
+  "van-goods-action-button": "/lib/vant/goods-action-button/index",
+  "van-search":"/lib/vant/search/index",
+  "van-swipe-cell":"/lib/vant/swipe-cell/index",
+  "van-icon": "/lib/vant/icon/index"
    
   }
 }

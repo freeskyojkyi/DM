@@ -178,10 +178,6 @@ font-family: "iconfont" !important;
   padding-right: 10px;
 }
 
-.device-gap{
-  margin-bottom: 10px;
-}
-
 .all-device-label{
   display: flex;
   flex-direction: row;
@@ -205,4 +201,34 @@ font-family: "iconfont" !important;
 .all-devices{
   position: relative;
   margin-bottom: 120rpx;
+
+  margin-top: 10px;
+}
+
+.tool-bar{
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+}
+
+.search-field{
+  position: relative;
+  width: 40px;
+}
+
+.device-locale-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.device-locale{
+  border-radius: 25px;
+  border-color: #000;
+  border-style: solid;
+  border: 2px;
+  width: 90%;
+  margin: 5px;
+  padding: 1px;
+  font: 6px;
 }

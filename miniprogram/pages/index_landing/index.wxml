@@ -1,10 +1,21 @@
 <!--index.wxml-->
-<!-- 切换页面 -->
+
+<!-- 切换页面
 <view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}" bindtap='bindShowMsg'>
   <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
     <button iew class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</button>
   </block>
+</view> -->
+
+
+
+<!-- 模糊搜索 -->
+<view class="tool-bar">
+  <form action="/">
+    <van-search v-model="value" placeholder="请输入搜索关键词" show-action cancel="onCancel" />
+  </form>
 </view>
+
 
 <view class='top1'>
   <!--checkbox add from here-->
@@ -56,27 +67,26 @@
 </view>
 
 <van-cell-group wx:if="{{mydevices.length != 0}}" wx:for="{{mydevices}}" wx:key="{{item._id}}">
-  <van-cell 
-    title="{{item.device_name}}" 
-    label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" 
-    size="large" 
-    is-link 
-    data-id="{{item._id}}" 
-    bindtap="gotoDeviceInfo"  
-    open-type="getUserInfo"
-    bindtouchstart="touchStart"
-    bindtouchmove="touchMove">
+  <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" open-type="getUserInfo" bindtouchstart="touchStart" bindtouchmove="touchMove">
     <van-tag type="danger">{{item.holding_open_id}}</van-tag>
   </van-cell>
   <!-- <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
   <view wx:else>请升级微信版本</view> -->
+
+
 
 </van-cell-group>
 
 <view class="device-gap" wx:if="{{mydevices.length != 0}}"></view>
 
 <view class="all-devices">
-  <view class='all-device-label'>All Device</view>
+  <view class='all-device-label'>
+    All Device
+  </view>
+
+  <view class='device-locale-container'>
+    <button class='device-locale'>点击编辑过滤地区</button>
+  </view>
 
   <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
     <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo">
