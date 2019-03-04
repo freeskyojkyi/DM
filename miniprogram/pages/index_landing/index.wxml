@@ -85,7 +85,9 @@
   </view>
 
   <view class='device-locale-container'>
-    <button class='device-locale'>点击编辑过滤地区</button>
+    <button class='device-locale'>
+      <image class='device-locale-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
+    </button>
   </view>
 
   <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">

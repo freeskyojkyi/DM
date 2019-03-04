@@ -16,8 +16,11 @@ Page({
     scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon_hollowout_white.png',
+    device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
 
-    return_label: '<<<<<<左滑以还机',
+    return_label: '*通过左滑以快速还机',
+
+    device_locale_label: '编辑过滤地区',
 
     //Record down the start point of the swipe,
     startPoint: [0, 0],
@@ -195,9 +198,9 @@ Page({
         for (var i = 0; i < fullset.length; i++) {
           if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
             holding.push(fullset[i])
-            
+
             //删除已借机器
-            fullset.splice(i,1)
+            fullset.splice(i, 1)
             i--
           }
         }
@@ -551,7 +554,7 @@ Page({
     }
   },
 
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       title: '点机坊', // 转发后 所显示的title
       path: '/pages/index_landing/index'

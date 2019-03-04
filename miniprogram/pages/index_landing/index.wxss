@@ -1,6 +1,6 @@
 /**index.wxss**/
 
-page{
+page {
   width: 100%;
   background: #f6f6f6;
   display: flex;
@@ -8,7 +8,7 @@ page{
   justify-content: flex-start;
 }
 
-.container{
+.container {
   padding: 0 20rpx;
   background-color: #fff;
   position: relative;
@@ -17,218 +17,220 @@ page{
   height: 100%;
   align-items: left;
   justify-content: space-around;
-  box-shadow: none;  
+  box-shadow: none;
 }
 
-.iconfont{
-font-family: "iconfont" !important;
+.iconfont {
+  font-family: "iconfont" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.actionItems{
+.actionItems {
   padding: 0rpx;
   margin: 0rpx;
-
   width: 100%;
-
   display: flex;
   flex-direction: row;
-
   position: fixed;
   bottom: 0rpx;
-
   background-color: #fff;
   z-index: 9999;
 }
 
-.fixedButton{
+.fixedButton {
   width: 100%;
-  
   background-color: #415858;
   color: #fff;
-
   font-family: '微软雅黑';
   font-weight: bold;
   font-size: 32rpx;
-
   bottom: 30rpx;
-
   border: 1rpx;
   border-style: solid;
   border-color: #e7c1c1;
-
   display: flex;
   flex-direction: row;
 }
 
-._icon{
+._icon {
   padding: 17rpx;
   margin-left: 5%;
   height: 50rpx;
   width: 50rpx;
 }
 
-.wording{
+.wording {
   width: 50%;
 }
 
-.scanQR{
+.scanQR {
   width: 75rpx;
   height: 75rpx;
-  border-style:solid;
-  border-color:#fff; 
-  align-content:center;
+  border-style: solid;
+  border-color: #fff;
+  align-content: center;
 }
 
 .nav {
-    height: 80rpx;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    line-height: 80rpx;
-    background: #f7f7f7;
-    font-size: 16px;
-    white-space: nowrap;
-    z-index: 99;   
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  background: #f7f7f7;
+  font-size: 16px;
+  white-space: nowrap;
+  z-index: 99;
 }
 
 .nav-item {
-    width: 50%;
-    display: inline-block;
-    text-align: center;
+  width: 50%;
+  display: inline-block;
+  text-align: center;
 }
 
-.nav-item.active{
+.nav-item.active {
   background-color: #415858;
-  border:  0em;
+  border: 0em;
   color: white;
 }
 
 /**added selection details**/
+
 /* 顶部 */
-.top{
-   width: 100vw;
+
+.top {
+  width: 100vw;
   height: 80rpx;
   padding: 0 20rpx;
   line-height: 80rpx;
   animation: myfirst 0.2s;
   font-size: 35rpx;
-  background-color: #ccc;  
+  background-color: #ccc;
 }
 
-.top-text{
-  float: left
+.top-text {
+  float: left;
 }
 
 /* 下拉框 - 下拉内容  */
-.select_box {  
-    background-color:#dadada;
-    padding: 0 58rpx;
-    right: 60rpx;
-    text-align:left;
-    animation: myfirst 0.2s;
-    font-size: 30rpx;
-    width: 34.5%;
+
+.select_box {
+  background-color: #dadada;
+  padding: 0 58rpx;
+  right: 60rpx;
+  text-align: left;
+  animation: myfirst 0.2s;
+  font-size: 30rpx;
+  width: 34.5%;
 }
- 
- .select_box label{
-   margin-left: 0px;
+
+.select_box label {
+  margin-left: 0px;
 }
+
 /* 下拉过度效果 */
+
 @keyframes myfirst {
-    from {
-        height: 0rpx;
-    }
- 
-    to {
-        height: 210rpx;
-    }
+  from {
+    height: 0rpx;
+  }
+
+  to {
+    height: 210rpx;
+  }
 }
+
 /* 下拉图标 */
-.top-selected image{
-  height:50rpx;
-  width:50rpx;
+
+.top-selected image {
+  height: 50rpx;
+  width: 50rpx;
   position: absolute;
   right: 0rpx;
   top: 20rpx;
 }
 
-.my-device-label{
+.my-device-label {
   display: flex;
   flex-direction: row;
   justify-content: center;
   background-color: #3a454d;
   color: #e7e9eb;
-
   text-decoration: underline;
 }
 
-.my-device-return-label{
+.my-device-return-label {
   width: 100%-10px;
   text-align: right;
-
   background-color: #3a454d;
   color: #e7e9eb;
   font-size: 15px;
   font-style: italic;
-
   padding-right: 10px;
 }
 
-.all-device-label{
+.all-device-label {
   display: flex;
   flex-direction: row;
   justify-content: center;
   background-color: #586978;
   color: #e7e9eb;
-
   position: relative;
-
   text-decoration: underline;
 }
 
-.my-device-return{
+.my-device-return {
   height: 50rpx;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.all-devices{
+.all-devices {
   position: relative;
   margin-bottom: 120rpx;
-
   margin-top: 10px;
 }
 
-.tool-bar{
+.tool-bar {
   position: relative;
   flex-direction: row;
   width: 100%;
 }
 
-.search-field{
+.search-field {
   position: relative;
   width: 40px;
 }
 
-.device-locale-container{
+.device-locale-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: #586978;
 }
 
-.device-locale{
+.device-locale {
   border-radius: 25px;
-  border-color: #000;
-  border-style: solid;
   border: 2px;
   width: 90%;
   margin: 5px;
-  padding: 1px;
-  font: 6px;
+  padding: 0px;
+  height: 40px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.device-locale-icon {
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 5px;
+  padding: 0;
 }
