@@ -9,9 +9,8 @@
 
 
 <!-- 模糊搜索 -->
-
 <form action="/">
-  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action cancel="onCancel" search="onSearch" class="search"/>
+  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action cancel="onCancel" search="onSearch"/>
 </form>
 
 <view class='top1'>
@@ -47,8 +46,7 @@
   </view>
   <view class='wording'>
     <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="returnAllDevice">
-      <image class='_icon' src='{{return_icon}}' mode='{{mode}}'></image>
-      <view>{{return_button_label}}</view>
+      <image class='_icon' src='{{return_icon}}' mode='{{mode}}'/>{{return_button_label}}
     </button>
     <view wx:else>请升级微信版本</view>
   </view>

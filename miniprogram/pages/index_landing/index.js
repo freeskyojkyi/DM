@@ -19,7 +19,7 @@ Page({
     device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
     my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',      all_device_icon:'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
 
-    placeholder_search: "Please input the keywords",
+    placeholder_search: "Please input keywords",
 
     my_device_label: 'Hand',
     all_device_label: 'Store',
