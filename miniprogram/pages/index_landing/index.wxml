@@ -8,8 +8,8 @@
 </view> -->
 
 
-
 <!-- 模糊搜索 -->
+
 <form action="/">
   <van-search v-model="value" placeholder="请输入搜索关键词" show-action cancel="onCancel" search="onSearch" />
 </form>
@@ -55,12 +55,14 @@
   </view>
 </view>
 
-<view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
-  {{my_device_label}}
-</view>
+<view class='my-devices-container'>
+  <view wx:if="{{mydevices.length != 0}}" class='device-label'>
+    <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}' /> {{my_device_label}}
+  </view>
 
-<view wx:if="{{mydevices.length != 0}}" class='my-device-return-label'>
-  {{return_label}}
+  <!-- <view wx:if="{{mydevices.length != 0}}" class='my-device-return-label'>
+    {{return_label}}
+  </view> -->
 </view>
 
 <van-cell-group wx:if="{{mydevices.length != 0}}" wx:for="{{mydevices}}" wx:key="{{item._id}}">
@@ -76,14 +78,17 @@
 <view class="device-gap" wx:if="{{mydevices.length != 0}}"></view>
 
 <view class="all-devices">
-  <view class='all-device-label'>
-    {{all_device_label}}
-  </view>
+  <view class='all-devices-header-container'>
+    <view class='all-device-label'>
+      <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> 
+      {{all_device_label}}
+    </view>
 
-  <view class='device-locale-container'>
-    <button class='device-locale'>
-      <image class='device-locale-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
-    </button>
+    <view class='device-locale-container'>
+      <button class='device-locale'>
+        <image class='normal_icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
+      </button>
+    </view>
   </view>
 
   <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">

@@ -17,12 +17,13 @@ Page({
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon_hollowout_white.png',
     device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
+    my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',      all_device_icon:'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
 
-    my_device_label: 'My Devices',
-    all_device_label: 'All Devices',
+    my_device_label: 'MY Devices',
+    all_device_label: 'ALL Devices',
     return_label: '*通过左滑以快速还机',
 
-    device_locale_label: '编辑过滤地区',
+    device_locale_label: '编辑地区',
 
     //Record down the start point of the swipe,
     startPoint: [0, 0],

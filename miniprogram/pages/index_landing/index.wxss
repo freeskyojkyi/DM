@@ -154,32 +154,76 @@ page {
   top: 20rpx;
 }
 
-.my-device-label {
+.my-devices-container{
+  padding: 0px;
+  margin: 0px;
+
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
   background-color: #3a454d;
+}
+
+.device-label {
+  position: relative;
+  left: 30rpx;
+
+  font-family: '微软雅黑';
+
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+
+  font-weight:bold;
+  font-size: 50rpx;
   color: #e7e9eb;
   text-decoration: underline;
 }
 
 .my-device-return-label {
-  width: 100%-10px;
+  position: relative;
+  top: 18rpx;
+
+  width: 50%;
+  /* width: 100%-10px; */
   text-align: right;
-  background-color: #3a454d;
   color: #e7e9eb;
   font-size: 15px;
   font-style: italic;
   padding-right: 10px;
 }
 
-.all-device-label {
+.all-devices-header-container{
+  background-color: #586978;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  background-color: #586978;
+}
+
+.all-device-label {
   color: #e7e9eb;
   position: relative;
+  left: 30rpx;
+  width: 55%
+
+  font-family: '微软雅黑';
+
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+
+  font-weight:bold;
+  font-size: 50rpx;
   text-decoration: underline;
 }
 
@@ -205,7 +249,7 @@ page {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: #586978;
+  width: 45%;
 }
 
 .device-locale {
@@ -222,7 +266,7 @@ page {
   align-items: center;
 }
 
-.device-locale-icon {
+.normal_icon {
   height: 40rpx;
   width: 40rpx;
   margin-right: 5px;
