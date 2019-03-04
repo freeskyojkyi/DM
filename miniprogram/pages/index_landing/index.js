@@ -490,7 +490,7 @@ Page({
   swipe_to_return_device: function(e) {
     wx.showModal({
       title: 'Return Device?',
-      content: 'You are already holding device ID =' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
+      content: 'You are already holding device #' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
       confirmText: 'Confirm',
       cancelText: 'Cancel',
       success: function (res) {
@@ -523,6 +523,68 @@ Page({
           })
         }
       }
+    })
+  },
+
+  swipe_to_borrow_device: function (e) {
+    var that = this
+    wx.cloud.callFunction({
+      name: 'ownByMe',
+      data: {
+        deviceid: e.currentTarget.dataset.id,
+      },
+      success(res) {
+        //console.log(res)
+        if (res.result) {
+          //pop up to start return flow
+          wx.showModal({
+            title: 'ERROR',
+            content: 'You are already holding this device!',
+            confirmText: 'OK',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+              }
+            }
+          })
+        } else {
+          //pop up to start borrow flow
+          wx.showModal({
+            title: 'Borrow Device?',
+            content: 'Are you confirm to borrow device #' + e.currentTarget.dataset.id + '?',
+            confirmText: 'Confirm',
+            cancelText: 'Cancel',
+            success: function (res) {
+              if (res.confirm) {
+                console.log("确定借机")
+                wx.cloud.callFunction({
+                  name: 'setDeviceBorrow',
+                  data: {
+                    deviceid: e.currentTarget.dataset.id,
+                    operationtype: 0,
+                    operatorNickname: app.globalData.operatorInfo
+                  },
+                  success(res) {
+                    wx.showToast({
+                      title: "Confirmed",
+                      icon: 'success',
+                      duration: 3000
+                    })
+                    wx.navigateTo({
+                      url: "../index_landing/index",
+                      success: function (res) { },
+                      fail: function (res) { },
+                      complete: function (res) { },
+                    })
+                  },
+                  fail: console.error
+                })
+              } else { console.log("取消") }
+            }
+          })
+        }
+      },
+      fail: console.error
     })
   },
 
