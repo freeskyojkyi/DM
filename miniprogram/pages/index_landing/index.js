@@ -312,6 +312,7 @@ Page({
     //     }
     //   })
     // }
+    var that = this
     if (e.detail.userInfo) {
       wx.showModal({
         title: 'Return Device?',
@@ -348,11 +349,7 @@ Page({
                     showCancel: false,
                     success: function(res) {
                       if (res.confirm) {
-                        wx.navigateTo({
-                          success: function(res) {},
-                          fail: function(res) {},
-                          complete: function(res) {},
-                        })
+                        that.onLoad()
                       }
                     }
                   })
