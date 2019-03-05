@@ -27,7 +27,7 @@ Page({
       success(res) {
         //create by yippee on 17Feb 时间戳转化为年 月 日 时 分 秒
         // console.log('cost：：：' + (new Date().getTime() - start))
-        // console.log('------------------------------------------')
+        // console.log
         console.log(JSON.stringify(res.result))
         var datas = res.result.data
         for (var i = 0; i < datas.length; i++) {

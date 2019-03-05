@@ -1,6 +1,6 @@
 /**index.wxss**/
 
-page{
+page {
   width: 100%;
   background: #f6f6f6;
   display: flex;
@@ -8,201 +8,281 @@ page{
   justify-content: flex-start;
 }
 
-.container{
-  padding: 0 20rpx;
-  background-color: #fff;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: left;
-  justify-content: space-around;
-  box-shadow: none;  
-}
-
-.iconfont{
-font-family: "iconfont" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.actionItems{
+.actionItems {
+  height: 118rpx;
   padding: 0rpx;
   margin: 0rpx;
-
   width: 100%;
-
   display: flex;
   flex-direction: row;
-
   position: fixed;
   bottom: 0rpx;
-
   background-color: #fff;
   z-index: 9999;
 }
 
-.fixedButton{
+.fixedButton {
   width: 100%;
-  
   background-color: #415858;
   color: #fff;
-
   font-family: '微软雅黑';
   font-weight: bold;
-  font-size: 32rpx;
-
-  bottom: 30rpx;
-
+  font-size: 35rpx;
   border: 1rpx;
   border-style: solid;
   border-color: #e7c1c1;
-
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
-._icon{
+._icon {
   padding: 17rpx;
   margin-left: 5%;
   height: 50rpx;
   width: 50rpx;
 }
 
-.wording{
+.wording {
   width: 50%;
 }
 
-.scanQR{
+.scanQR {
   width: 75rpx;
   height: 75rpx;
-  border-style:solid;
-  border-color:#fff; 
-  align-content:center;
+  border-style: solid;
+  border-color: #fff;
+  align-content: center;
 }
 
 .nav {
-    height: 80rpx;
-    width: 100%;
-    box-sizing: border-box;
-    overflow: hidden;
-    line-height: 80rpx;
-    background: #f7f7f7;
-    font-size: 16px;
-    white-space: nowrap;
-    z-index: 99;   
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  background: #f7f7f7;
+  font-size: 16px;
+  white-space: nowrap;
+  z-index: 99;
 }
 
 .nav-item {
-    width: 50%;
-    display: inline-block;
-    text-align: center;
+  width: 50%;
+  display: inline-block;
+  text-align: center;
 }
 
-.nav-item.active{
+.nav-item.active {
   background-color: #415858;
-  border:  0em;
+  border: 0em;
   color: white;
 }
 
 /**added selection details**/
+
 /* 顶部 */
-.top{
-   width: 100vw;
+
+.top {
+  width: 100vw;
   height: 80rpx;
   padding: 0 20rpx;
   line-height: 80rpx;
   animation: myfirst 0.2s;
   font-size: 35rpx;
-  background-color: #ccc;  
+  background-color: #ccc;
 }
 
-.top-text{
-  float: left
+.top-text {
+  float: left;
 }
 
 /* 下拉框 - 下拉内容  */
-.select_box {  
-    background-color:#dadada;
-    padding: 0 58rpx;
-    right: 60rpx;
-    text-align:left;
-    animation: myfirst 0.2s;
-    font-size: 30rpx;
-    width: 34.5%;
+
+.select_box {
+  background-color: #dadada;
+  padding: 0 58rpx;
+  right: 60rpx;
+  text-align: left;
+  animation: myfirst 0.2s;
+  font-size: 30rpx;
+  width: 34.5%;
 }
- 
- .select_box label{
-   margin-left: 0px;
+
+.select_box label {
+  margin-left: 0px;
 }
+
 /* 下拉过度效果 */
+
 @keyframes myfirst {
-    from {
-        height: 0rpx;
-    }
- 
-    to {
-        height: 210rpx;
-    }
+  from {
+    height: 0rpx;
+  }
+
+  to {
+    height: 210rpx;
+  }
 }
+
 /* 下拉图标 */
-.top-selected image{
-  height:50rpx;
-  width:50rpx;
+
+.top-selected image {
+  height: 50rpx;
+  width: 50rpx;
   position: absolute;
   right: 0rpx;
   top: 20rpx;
 }
 
-.my-device-label{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: #3a454d;
-  color: #e7e9eb;
-
-  text-decoration: underline;
-}
-
-.my-device-return-label{
-  width: 100%-10px;
-  text-align: right;
-
-  background-color: #3a454d;
-  color: #e7e9eb;
-  font-size: 15px;
-  font-style: italic;
-
-  padding-right: 10px;
-}
-
-.device-gap{
+.my-devices-container{
   margin-bottom: 10px;
 }
 
-.all-device-label{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  background-color: #586978;
-  color: #e7e9eb;
-
-  position: relative;
-
-  text-decoration: underline;
-}
-
-.my-device-return{
+.my-devices-title-container{
   height: 50rpx;
 
+  padding: 0px;
+  margin: 0px;
+
   display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background-color: #3a454d;
+}
+
+.my-device-label {
+  position: relative;
+  left: 30rpx;
+
+  font-family: '微软雅黑';
+
+  padding: 0px;
+  margin: 0px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+
+  font-weight:bold;
+  font-size: 69rpx;
+  color: #e6e6e6;
+}
+
+.van-swipe-cell__left,
+.van-swipe-cell__right {
+  width: 65px;
+  height: 44px;
+  font-size: 15px;
+  line-height: 44px;
+  color: #fff;
+}
+
+.swipe-to-return-label{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f44;
+}
+
+.swipe-to-borrow-label{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8780e5;
+}
+
+.all-devices-header-container{
+  height: 50rpx;
+  background-color: #586978;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.all-device-label {
+  color: #e6e6e6;
+  position: relative;
+  left: 30rpx;
+  width: 65%;
+
+  font-family: '微软雅黑';
+
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+
+  font-weight:bold;
+  font-size: 69rpx;
+}
+
+.all-devices {
+  position: relative;
+  margin-bottom: 120rpx;
+}
+
+.device-locale-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  width: 35%;
+  padding: 1px;
+}
+
+.device-locale-button {
+  height: 20px;
+  border-radius: 25px;
+  border: 2px;
+  width: 90%;
+  padding: 0px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.all-devices{
-  position: relative;
-  margin-bottom: 120rpx;
+.small-icon{
+  height: 35rpx;
+  width: 35rpx;
+  margin-right: 10px;
+  padding: 0;
+}
+
+.normal_icon {
+  height: 50rpx;
+  width: 50rpx;
+  margin-right: 10px;
+  padding: 0;
+}
+
+.locales-container{
+  position: absolute;
+
+  width: 100%;
+  height: 150%;
+
+  background-color: #7c8086;
+  color: rgb(235, 65, 65);
+
+  opacity: 0.9;
+
+  z-index: 99999;
+}
+
+.locales-visable{
+  visibility: visible;
+}
+
+.locales-hidden{
+  visibility: hidden;
 }

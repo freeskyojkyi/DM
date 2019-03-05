@@ -1,10 +1,23 @@
 <!--index.wxml-->
-<!-- 切换页面 -->
+
+<!-- 切换页面
 <view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}" bindtap='bindShowMsg'>
   <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
     <button iew class="nav-item {{currentTab == idx ?'active':''}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</button>
   </block>
+</view> -->
+
+<!-- Select Locale -->
+<view class="locales-container {{locales_visible?'locales-visable':'locales-hidden'}}">
+  Locale
+  <button bindtap='locales_hidden_change' catchtouchmove='disable_touch_move'>hidden</button>
 </view>
+
+
+<!-- 模糊搜索 -->
+<form action="/">
+  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action cancel="onCancel" search="onSearch" />
+</form>
 
 <view class='top1'>
   <!--checkbox add from here-->
@@ -21,7 +34,6 @@
 
 
 <!-- 借机  -->
-
 <view class='actionItems'>
   <view class='wording'>
     <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="getLogList">
@@ -40,47 +52,48 @@
   </view>
   <view class='wording'>
     <button wx:if="{{canIUse}}" class='fixedButton' open-type="getUserInfo" bindgetuserinfo="returnAllDevice">
-      <image class='_icon' src='{{return_icon}}' mode='{{mode}}'></image>
-      <view>{{return_button_label}}</view>
+      <image class='_icon' src='{{return_icon}}' mode='{{mode}}' />{{return_button_label}}
     </button>
     <view wx:else>请升级微信版本</view>
   </view>
 </view>
 
-<view wx:if="{{mydevices.length != 0}}" class='my-device-label'>
-  我的机器
+<view wx:if="{{mydevices.length != 0}}" class='my-devices-container'>
+  <view class='my-devices-title-container'>
+    <view class='my-device-label'>
+      <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}'/> {{my_device_label}}
+    </view>
+  </view>
+
+  <van-swipe-cell wx:for="{{mydevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
+    <van-cell-group>
+      <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" open-type="getUserInfo">
+        <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+      </van-cell>
+    </van-cell-group>
+    <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_return_device' class='swipe-to-return-label'>Return</view>
+  </van-swipe-cell>
 </view>
-
-<view wx:if="{{mydevices.length != 0}}" class='my-device-return-label'>
-  {{return_label}}
-</view>
-
-<van-cell-group wx:if="{{mydevices.length != 0}}" wx:for="{{mydevices}}" wx:key="{{item._id}}">
-  <van-cell 
-    title="{{item.device_name}}" 
-    label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" 
-    size="large" 
-    is-link 
-    data-id="{{item._id}}" 
-    bindtap="gotoDeviceInfo"  
-    open-type="getUserInfo"
-    bindtouchstart="touchStart"
-    bindtouchmove="touchMove">
-    <van-tag type="danger">{{item.holding_open_id}}</van-tag>
-  </van-cell>
-  <!-- <button wx:if="{{canIUse}}" class='my-device-return' open-type="getUserInfo" bindgetuserinfo="returnThisDevice" data-id="{{item._id}}">Return</button>
-  <view wx:else>请升级微信版本</view> -->
-
-</van-cell-group>
-
-<view class="device-gap" wx:if="{{mydevices.length != 0}}"></view>
 
 <view class="all-devices">
-  <view class='all-device-label'>All Device</view>
+  <view class='all-devices-header-container'>
+    <view class='all-device-label'>
+      <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> {{all_device_label}}
+    </view>
 
-  <van-cell-group wx:for="{{alldevices}}" wx:key="{{item._id}}">
-    <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo">
-      <van-tag type="danger">{{item.holding_open_id}}</van-tag>
-    </van-cell>
-  </van-cell-group>
+    <view class='device-locale-container'>
+      <button class='device-locale-button' bindtap='locales_visible_change'>
+        <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
+      </button>
+    </view>
+  </view>
+
+    <van-swipe-cell wx:for="{{alldevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
+    <van-cell-group>
+      <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo">
+        <van-tag type="danger">{{item.holding_open_id}}</van-tag>
+      </van-cell>
+    </van-cell-group>
+    <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_borrow_device' class='swipe-to-borrow-label'>Borrow</view>
+  </van-swipe-cell>
 </view>
