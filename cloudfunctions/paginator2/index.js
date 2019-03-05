@@ -25,7 +25,7 @@ exports.main = async (event, context) => {
   //   devicelist = res;
   //   return devicelist;
   // })
-  //console.log(devicelist)
+  
   try {
     let devicelist = await db.collection(dbName).where(filter).skip((pageIndex - 1) * pageSize).limit(pageSize).get();
     devicelist.hasMore = hasMore;
