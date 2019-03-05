@@ -7,6 +7,13 @@
   </block>
 </view> -->
 
+<!-- Select Locale -->
+<view class="locales-container {{locales_visible?'locales-visable':'locales-hidden'}}">
+  Locale
+  <button bindtap='locales_hidden_change' catchtouchmove='disable_touch_move'>hidden</button>
+</view>
+
+
 <!-- 模糊搜索 -->
 <form action="/">
   <van-search v-model="value" placeholder="{{placeholder_search}}" show-action cancel="onCancel" search="onSearch" />
@@ -75,7 +82,7 @@
     </view>
 
     <view class='device-locale-container'>
-      <button class='device-locale-button'>
+      <button class='device-locale-button' bindtap='locales_visible_change'>
         <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
       </button>
     </view>

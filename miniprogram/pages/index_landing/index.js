@@ -24,6 +24,8 @@ Page({
     all_device_label: 'Store',
     device_locale_label: 'Locales',
 
+    locales_visible: false,
+
     //added checkbox value
     items: [{
         name: '0',
@@ -347,7 +349,6 @@ Page({
                     success: function(res) {
                       if (res.confirm) {
                         wx.navigateTo({
-                          url: "../index_landing/index",
                           success: function(res) {},
                           fail: function(res) {},
                           complete: function(res) {},
@@ -487,6 +488,7 @@ Page({
   },
 
   swipe_to_return_device: function(e) {
+    var that = this
     wx.showModal({
       title: 'Return Device?',
       content: 'You are already holding device #' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
@@ -508,13 +510,8 @@ Page({
                 title: "Confirmed",
                 icon: 'success',
                 duration: 3000
-              })
-              wx.navigateTo({
-                url: "../index_landing/index",
-                success: function (res) { },
-                fail: function (res) { },
-                complete: function (res) { },
-              })
+              }),
+              that.onLoad()
             },
             fail(e) {
               console.error
@@ -568,13 +565,8 @@ Page({
                       title: "Confirmed",
                       icon: 'success',
                       duration: 3000
-                    })
-                    wx.navigateTo({
-                      url: "../index_landing/index",
-                      success: function (res) { },
-                      fail: function (res) { },
-                      complete: function (res) { },
-                    })
+                    }),
+                    that.onLoad()
                   },
                   fail: console.error
                 })
@@ -609,5 +601,21 @@ Page({
         });
         break;
     }
+  },
+
+  locales_visible_change: function(){
+    this.setData({
+      locales_visible:true
+    })
+  },
+
+  locales_hidden_change: function () {
+    this.setData({
+      locales_visible: false
+    })
+  },
+
+  disable_touch_move: function (){
+    
   }
 })
