@@ -135,44 +135,36 @@ page {
   top: 20rpx;
 }
 
-.my-devices-container{
+.my-devices-container {
   margin-bottom: 10px;
 }
 
-.my-devices-title-container{
+.my-devices-title-container {
   height: 50rpx;
-
   padding: 0px;
   margin: 0px;
-
   display: flex;
   flex-direction: row;
   align-items: center;
-
   background-color: #3a454d;
 }
 
 .my-device-label {
   position: relative;
   left: 30rpx;
-
   font-family: '微软雅黑';
-
   padding: 0px;
   margin: 0px;
-
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
-
-  font-weight:bold;
+  font-weight: bold;
   font-size: 69rpx;
   color: #e6e6e6;
 }
 
-.van-swipe-cell__left,
-.van-swipe-cell__right {
+.van-swipe-cell__left, .van-swipe-cell__right {
   width: 65px;
   height: 44px;
   font-size: 15px;
@@ -180,7 +172,7 @@ page {
   color: #fff;
 }
 
-.swipe-to-return-label{
+.swipe-to-return-label {
   width: 100%;
   height: 100%;
   display: flex;
@@ -189,7 +181,7 @@ page {
   background-color: #f44;
 }
 
-.swipe-to-borrow-label{
+.swipe-to-borrow-label {
   width: 100%;
   height: 100%;
   display: flex;
@@ -198,7 +190,7 @@ page {
   background-color: #8780e5;
 }
 
-.all-devices-header-container{
+.all-devices-header-container {
   height: 50rpx;
   background-color: #586978;
   display: flex;
@@ -206,22 +198,25 @@ page {
   align-items: center;
 }
 
+.topnav {
+  position: fixed;
+  top: 85rpx;
+  z-index: 99;
+}
+
 .all-device-label {
   color: #e6e6e6;
   position: relative;
   left: 30rpx;
   width: 65%;
-
   font-family: '微软雅黑';
-
   padding: 0px;
   margin: 0px;
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
-
-  font-weight:bold;
+  font-weight: bold;
   font-size: 69rpx;
 }
 
@@ -251,7 +246,7 @@ page {
   align-items: center;
 }
 
-.small-icon{
+.small-icon {
   height: 35rpx;
   width: 35rpx;
   margin-right: 10px;
@@ -265,24 +260,20 @@ page {
   padding: 0;
 }
 
-.locales-container{
+.locales-container {
   position: absolute;
-
   width: 100%;
   height: 150%;
-
   background-color: #7c8086;
   color: rgb(235, 65, 65);
-
   opacity: 0.9;
-
   z-index: 99999;
 }
 
-.locales-visable{
+.locales-visable {
   visibility: visible;
 }
 
-.locales-hidden{
+.locales-hidden {
   visibility: hidden;
 }

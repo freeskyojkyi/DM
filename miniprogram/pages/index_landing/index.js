@@ -26,6 +26,8 @@ Page({
 
     locales_visible: false,
 
+    top:0,
+
     //added checkbox value
     items: [{
         name: '0',
@@ -614,5 +616,12 @@ Page({
 
   disable_touch_move: function (){
     
+  },
+
+  scrollTopFun(e) {
+    let that = this;
+    that.top = e.detail.scrollTop;
+    console.log(e)
+    that.$apply();
   }
 })
