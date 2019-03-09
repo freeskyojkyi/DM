@@ -81,7 +81,7 @@
   </van-swipe-cell>
 </view>
 
-<view class="all-devices">
+<view class="all-devices" wx:if="{{alldevices.length != 0}}">
   <scroll-view bindscroll="scrollTopFun">
     <view class="all-devices-header-container {{top>130?'topnav':''}}">
       <view class='all-device-label'>
