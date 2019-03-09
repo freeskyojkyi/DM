@@ -28,6 +28,9 @@ Page({
 
     top:0,
 
+    all_data_devices: ['123','222'],
+    my_data_devices: '???',
+
     //added checkbox value
     items: [{
         name: '0',
@@ -159,6 +162,7 @@ Page({
 
   onLoad: function(options) {
     var that = this
+
     if (app.globalData.operatorInfo) {} else {
       //console.log("not yet has userinfo")
       wx.getUserInfo({
@@ -211,6 +215,10 @@ Page({
         this.setData({
           alldevices: fullset,
           mydevices: holding,
+        })
+        that.setData({
+          all_data_devices: fullset,
+          my_data_devices: holding,
         })
         console.log('[数据库] [查询alldevices] 成功: ', res)
       },
@@ -623,5 +631,54 @@ Page({
     that.top = e.detail.scrollTop;
     console.log(e)
     that.$apply();
+  },
+
+  onSearch: function (e){
+    // my_data_devices - 我的设备 
+    // all_data_devices - 所有设备
+    // my_search_devices - 我的查询设备
+    // all_search_devices - 所有的查询设备
+    // search critiria - e.detail
+    var search_scope
+
+    var my_search_devices
+    var all_search_devices
+
+    var that = this
+
+    that.setData({
+      my_search_devices: [],
+      all_search_devices: []
+    })
+
+    console.log(this.data.my_data_devices)
+
+    for(var i = 0; i < that.data.my_data_devices.length; i++){
+      search_scope = (that.data.my_data_devices[i]._id + ',' +
+                    that.data.my_data_devices[i].device_name + ',' +
+                    that.data.my_data_devices[i].holding_open_id + ',' +
+                    that.data.my_data_devices[i].os).toLowerCase()
+
+      if (search_scope.indexOf(e.detail.toLowerCase())!= "-1")
+      {
+        that.data.my_search_devices.push(that.data.my_data_devices[i])
+      }
+    }
+
+    for (var i = 0; i < that.data.all_data_devices.length; i++) {
+      search_scope = (that.data.all_data_devices[i]._id + ',' +
+        that.data.all_data_devices[i].device_name + ',' +
+        that.data.all_data_devices[i].holding_open_id + ',' +
+        that.data.all_data_devices[i].os).toLowerCase()
+
+      if (search_scope.indexOf(e.detail.toLowerCase()) != "-1") {
+        that.data.all_search_devices.push(that.data.all_data_devices[i])
+      }
+    }
+    
+    that.setData({
+      mydevices: that.data.my_search_devices,
+      alldevices: that.data.all_search_devices
+    })
   }
 })

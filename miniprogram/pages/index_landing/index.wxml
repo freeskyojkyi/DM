@@ -22,7 +22,7 @@
 
 <!-- 模糊搜索 -->
 <form action="/">
-  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action cancel="onCancel" search="onSearch" />
+  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action bind:cancel="onCancel" bind:search="onSearch" />
 </form>
 
 <view class='top1'>
