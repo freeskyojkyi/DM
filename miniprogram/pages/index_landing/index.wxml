@@ -73,9 +73,16 @@
 
   <van-swipe-cell wx:for="{{mydevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
     <van-cell-group>
-      <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" open-type="getUserInfo">
-        <van-tag type="danger">{{item.holding_open_id}}</van-tag>
-      </van-cell>
+    <van-cell
+    is-link 
+    data-id="{{item._id}}" bindtap="gotoDeviceInfo"
+    value="{{item.holding_open_id}}">
+  <view slot="title">
+    <view class="van-cell-text">{{item.device_name}}</view>
+    <van-tag type="danger">No.{{item._id}}</van-tag>\n
+    <van-tag type="primary">Location {{item.location_id}}</van-tag>
+  </view>
+    </van-cell>
     </van-cell-group>
     <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_return_device' class='swipe-to-return-label'>Return</view>
   </van-swipe-cell>
@@ -98,9 +105,17 @@
 
   <van-swipe-cell wx:for="{{alldevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
     <van-cell-group>
-      <van-cell title="{{item.device_name}}" label="No.{{item._id}}\nLocation\n{{item.location_id}}\n" size="large" is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo">
-        <van-tag type="danger">{{item.holding_open_id}}</van-tag>
-      </van-cell>
+    <van-cell
+    is-link 
+    data-id="{{item._id}}" bindtap="gotoDeviceInfo"
+  value="{{item.holding_open_id}}"
+>
+  <view slot="title">
+    <view class="van-cell-text">{{item.device_name}}</view>
+    <van-tag type="danger">No.{{item._id}}</van-tag>\n
+    <van-tag type="primary">Location {{item.location_id}}</van-tag>
+  </view>
+    </van-cell>
     </van-cell-group>
     <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_borrow_device' class='swipe-to-borrow-label'>Borrow</view>
   </van-swipe-cell>

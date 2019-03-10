@@ -13,6 +13,7 @@
     "van-swipe-cell": "/lib/vant/swipe-cell/index",
     "van-icon": "/lib/vant/icon/index",
     "van-checkbox": "/lib/vant/checkbox/index",
-    "van-checkbox-group": "/lib/vant/checkbox-group/index"
+    "van-checkbox-group": "/lib/vant/checkbox-group/index",
+    "van-tag": "/lib/vant/tag/index"
   }
 }
