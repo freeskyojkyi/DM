@@ -79,7 +79,7 @@
     value="{{item.holding_open_id}}">
   <view slot="title">
     <view class="van-cell-text">{{item.device_name}}</view>
-    <van-tag type="danger">No.{{item._id}}</van-tag>\n
+    <van-tag type="success">No.{{item._id}}</van-tag>\n
     <van-tag type="primary">Location {{item.location_id}}</van-tag>
   </view>
     </van-cell>
@@ -112,7 +112,7 @@
 >
   <view slot="title">
     <view class="van-cell-text">{{item.device_name}}</view>
-    <van-tag type="danger">No.{{item._id}}</van-tag>\n
+    <van-tag type="success">No.{{item._id}}</van-tag>\n
     <van-tag type="primary">Location {{item.location_id}}</van-tag>
   </view>
     </van-cell>
