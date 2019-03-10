@@ -19,7 +19,8 @@ Page({
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon_hollowout_white.png',
     device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
-    my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',      all_device_icon:'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
+    my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',
+    all_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
 
     placeholder_search: "Please input keywords",
     my_device_label: 'Hand',
@@ -27,6 +28,11 @@ Page({
     device_locale_label: 'Locales',
 
     locales_visible: false,
+
+    top: 0,
+
+    all_data_devices: ['123', '222'],
+    my_data_devices: '???',
 
     //added checkbox value
     items: [{
@@ -66,7 +72,7 @@ Page({
 
     ],
   },
-  
+
   checkboxChange(e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     wx.cloud.callFunction({
@@ -159,6 +165,7 @@ Page({
 
   onLoad: function(options) {
     var that = this
+
     if (app.globalData.operatorInfo) {} else {
       //console.log("not yet has userinfo")
       wx.getUserInfo({
@@ -216,6 +223,10 @@ Page({
         this.setData({
           alldevices: fullset,
           mydevices: holding,
+        })
+        that.setData({
+          all_data_devices: fullset,
+          my_data_devices: holding,
         })
         console.log('[数据库] [查询alldevices] 成功: ', res)
       },
@@ -513,7 +524,7 @@ Page({
       content: 'You are already holding device #' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
       confirmText: 'Confirm',
       cancelText: 'Cancel',
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           console.log("确定还机")
           wx.cloud.callFunction({
@@ -526,11 +537,11 @@ Page({
             },
             success(res) {
               wx.showToast({
-                title: "Confirmed",
-                icon: 'success',
-                duration: 3000
-              }),
-              that.onLoad()
+                  title: "Confirmed",
+                  icon: 'success',
+                  duration: 3000
+                }),
+                that.onLoad()
             },
             fail(e) {
               console.error
@@ -541,7 +552,7 @@ Page({
     })
   },
 
-  swipe_to_borrow_device: function (e) {
+  swipe_to_borrow_device: function(e) {
     var that = this
     wx.cloud.callFunction({
       name: 'ownByMe',
@@ -557,9 +568,8 @@ Page({
             content: 'You are already holding this device!',
             confirmText: 'OK',
             showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-              }
+            success: function(res) {
+              if (res.confirm) {}
             }
           })
         } else {
@@ -569,7 +579,7 @@ Page({
             content: 'Are you confirm to borrow device #' + e.currentTarget.dataset.id + '?',
             confirmText: 'Confirm',
             cancelText: 'Cancel',
-            success: function (res) {
+            success: function(res) {
               if (res.confirm) {
                 console.log("确定借机")
                 wx.cloud.callFunction({
@@ -581,15 +591,17 @@ Page({
                   },
                   success(res) {
                     wx.showToast({
-                      title: "Confirmed",
-                      icon: 'success',
-                      duration: 3000
-                    }),
-                    that.onLoad()
+                        title: "Confirmed",
+                        icon: 'success',
+                        duration: 3000
+                      }),
+                      that.onLoad()
                   },
                   fail: console.error
                 })
-              } else { console.log("取消") }
+              } else {
+                console.log("取消")
+              }
             }
           })
         }
@@ -606,7 +618,10 @@ Page({
   },
 
   onClose(event) {
-    const { position, instance } = event.detail;
+    const {
+      position,
+      instance
+    } = event.detail;
     switch (position) {
       case 'left':
       case 'cell':
@@ -622,19 +637,100 @@ Page({
     }
   },
 
-  locales_visible_change: function(){
+  locales_visible_change: function() {
     this.setData({
-      locales_visible:true
+      locales_visible: true
     })
   },
 
-  locales_hidden_change: function () {
+  locales_hidden_change: function() {
     this.setData({
       locales_visible: false
     })
   },
 
-  disable_touch_move: function (){
-    
+  disable_touch_move: function() {
+
+  },
+
+  scrollTopFun(e) {
+    let that = this;
+    that.top = e.detail.scrollTop;
+    console.log(e)
+    that.$apply();
+  },
+
+  onSearch: function(e) {
+    // my_data_devices - 我的设备 
+    // all_data_devices - 所有设备
+    // my_search_devices - 我的查询设备
+    // all_search_devices - 所有的查询设备
+    // search critiria - e.detail
+    var that = this
+    var search_scope
+
+    //格式化查询条件并以空格分离查询条件 
+    var search_condition = e.detail.replace(/\s+/g, ' ').replace(/(^\s*)|(\s*$)/g, "").split(' ')
+
+    var my_search_devices
+    var all_search_devices
+    var able_To_push
+
+    //初始化数据
+    that.setData({
+      my_search_devices: [],
+      all_search_devices: [],
+    })
+
+    for (var i = 0; i < that.data.my_data_devices.length; i++) {
+      search_scope = (that.data.my_data_devices[i]._id + ',' +
+        that.data.my_data_devices[i].device_name + ',' +
+        that.data.my_data_devices[i].holding_open_id).toLowerCase();
+
+      able_To_push = true;
+
+      for (var j = 0; j < search_condition.length; j++) {
+        if (search_scope.indexOf(search_condition[j].toLowerCase()) == "-1") {
+          able_To_push = false;
+          j++;
+        }
+      };
+
+      if (able_To_push) {
+        that.data.my_search_devices.push(that.data.my_data_devices[i])
+      }
+    }
+
+    for (var i = 0; i < that.data.all_data_devices.length; i++) {
+      search_scope = (that.data.all_data_devices[i]._id + ',' +
+        that.data.all_data_devices[i].device_name + ',' +
+        that.data.all_data_devices[i].holding_open_id).toLowerCase()
+
+      able_To_push = true;
+
+      for (var j = 0; j < search_condition.length; j++) {
+        if (search_scope.indexOf(search_condition[j].toLowerCase()) == "-1") {
+          able_To_push = false;
+          j++;
+        }
+      };
+
+      if (able_To_push) {
+        that.data.all_search_devices.push(that.data.all_data_devices[i])
+      }
+    }
+
+    //刷新列表
+    that.setData({
+      mydevices: that.data.my_search_devices,
+      alldevices: that.data.all_search_devices
+    })
+  },
+
+  onCancel:function(){
+    this.setData({
+      alldevices: this.data.all_data_devices,
+      mydevices: this.data.my_data_devices
+    })
   }
 })

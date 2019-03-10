@@ -11,6 +11,8 @@
     "van-goods-action-button": "/lib/vant/goods-action-button/index",
     "van-search": "/lib/vant/search/index",
     "van-swipe-cell": "/lib/vant/swipe-cell/index",
-    "van-icon": "/lib/vant/icon/index"
+    "van-icon": "/lib/vant/icon/index",
+    "van-checkbox": "/lib/vant/checkbox/index",
+    "van-checkbox-group": "/lib/vant/checkbox-group/index"
   }
 }
