@@ -1,0 +1,4 @@
+<view>
+This is Entrance for DMS
+<button bindtap='goToDeviceList'>Go to Device List</button>
+</view>

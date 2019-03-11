@@ -32,7 +32,7 @@ Page({
     top: 0,
 
     all_data_devices: ['123', '222'],
-    my_data_devices: '???',
+    my_data_devices: 'default',
 
     //added checkbox value
     items: [{
@@ -206,6 +206,7 @@ Page({
         pageSize:10,
       },
       success: res => {
+        console.log(res)
         let fullset = res.result.data
         //console.log(fullset)
         var holding = []
