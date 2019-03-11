@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/entrance/entrance",
     "pages/index_landing/index",
     "pages/deviceInfo/deviceInfo",
     "pages/deviceLogList/deviceLogList"

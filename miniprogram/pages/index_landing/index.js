@@ -30,7 +30,7 @@ Page({
     top: 0,
 
     all_data_devices: ['123', '222'],
-    my_data_devices: '???',
+    my_data_devices: 'default',
 
     //added checkbox value
     items: [{
@@ -200,6 +200,7 @@ Page({
       // 传给云函数的参数
       data: {},
       success: res => {
+        console.log(res)
         let fullset = res.result.data
         console.log(fullset)
         var holding = []
