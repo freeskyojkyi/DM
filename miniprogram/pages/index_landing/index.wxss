@@ -277,3 +277,17 @@ page {
 .locales-hidden {
   visibility: hidden;
 }
+
+.search-field {
+  padding: 0px;
+  margin: 0px;
+
+  width: 100%;
+
+  position: fixed;
+  z-index: 99999;
+}
+
+.device-list {
+  margin-top: 45px;
+}
