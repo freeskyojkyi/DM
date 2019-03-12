@@ -22,7 +22,7 @@
 
 <!-- 模糊搜索 -->
 <form action="/">
-  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action bind:cancel="onCancel" bind:search="onSearch" />
+  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action bind:cancel="onCancel" bind:search="onSearch" class="search-field"/>
 </form>
 
 <view class='top1'>
@@ -64,59 +64,54 @@
   </view>
 </view>
 
-<view wx:if="{{mydevices.length != 0}}" class='my-devices-container'>
-  <view class='my-devices-title-container'>
-    <view class='my-device-label'>
-      <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}' /> {{my_device_label}}
-    </view>
-  </view>
-
-  <van-swipe-cell wx:for="{{mydevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
-    <van-cell-group>
-    <van-cell
-    is-link 
-    data-id="{{item._id}}" bindtap="gotoDeviceInfo"
-    value="{{item.holding_open_id}}">
-  <view slot="title">
-    <view class="van-cell-text">{{item.device_name}}</view>
-    <van-tag type="success">No.{{item._id}}</van-tag>\n
-    <van-tag type="primary">Location {{item.location_id}}</van-tag>
-  </view>
-    </van-cell>
-    </van-cell-group>
-    <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_return_device' class='swipe-to-return-label'>Return</view>
-  </van-swipe-cell>
-</view>
-
-<view class="all-devices" wx:if="{{alldevices.length != 0}}">
-  <scroll-view bindscroll="scrollTopFun">
-    <view class="all-devices-header-container {{top>130?'topnav':''}}">
-      <view class='all-device-label'>
-        <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> {{all_device_label}}
-      </view>
-
-      <view class='device-locale-container'>
-        <button class='device-locale-button' bindtap='locales_visible_change'>
-          <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
-        </button>
+<view class='device-list'>
+  <view wx:if="{{mydevices.length != 0}}" class='my-devices-container'>
+    <view class='my-devices-title-container'>
+      <view class='my-device-label'>
+        <image class='normal_icon' src='{{my_device_icon}}' mode='{{mode}}' /> {{my_device_label}}
       </view>
     </view>
-  </scroll-view>
 
-  <van-swipe-cell wx:for="{{alldevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
-    <van-cell-group>
-    <van-cell
-    is-link 
-    data-id="{{item._id}}" bindtap="gotoDeviceInfo"
-  value="{{item.holding_open_id}}"
->
-  <view slot="title">
-    <view class="van-cell-text">{{item.device_name}}</view>
-    <van-tag type="success">No.{{item._id}}</van-tag>\n
-    <van-tag type="primary">Location {{item.location_id}}</van-tag>
+    <van-swipe-cell wx:for="{{mydevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
+      <van-cell-group>
+        <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
+          <view slot="title">
+            <view class="van-cell-text">{{item.device_name}}</view>
+            <van-tag type="success">No.{{item._id}}</van-tag>\n
+            <van-tag type="primary">Location {{item.location_id}}</van-tag>
+          </view>
+        </van-cell>
+      </van-cell-group>
+      <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_return_device' class='swipe-to-return-label'>Return</view>
+    </van-swipe-cell>
   </view>
-    </van-cell>
-    </van-cell-group>
-    <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_borrow_device' class='swipe-to-borrow-label'>Borrow</view>
-  </van-swipe-cell>
+
+  <view class="all-devices" wx:if="{{alldevices.length != 0}}">
+    <scroll-view bindscroll="scrollTopFun">
+      <view class="all-devices-header-container {{top>130?'topnav':''}}">
+        <view class='all-device-label'>
+          <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> {{all_device_label}}
+        </view>
+
+        <view class='device-locale-container'>
+          <button class='device-locale-button' bindtap='locales_visible_change'>
+            <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
+          </button>
+        </view>
+      </view>
+    </scroll-view>
+
+    <van-swipe-cell wx:for="{{alldevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
+      <van-cell-group>
+        <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
+          <view slot="title">
+            <view class="van-cell-text">{{item.device_name}}</view>
+            <van-tag type="success">No.{{item._id}}</van-tag>\n
+            <van-tag type="primary">Location {{item.location_id}}</van-tag>
+          </view>
+        </van-cell>
+      </van-cell-group>
+      <view slot="right" data-id="{{item._id}}" bindtap='swipe_to_borrow_device' class='swipe-to-borrow-label'>Borrow</view>
+    </van-swipe-cell>
+  </view>
 </view>
