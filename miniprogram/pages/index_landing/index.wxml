@@ -8,17 +8,23 @@
 </view> -->
 
 <!-- Select Locale -->
+<!--
 <view class="locales-container {{locales_visible?'locales-visable':'locales-hidden'}}">
   <button bindtap='locales_hidden_change' catchtouchmove='disable_touch_move'>hidden</button>
-
   <van-checkbox-group v-model="result">
     <van-checkbox v-for="(item, index) in list" :key="item" :name="item">
       复选框 {{ item }}
     </van-checkbox>
   </van-checkbox-group>
-
 </view>
+<but>
+-->
 
+<!-- <button  bindtap="device_locale_label">{{device_locale_label}}</button> -->
+
+ <!-- <view >
+   <button bindtap='device_locale_label'>{{device_locale_label}}</button>
+</view> -->
 
 <!-- 模糊搜索 -->
 <form action="/">
@@ -92,7 +98,7 @@
         <view class='all-device-label'>
           <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> {{all_device_label}}
         </view>
-
+<!-- loceles lable visible controller  -->
         <view class='device-locale-container'>
           <button class='device-locale-button' bindtap='locales_visible_change'>
             <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
