@@ -198,7 +198,7 @@ Page({
 
     wx.cloud.callFunction({
       // 获取全部设备
-      name: 'paginator2',
+      name: 'getAllDevices',
       // 传给云函数的参数
       data: {
         dbName:"devices",
