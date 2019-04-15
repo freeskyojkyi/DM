@@ -1,4 +1,3 @@
 <view>
-This is Entrance for DMS
-<button bindtap='goToDeviceList'>Go to Device List</button>
+  <image class='bg-pic' src='cloud://test-f05377.7465-test-f05377/resources/images/device management_big.jpg' bindtap='goToDeviceList'></image>
 </view>
