@@ -1,0 +1,22 @@
+<!--miniprogram/pages/location/location.wxml-->
+<form bindsubmit='submit'>
+  <view class='location'>
+    <view class='data'>
+      <checkbox-group name="selectedlocation">
+
+        <block wx:for="{{locationdata}}" wx:for-item="item" wx:key="_id">
+          <view>
+            <label class="checkbox">
+                <checkbox value="{{item.location}}" checked="{{item.checked}}" />{{item.location}}
+            </label>
+          </view>
+        </block>
+      </checkbox-group>
+    </view>
+    <view class='btn'>
+      <button class='confirmbtn' form-type='submit'>Submit</button>
+      <button bindtap='resetbtn'>Reset</button>
+
+    </view>
+  </view>
+</form>

@@ -33,6 +33,7 @@ Page({
 
     all_data_devices: ['123', '222'],
     my_data_devices: '???',
+    my_data_devices: 'default',
 
     //added checkbox value
     items: [{
@@ -197,7 +198,11 @@ Page({
     // })
 
     wx.cloud.callFunction({
+<<<<<<< HEAD
       // 获取全部设备'getAllDevices',分页请求'paginator2'
+=======
+      // 获取全部设备
+>>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
       name: 'getAllDevices',
       // 传给云函数的参数
       data: {
@@ -206,6 +211,7 @@ Page({
         // pageSize:10,
       },
       success: res => {
+        console.log(res)
         let fullset = res.result.data
         //console.log(fullset)
         var holding = []

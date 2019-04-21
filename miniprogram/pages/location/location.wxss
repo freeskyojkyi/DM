@@ -1,0 +1,10 @@
+
+.btn{
+margin-top:100rpx;
+padding:20rpx
+}
+.confirmbtn{
+  float:left;
+  width:48%;
+  margin-right:20rpx
+}
