@@ -197,13 +197,13 @@ Page({
     // })
 
     wx.cloud.callFunction({
-      // 获取全部设备
-      name: 'paginator2',
+      // 获取全部设备'getAllDevices',分页请求'paginator2'
+      name: 'getAllDevices',
       // 传给云函数的参数
       data: {
-        dbName:"devices",
-        pageIndex:1,
-        pageSize:10,
+        // dbName:"devices",
+        // pageIndex:1,
+        // pageSize:10,
       },
       success: res => {
         let fullset = res.result.data
