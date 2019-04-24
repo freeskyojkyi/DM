@@ -641,16 +641,17 @@ Page({
   },
 
   locales_visible_change: function() {
-    this.setData({
-      locales_visible: true
+    wx.redirectTo({
+      url: "../location/location"
+    
     })
   },
 
-  locales_hidden_change: function() {
-    this.setData({
-      locales_visible: false
-    })
-  },
+  // locales_hidden_change: function() {
+  //   this.setData({
+  //     locales_visible: false
+  //   })
+  // },
 
   disable_touch_move: function() {
 
@@ -727,6 +728,14 @@ Page({
     that.setData({
       mydevices: that.data.my_search_devices,
       alldevices: that.data.all_search_devices
+    })
+  },
+
+  device_locale_label: function (e) {
+   
+    wx.navigateTo({
+      
+      url: "../location/location"
     })
   },
 
