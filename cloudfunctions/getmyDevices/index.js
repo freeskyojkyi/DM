@@ -3,7 +3,6 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 exports.main = async (event, context) => {
  try {
-//     //Get userdata
 //     const wxContext = cloud.getWXContext().openid
 //     let useropenid = await wxContext
 //     //get mydevices by userdata
