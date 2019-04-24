@@ -166,6 +166,8 @@ Page({
   onLoad: function(options) {
     var that = this
 
+
+
     if (app.globalData.operatorInfo) {} else {
       //console.log("not yet has userinfo")
       wx.getUserInfo({

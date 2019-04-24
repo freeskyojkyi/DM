@@ -46,9 +46,14 @@ Page({
         }
       })
     }
+
+    
     if (options.qr) { 
       //if (options.detail.userInfo) {
       //console.log(options.qr)
+      wx.getSetting({
+        success: function (res) {
+          if (res.authSetting['scope.userInfo']) {
       wx.cloud.callFunction({
         name: 'ownByMe',
         data: {
@@ -172,6 +177,9 @@ Page({
       },
     })
     console.log(app.globalData.operatorInfo)
+        }
+      }
+      )}
   },
 
   /**
