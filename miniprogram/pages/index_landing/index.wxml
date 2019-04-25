@@ -27,22 +27,7 @@
 </view> -->
 
 <!-- 模糊搜索 -->
-<form action="/">
-  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action bind:cancel="onCancel" bind:search="onSearch" class="search-field"/>
-</form>
 
-<view class='top1'>
-  <!--checkbox add from here-->
-  <!-- 下拉需要显示的列表 -->
-  <view class="select_box" wx:if="{{select}}">
-    <checkbox-group bindchange="checkboxChange">
-      <label class="checkbox" wx:for="{{items}}">
-        {{item.value}}
-        <checkbox value="{{item.name}}" checked="{{item.checked}}" style='{{index==selectData.length-1&&"border:0;"}}' />
-      </label>
-    </checkbox-group>
-  </view>
-</view>
 
 
 <!-- 借机  -->
