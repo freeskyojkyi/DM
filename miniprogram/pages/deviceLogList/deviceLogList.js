@@ -92,5 +92,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+    backEvent: function () {
+      wx.navigateTo({
+        url: '../index_landing/index'
+      })
   }
 })

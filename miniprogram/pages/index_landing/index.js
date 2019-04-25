@@ -74,7 +74,7 @@ Page({
   },
 
   checkboxChange(e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    //console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     wx.cloud.callFunction({
       // 获取全部设备
       name: 'getLocationDevices',
@@ -83,11 +83,11 @@ Page({
         locationGroup: e.detail.value,
       },
       success: res => {
-        console.log(res)
+        //console.log(res)
         this.setData({
           alldevices: res.result.data,
         })
-        console.log('[数据库] [查询alldevices] 成功: ', res)
+        //console.log('[数据库] [查询alldevices] 成功: ', res)
       },
       fail: err => {
         wx.showToast({
@@ -150,7 +150,7 @@ Page({
    * 已选下拉框
    */
   mySelect(e) {
-    console.log(e)
+    //console.log(e)
     var name = e.currentTarget.dataset.name
     this.setData({
       grade_name: name,
@@ -165,7 +165,7 @@ Page({
 
   onLoad: function(options) {
     var that = this
-
+    var navH
 
 
     if (app.globalData.operatorInfo) {} else {
@@ -208,7 +208,7 @@ Page({
         pageSize:10,
       },
       success: res => {
-        console.log(res)
+        //console.log(res)
         let fullset = res.result.data
         //console.log(fullset)
         var holding = []
@@ -221,7 +221,7 @@ Page({
             i--
           }
         }
-        console.log(res)
+        //console.log(res)
        // console.log(res)
         this.setData({
           alldevices: fullset,
@@ -231,7 +231,7 @@ Page({
           all_data_devices: fullset,
           my_data_devices: holding,
         })
-        console.log('[数据库] [查询alldevices] 成功: ', res)
+        //console.log('[数据库] [查询alldevices] 成功: ', res)
       },
       fail: err => {
         wx.showToast({
@@ -241,6 +241,10 @@ Page({
         console.error('[数据库] [查询alldevices] 失败：', err)
       }
     })
+    this.setData({
+      navH: app.globalData.navHeight,
+    })
+    //console.log(app.globalData.navHeight)
   },
 
   /**
@@ -274,7 +278,7 @@ Page({
 
   returnThisDevice: function(e) {
     var that = this
-    console.log(e)
+    //console.log(e)
     if (e.detail.userInfo) {
       wx.cloud.callFunction({
         name: 'ownByMe',
@@ -328,7 +332,7 @@ Page({
               showCancel: false,
               success: function(res) {
                 if (res.confirm) {} else {
-                  console.log("取消")
+                  //console.log("取消")
                 }
               }
             })
@@ -357,7 +361,7 @@ Page({
         cancelText: 'Cancel',
         success: function(res) {
           if (res.confirm) {
-            console.log("确定还ALL机")
+            //console.log("确定还ALL机")
             wx.cloud.callFunction({
               name: 'returnAllDevice',
               data: {
@@ -367,7 +371,7 @@ Page({
               },
               success(res) {
                 if (res.result == 0) {
-                  console.log("result is 0")
+                  //console.log("result is 0")
                   wx.showModal({
                     title: 'ERROR',
                     content: 'You dont have any device holding currently',
@@ -395,7 +399,7 @@ Page({
               fail: console.error
             })
           } else {
-            console.log("取消")
+            //console.log("取消")
           }
         }
       })
@@ -403,8 +407,8 @@ Page({
   },
 
   getDevice: function(e) {
-    console.log("This is getDevice")
-    console.log(e.currentTarget.dataset.id)
+    //console.log("This is getDevice")
+    //console.log(e.currentTarget.dataset.id)
 
     wx.cloud.callFunction({
       // 云函数名称
@@ -414,7 +418,7 @@ Page({
         "id": e.currentTarget.dataset.id,
       },
       success(res) {
-        console.log(res)
+        //console.log(res)
         wx.navigateTo({
           url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id,
         })
@@ -436,7 +440,7 @@ Page({
     } else {
       wx.getUserInfo({
         success: function(res) {
-          console.log('用户信息', res.userInfo)
+          //console.log('用户信息', res.userInfo)
           that.globalData.userInfo = res.userInfo
           typeof cb == "function" && cb(that.globalData.userInfo)
           that.setData({
@@ -465,7 +469,7 @@ Page({
       wx.scanCode({
         success: (res) => {
           //const scene = decodeURIComponent(res.result.scene)
-          console.log(res.path),
+          //console.log(res.path),
             //if (res.result.indexOf("data") != -1) {
             //app.globalData.cResult = res.result.slice(7);
             //if (app.globalData.operatorInfo == undefined) {
@@ -489,7 +493,7 @@ Page({
               duration: 2000
             })
           if (res.path) {
-            console.log(res.path)
+            //console.log(res.path)
             wx.navigateTo({
               url: '/' + res.path
             })
@@ -529,7 +533,7 @@ Page({
       cancelText: 'Cancel',
       success: function(res) {
         if (res.confirm) {
-          console.log("确定还机")
+          //console.log("确定还机")
           wx.cloud.callFunction({
             name: 'setDeviceReturn',
             data: {
@@ -584,7 +588,7 @@ Page({
             cancelText: 'Cancel',
             success: function(res) {
               if (res.confirm) {
-                console.log("确定借机")
+                //console.log("确定借机")
                 wx.cloud.callFunction({
                   name: 'setDeviceBorrow',
                   data: {
@@ -603,7 +607,7 @@ Page({
                   fail: console.error
                 })
               } else {
-                console.log("取消")
+                //console.log("取消")
               }
             }
           })
@@ -660,7 +664,7 @@ Page({
   scrollTopFun(e) {
     let that = this;
     that.top = e.detail.scrollTop;
-    console.log(e)
+    //console.log(e)
     that.$apply();
   },
 

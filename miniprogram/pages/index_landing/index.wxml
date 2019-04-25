@@ -28,7 +28,16 @@
 
 <!-- 模糊搜索 -->
 
-
+<van-nav-bar
+  title="Devices"
+  safe-area-inset-top="true"
+  fixed="true"
+/>
+<view class='container' style='height:calc(100vh - {{navH}}px); margin-top:{{navH}}px'
+>
+<view action="/">
+  <van-search v-model="value" placeholder="{{placeholder_search}}" show-action bind:cancel="onCancel" bind:search="onSearch" class="search-field"/>
+</view>
 
 <!-- 借机  -->
 <view class='actionItems'>
@@ -120,3 +129,4 @@
     </van-swipe-cell>
   </view>
 </view>
+  </view>
