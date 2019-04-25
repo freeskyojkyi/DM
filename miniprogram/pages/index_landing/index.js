@@ -645,9 +645,8 @@ Page({
   },
 
   locales_visible_change: function() {
-    wx.redirectTo({
-      url: "../location/location"
-    
+    wx.navigateTo({
+      url: "../location/location"  
     })
   },
 
