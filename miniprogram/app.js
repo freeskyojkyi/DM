@@ -31,12 +31,23 @@ App({
         },
       })
     }
+
     }
+    
     
     
     this.globalData = {
       operatorInfo: null
     }
+    wx.getSystemInfo({
+      success: res => {
+        //导航高度
+        this.globalData.navHeight = res.statusBarHeight + 46;
+        // console.log("global data: "+ JSON.stringify(this.globalData));
+      }, fail(err) {
+        console.log(err);
+      }
+    })
   }
 
 })
