@@ -83,8 +83,8 @@
         <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
           <view slot="title">
             <view class="van-cell-text">{{item.device_name}}</view>
-            <van-tag type="success">No.{{item._id}}</van-tag>\n
-            <van-tag type="primary">Location {{item.location_id}}</van-tag>
+            <van-tag type="number">No.{{item._id}}</van-tag>\n
+            <van-tag type="location">Location {{item.location_id}}</van-tag>
           </view>
         </van-cell>
       </van-cell-group>
@@ -112,8 +112,8 @@
         <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
           <view slot="title">
             <view class="van-cell-text">{{item.device_name}}</view>
-            <van-tag type="success">No.{{item._id}}</van-tag>\n
-            <van-tag type="primary">Location {{item.location_id}}</van-tag>
+            <van-tag type="number">No.{{item._id}}</van-tag>\n
+            <van-tag type="location">Location {{item.location_id}}</van-tag>
           </view>
         </van-cell>
       </van-cell-group>
