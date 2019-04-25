@@ -10,6 +10,5 @@
   width: 100%;
   position: fixed;
   z-index: 9999;
-  background-color: red;
-  
+  opacity: 0;
 }
