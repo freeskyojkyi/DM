@@ -6,6 +6,7 @@ Page({
     //参数信息
     pageIndex: 1,
     pageSize: 10,
+    alldevices:[],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     grade_name: '--请选择Device Group--',
     currentTab: 0,
@@ -198,17 +199,16 @@ Page({
     // })
 
     wx.cloud.callFunction({
-<<<<<<< HEAD
+// <<<<<<< HEAD
       // 获取全部设备'getAllDevices',分页请求'paginator2'
-=======
-      // 获取全部设备
->>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
-      name: 'getAllDevices',
+// =======
+// >>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
+      name: 'paginator2',
       // 传给云函数的参数
       data: {
-        // dbName:"devices",
-        // pageIndex:1,
-        // pageSize:10,
+        dbName:"devices",
+        pageIndex:1,
+        pageSize:10,
       },
       success: res => {
         console.log(res)
@@ -245,28 +245,132 @@ Page({
       }
     })
   },
+  // 获取分页内容
+  loadPages: function (res) {
+    var that = this;
+    //获取分页信息
+    // var pageIndex = that.data.pageIndex;
+    // var pageSize = that.data.pageSize;
 
+    //发送请求
+
+    wx.cloud.callFunction({
+      name: 'paginator2',
+      // 传给云函数的参数
+      data: {
+        dbName: "devices",
+        pageIndex: that.data.pageIndex++,
+        pageSize: that.data.pageSize,
+      },
+      success: res => {
+        wx.hideLoading()
+        console.log(res)
+        let fullset = res.result.data
+        //console.log(fullset)
+        var holding = []
+        for (var i = 0; i < fullset.length; i++) {
+          if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
+            holding.push(fullset[i])
+
+            //删除已借机器
+            fullset.splice(i, 1)
+            i--
+          }
+        }
+        console.log(res)
+        // console.log(res)
+        this.setData({
+          alldevices: that.data.alldevices.concat(res.result.data),
+          // mydevices: holding,
+        })
+        console.log("hippocheck")
+        console.log(fullset)
+        // that.setData({
+        //   all_data_devices: fullset,
+        //   my_data_devices: holding,
+        // })
+        console.log('[数据库] [查询alldevices] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询alldevices失败'
+        })
+        console.error('[数据库] [查询alldevices] 失败：', err)
+      }
+    })
+    // wechatUtil.req(url, {
+    //   "pageNumber": pageNumber,
+    //   "pageSize": pageSize
+    // }, function (res) {
+    //   if (res.resultCode == 200) {
+    //     //返回成功
+    //     var roomList = that.data.roomList;
+    //     var reqRooms = res.resultContent;
+
+    //     //如果返回数据为空，则提示
+    //     if (reqRooms.length == 0) {
+    //       wx.showToast({
+    //         title: "没有更多的数据了...",
+    //         icon: 'fail',
+    //         duration: 1000
+    //       });
+
+    //       //分页失败，分页数据减1
+    //       if (pageNumber > 1) {
+    //         that.setData({
+    //           pageNumber: --pageNumber
+    //         });
+    //       }
+    //       return;
+    //     }
+
+    //     //如果分页数据不为空，则将新的分页数据追加到原数据智商
+    //     that.setData({
+    //       roomList: roomList.concat(reqRooms)
+    //     });
+
+    //   } else {
+
+    //     //如果数据加载失败，则提示
+    //     wx.showToast({
+    //       title: "加载数据失败",
+    //       icon: 'fail',
+    //       duration: 1000
+    //     });
+
+    //     //分页失败，分页数据回退
+    //     if (pageNumber > 1) {
+    //       that.setData({
+    //         pageNumber: --pageNumber
+    //       });
+    //     }
+    //   }
+    //   console.log(res);
+    // })
+
+  },
   /**
  * 上拉分页
  */
   onReachBottom: function () {
 //调试中
-  //   //上拉分页,将页码加1，然后调用分页函数loadRoom()
-  //   var that = this;
-  //   var pageNumber = that.data.pageNumber;
-  //   that.setData({
-  //     pageNumber: ++pageNumber
-  //   });
+  //   //上拉分页,将页码加1，然后调用分页函数loadPages()
+    var that = this;
+    var pageIndex = that.data.pageIndex;
+    that.setData({
+      pageIndex: ++pageIndex
+    });
 
-  //   setTimeout(function () {
-  //     wx.showToast({
-  //       title: '加载中..',
-  //     }),
-  //       that.loadRooms();
-  //     that.setData({
-  //       title: "数据加载完毕"
-  //     })
-  //   }, 1000)
+    setTimeout(function () {
+      wx.showLoading({
+        title: '加载中..',
+      }),
+        that.loadPages();
+      // that.setData({
+      //   title: "数据加载完毕"
+      // })
+    }, 1000)
   },
 
   gotoDeviceInfo: function(e) {
