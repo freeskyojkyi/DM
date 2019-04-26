@@ -25,7 +25,7 @@ Page({
     placeholder_search: "Please input keywords",
     my_device_label: 'Hand',
     all_device_label: 'Store',
-    device_locale_label: 'Locales',
+    device_locale_label: 'Location',
 
     locales_visible: false,
 
