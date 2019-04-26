@@ -77,13 +77,8 @@
         <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
           <view slot="title">
             <view class="van-cell-text">{{item.device_name}}</view>
-<<<<<<< HEAD
             <van-tag type="number">#{{item._id}}</van-tag>\n
-            <van-tag type="location">Location {{item.location_id}}</van-tag>
-=======
-            <van-tag type="success">#{{item._id}}</van-tag>\n
-            <van-tag type="primary">{{item.location_id}}</van-tag>
->>>>>>> a93c65892c8a2aac1c914af508ec84031aa2e410
+            <van-tag type="location">{{item.location_id}}</van-tag>
           </view>
         </van-cell>
       </van-cell-group>
@@ -115,23 +110,13 @@
         </view>
       </view>
     </scroll-view>
-
-
-
-
-
     <van-swipe-cell wx:for="{{alldevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
       <van-cell-group>
         <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
           <view slot="title">
             <view class="van-cell-text">{{item.device_name}}</view>
-<<<<<<< HEAD
             <van-tag type="number">#{{item._id}}</van-tag>\n
-            <van-tag type="location">Location {{item.location_id}}</van-tag>
-=======
-            <van-tag type="success">#{{item._id}}</van-tag>\n
-            <van-tag type="primary">{{item.location_id}}</van-tag>
->>>>>>> a93c65892c8a2aac1c914af508ec84031aa2e410
+            <van-tag type="location">{{item.location_id}}</van-tag>
           </view>
         </van-cell>
       </van-cell-group>

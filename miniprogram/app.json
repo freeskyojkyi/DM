@@ -12,7 +12,8 @@
     "navigationStyle":"custom",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "Device Farm",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 50
   },
   "sitemapLocation": "sitemap.json"
 }
