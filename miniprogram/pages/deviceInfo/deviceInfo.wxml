@@ -8,7 +8,7 @@
     fixed="true"
   safe-area-inset-top="true"
 />
-<view class='page-container'>
+<view class='page-container' style='margin-top:{{navH}}px'>
   <view class='picture-container'>
     <image class='device-picture' src="{{pic_default}}" mode="{{mode}}"></image>
   </view>

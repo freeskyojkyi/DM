@@ -1,6 +1,5 @@
 // pages/deviceInfo/deviceInfo.js
 var app = getApp();
-
 Page({
 
   /**
@@ -38,6 +37,10 @@ Page({
     var that = this
     var url
     this.pageid = options.id
+    var navH
+    this.setData({
+      navH: app.globalData.navHeight,
+    })
     if (app.globalData.operatorInfo) {} else {
       console.log("not yet has userinfo")
       wx.getUserInfo({

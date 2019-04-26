@@ -1,5 +1,6 @@
 // miniprogram/pages/deviceLogList/deviceLogList.js
 const time = require("../../utlis/timeutlis.js");
+const app = getApp()
 Page({
 
   /**
@@ -14,6 +15,10 @@ Page({
    */
   onLoad: function (options) {
     var thispage = this
+    var navH
+    this.setData({
+      navH: app.globalData.navHeight,
+    })
     //const scene = decodeURIComponent(options.path)
     //console.log(options.id)
     var start = new Date().getTime()
