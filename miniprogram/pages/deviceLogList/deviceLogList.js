@@ -92,5 +92,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  backEvent: function () {
+    var cps = getCurrentPages();
+    if (cps.length < 2) {
+      wx.navigateTo({
+        url: '../index_landing/index'
+      })
+    } else if (cps[cps.length - 2].route == "pages/index_landing/index") {
+      wx.navigateBack({
+        delta: 1
+      })
+    } else {
+      wx.navigateTo({
+        url: '../index_landing/index'
+      })
+    }
   }
 })

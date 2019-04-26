@@ -1,6 +1,6 @@
 <view
   class="custom-class van-nav-bar {{ border ? 'van-hairline--bottom' : '' }} {{ fixed ? 'van-nav-bar--fixed' : '' }}"
-  style="z-index: {{ zIndex }}"
+  style="z-index: {{ zIndex }}; padding-top:{{navH}}px;"
 >
   <view class="van-nav-bar__left" bind:tap="onClickLeft">
     <block wx:if="{{ leftArrow || leftText }}">

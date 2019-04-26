@@ -1,4 +1,14 @@
 <!--miniprogram/pages/location/location.wxml-->
+<van-nav-bar
+  title="Location"
+  left-text="Back"
+  left-arrow
+  bind:click-left="backEvent"
+  fixed="true"
+  safe-area-inset-top="true"
+/>
+<view class='container'style='height:calc(100vh - {{navH}}px); margin-top:{{navH}}px'>
+
 <form bindsubmit='submit'>
   <view class='location'>
     <view class='data'>
@@ -20,3 +30,4 @@
     </view>
   </view>
 </form>
+</view>

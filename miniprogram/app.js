@@ -1,6 +1,7 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function (options) {
+    var that = this
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -8,12 +9,45 @@ App({
         traceUser: true,
       //  env: 'test-f05377'
       })
+      //console.log(options.query)
+      if (options.query.qr) {
+        wx.getSetting({
+          success: function (res) {
+            if (!res.authSetting['scope.userInfo']) {
+              wx.navigateTo({
+                url: "../entrance/entrance?qr=y&id=" + options.query.id
+              })
+            } else { }
+          },
+        })
+        } else{
+      wx.getSetting({
+        success: function (res) {
+          if (!res.authSetting['scope.userInfo']){
+            wx.navigateTo({
+              url: "../entrance/entrance",
+            })
+          }else{}
+        },
+      })
+    }
+
     }
     
-
+    
+    
     this.globalData = {
       operatorInfo: null
     }
+    wx.getSystemInfo({
+      success: res => {
+        //导航高度
+        this.globalData.navHeight = res.statusBarHeight + 46;
+        // console.log("global data: "+ JSON.stringify(this.globalData));
+      }, fail(err) {
+        console.log(err);
+      }
+    })
   }
 
 })

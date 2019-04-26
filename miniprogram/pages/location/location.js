@@ -1,3 +1,5 @@
+const app = getApp()
+
 Page({
 
   /**
@@ -40,7 +42,10 @@ Page({
   onLoad: function(options) {
     console.log('onload.......')
     var thispage = this
-
+    var navH
+    this.setData({
+      navH: app.globalData.navHeight,
+    })
     wx.cloud.callFunction({
       // 云函数名称
       name: 'location',
@@ -58,6 +63,7 @@ Page({
       },
       fail: console.error
     })
+    
   },
   // /
   //    * 生命周期函数--监听页面初次渲染完成
@@ -107,6 +113,10 @@ Page({
   onShareAppMessage: function() {
 
   },
-
+  backEvent: function () {
+    wx.navigateBack({
+    })
+    console.log("click back")
+  }
 
 });

@@ -1,4 +1,13 @@
 <!--miniprogram/pages/deviceLogList/deviceLogList.wxml-->
+<van-nav-bar
+  title="Log"
+  left-text="Back"
+  left-arrow
+  bind:click-left="backEvent"
+  fixed="true"
+  safe-area-inset-top="true"
+/>
+<view class='container'>
 <block wx:for="{{checkSummary}}" wx:for-item="item" wx:key="_id">
           <van-cell
            title="{{item.deviceid}}     {{item.date}}"
@@ -7,3 +16,4 @@
             size="small"
           />
         </block>
+        </view>

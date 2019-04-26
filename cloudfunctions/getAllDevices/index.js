@@ -23,8 +23,12 @@ exports.main = async (event, context) => {
       nickname: true,
       openid: true
     }).get();
+<<<<<<< HEAD
     let locations = await db.collection('location').field({
       _id: true,
+=======
+    let checkLocation = await db.collection('location').field({
+>>>>>>> a93c65892c8a2aac1c914af508ec84031aa2e410
       location: true
     }).get();
     let devicelist = await db.collection('devices').field({
@@ -40,10 +44,18 @@ exports.main = async (event, context) => {
         if (devicelist.data[i].holding_open_id == checkUser.data[j].openid) {
           devicelist.data[i].holding_open_id = checkUser.data[j].nickname
         }
+<<<<<<< HEAD
           // if (devicelist.data[i].location_id == locations.data[k]._id) {
           //   devicelist.data[i].location_id = locations.data[k].location
           // }
         // }
+=======
+        for (k = 0; k < checkLocation.data.length; k++) {
+          if (devicelist.data[i].location_id == checkLocation.data[k]._id) {
+            devicelist.data[i].location_id = checkLocation.data[k].location
+          }
+        }
+>>>>>>> a93c65892c8a2aac1c914af508ec84031aa2e410
       }
     }
     return devicelist;
