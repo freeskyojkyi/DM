@@ -202,7 +202,7 @@ Page({
 
     wx.cloud.callFunction({
       // <<<<<<< HEAD
-      // 获取全部设备'getAllDevices',分页请求'paginator2'
+      // 获取全部设备'getAllDevices',分页请求'paginator'
       // =======
       // >>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
       name: 'paginator2',
@@ -215,7 +215,7 @@ Page({
       success: res => {
         //console.log(res)
         let fullset = res.result.data
-        //console.log(fullset)
+        console.log(fullset)
         var holding = []
         for (var i = 0; i < fullset.length; i++) {
           if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
