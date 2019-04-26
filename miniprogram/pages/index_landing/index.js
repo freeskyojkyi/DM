@@ -210,7 +210,7 @@ Page({
       data: {
         dbName: "devices",
         pageIndex: 1,
-        pageSize: 10,
+        pageSize: 50,
       },
       success: res => {
         //console.log(res)
