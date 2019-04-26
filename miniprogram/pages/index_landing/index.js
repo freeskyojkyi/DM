@@ -5,8 +5,8 @@ Page({
   data: {
     //参数信息
     pageIndex: 1,
-    pageSize: 10,
-    alldevices:[],
+    pageSize: 50,
+    alldevices: [],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     grade_name: '--请选择Device Group--',
     currentTab: 0,
@@ -38,39 +38,39 @@ Page({
 
     //added checkbox value
     items: [{
-        name: '0',
-        value: 'Group A'
-      },
-      {
-        name: '1',
-        value: 'Group B'
-      },
-      {
-        name: '2',
-        value: 'Group C'
-      },
-      {
-        name: '3',
-        value: 'Group D'
-      },
-      {
-        name: '4',
-        value: 'Group E'
-      },
-      {
-        name: 'others',
-        value: ' Others'
-      },
+      name: '0',
+      value: 'Group A'
+    },
+    {
+      name: '1',
+      value: 'Group B'
+    },
+    {
+      name: '2',
+      value: 'Group C'
+    },
+    {
+      name: '3',
+      value: 'Group D'
+    },
+    {
+      name: '4',
+      value: 'Group E'
+    },
+    {
+      name: 'others',
+      value: ' Others'
+    },
     ],
 
 
     //navigation bar information
     navData: [{
-        text: '机器列表'
-      },
-      {
-        text: '未借出机器'
-      },
+      text: '机器列表'
+    },
+    {
+      text: '未借出机器'
+    },
 
     ],
   },
@@ -161,19 +161,19 @@ Page({
   },
 
   //pull down to refresh page to show my devices
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     this.onLoad()
   },
 
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this
     var navH
 
 
-    if (app.globalData.operatorInfo) {} else {
+    if (app.globalData.operatorInfo) { } else {
       //console.log("not yet has userinfo")
       wx.getUserInfo({
-        success: function(res) {
+        success: function (res) {
           app.globalData.operatorInfo = res.userInfo.nickName
         }
       })
@@ -201,16 +201,16 @@ Page({
     // })
 
     wx.cloud.callFunction({
-// <<<<<<< HEAD
+      // <<<<<<< HEAD
       // 获取全部设备'getAllDevices',分页请求'paginator2'
-// =======
-// >>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
+      // =======
+      // >>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
       name: 'paginator2',
       // 传给云函数的参数
       data: {
-        dbName:"devices",
-        pageIndex:1,
-        pageSize:10,
+        dbName: "devices",
+        pageIndex: 1,
+        pageSize: 10,
       },
       success: res => {
         //console.log(res)
@@ -227,7 +227,7 @@ Page({
           }
         }
         //console.log(res)
-       // console.log(res)
+        // console.log(res)
         this.setData({
           alldevices: fullset,
           mydevices: holding,
@@ -247,8 +247,8 @@ Page({
       }
     })
     this.setData({
-      navH: app.globalData.navHeight,
-    })
+       navH: app.globalData.navHeight,
+     })
     //console.log(app.globalData.navHeight)
   },
   // 获取分页内容
@@ -360,8 +360,8 @@ Page({
  * 上拉分页
  */
   onReachBottom: function () {
-//调试中
-  //   //上拉分页,将页码加1，然后调用分页函数loadPages()
+    //调试中
+    //   //上拉分页,将页码加1，然后调用分页函数loadPages()
     var that = this;
     var pageIndex = that.data.pageIndex;
     that.setData({
@@ -379,13 +379,13 @@ Page({
     }, 1000)
   },
 
-  gotoDeviceInfo: function(e) {
+  gotoDeviceInfo: function (e) {
     wx.navigateTo({
       url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id,
     })
   },
 
-  returnThisDevice: function(e) {
+  returnThisDevice: function (e) {
     var that = this
     //console.log(e)
     if (e.detail.userInfo) {
@@ -403,7 +403,7 @@ Page({
               content: 'You are already holding device ID =' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
               confirmText: 'Confirm',
               cancelText: 'Cancel',
-              success: function(res) {
+              success: function (res) {
                 if (res.confirm) {
                   console.log("确定还机")
                   wx.cloud.callFunction({
@@ -422,9 +422,9 @@ Page({
                       })
                       wx.navigateTo({
                         url: "../index_landing/index",
-                        success: function(res) {},
-                        fail: function(res) {},
-                        complete: function(res) {},
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
                       })
                     },
                     fail: console.error
@@ -439,8 +439,8 @@ Page({
               content: 'You are not currently holding this device!',
               confirmText: 'OK',
               showCancel: false,
-              success: function(res) {
-                if (res.confirm) {} else {
+              success: function (res) {
+                if (res.confirm) { } else {
                   //console.log("取消")
                 }
               }
@@ -449,10 +449,10 @@ Page({
         },
         fail: console.error
       })
-    } else {}
+    } else { }
   },
 
-  returnAllDevice: function(e) {
+  returnAllDevice: function (e) {
     // if (app.globalData.operatorInfo) { } else {
     //   //console.log("not yet has userinfo")
     //   wx.getUserInfo({
@@ -468,7 +468,7 @@ Page({
         content: 'You are going to return all devices you currently holding',
         confirmText: 'Confirm',
         cancelText: 'Cancel',
-        success: function(res) {
+        success: function (res) {
           if (res.confirm) {
             //console.log("确定还ALL机")
             wx.cloud.callFunction({
@@ -486,8 +486,8 @@ Page({
                     content: 'You dont have any device holding currently',
                     confirmText: 'Confirm',
                     showCancel: false,
-                    success: function(res) {
-                      if (res.confirm) {}
+                    success: function (res) {
+                      if (res.confirm) { }
                     }
                   })
                 } else {
@@ -496,7 +496,7 @@ Page({
                     content: 'Successfully returned device ID:' + res.result,
                     confirmText: 'Confirm',
                     showCancel: false,
-                    success: function(res) {
+                    success: function (res) {
                       if (res.confirm) {
                         that.onLoad()
                       }
@@ -512,10 +512,10 @@ Page({
           }
         }
       })
-    } else {}
+    } else { }
   },
 
-  getDevice: function(e) {
+  getDevice: function (e) {
     //console.log("This is getDevice")
     //console.log(e.currentTarget.dataset.id)
 
@@ -542,13 +542,13 @@ Page({
     })
   },
 
-  getUserInfo: function(cb) {
+  getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
     } else {
       wx.getUserInfo({
-        success: function(res) {
+        success: function (res) {
           //console.log('用户信息', res.userInfo)
           that.globalData.userInfo = res.userInfo
           typeof cb == "function" && cb(that.globalData.userInfo)
@@ -560,18 +560,18 @@ Page({
     }
   },
 
-  getLogList: function(e) {
+  getLogList: function (e) {
     if (e.detail.userInfo) {
       wx.navigateTo({
         url: "../deviceLogList/deviceLogList",
-        success: function(res) {},
-        fail: function(res) {},
-        complete: function(res) {},
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
       })
     }
   },
 
-  borrowDevice: function(e) {
+  borrowDevice: function (e) {
     if (e.detail.userInfo) {
       var that = this;
       var show;
@@ -579,28 +579,28 @@ Page({
         success: (res) => {
           //const scene = decodeURIComponent(res.result.scene)
           //console.log(res.path),
-            //if (res.result.indexOf("data") != -1) {
-            //app.globalData.cResult = res.result.slice(7);
-            //if (app.globalData.operatorInfo == undefined) {
-            //wx.getUserInfo({
-            //success: function (res2) {
-            //console.log(res2.userInfo.nickName)
-            // app.globalData.operatorInfo = res2.userInfo.nickName
-            //console.log(app.globalData.operatorInfo)
-            //}
-            //})
-            //}
-            //wx.navigateTo({
-            //url: "../addFunction/addFunction?id=" + "NA",
-            //success: function (res) { },
-            //fail: function (res) { },
-            //complete: function (res) { },
-            //})
-            wx.showToast({
-              title: '扫码成功',
-              icon: 'success',
-              duration: 2000
-            })
+          //if (res.result.indexOf("data") != -1) {
+          //app.globalData.cResult = res.result.slice(7);
+          //if (app.globalData.operatorInfo == undefined) {
+          //wx.getUserInfo({
+          //success: function (res2) {
+          //console.log(res2.userInfo.nickName)
+          // app.globalData.operatorInfo = res2.userInfo.nickName
+          //console.log(app.globalData.operatorInfo)
+          //}
+          //})
+          //}
+          //wx.navigateTo({
+          //url: "../addFunction/addFunction?id=" + "NA",
+          //success: function (res) { },
+          //fail: function (res) { },
+          //complete: function (res) { },
+          //})
+          wx.showToast({
+            title: '扫码成功',
+            icon: 'success',
+            duration: 2000
+          })
           if (res.path) {
             //console.log(res.path)
             wx.navigateTo({
@@ -628,19 +628,19 @@ Page({
             duration: 2000
           })
         },
-        complete: (res) => {}
+        complete: (res) => { }
       })
-    } else {}
+    } else { }
   },
 
-  swipe_to_return_device: function(e) {
+  swipe_to_return_device: function (e) {
     var that = this
     wx.showModal({
       title: 'Return Device?',
       content: 'You are already holding device #' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
       confirmText: 'Confirm',
       cancelText: 'Cancel',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
           //console.log("确定还机")
           wx.cloud.callFunction({
@@ -653,10 +653,10 @@ Page({
             },
             success(res) {
               wx.showToast({
-                  title: "Confirmed",
-                  icon: 'success',
-                  duration: 3000
-                }),
+                title: "Confirmed",
+                icon: 'success',
+                duration: 3000
+              }),
                 that.onLoad()
             },
             fail(e) {
@@ -668,7 +668,7 @@ Page({
     })
   },
 
-  swipe_to_borrow_device: function(e) {
+  swipe_to_borrow_device: function (e) {
     var that = this
     wx.cloud.callFunction({
       name: 'ownByMe',
@@ -684,8 +684,8 @@ Page({
             content: 'You are already holding this device!',
             confirmText: 'OK',
             showCancel: false,
-            success: function(res) {
-              if (res.confirm) {}
+            success: function (res) {
+              if (res.confirm) { }
             }
           })
         } else {
@@ -695,7 +695,7 @@ Page({
             content: 'Are you confirm to borrow device #' + e.currentTarget.dataset.id + '?',
             confirmText: 'Confirm',
             cancelText: 'Cancel',
-            success: function(res) {
+            success: function (res) {
               if (res.confirm) {
                 //console.log("确定借机")
                 wx.cloud.callFunction({
@@ -707,10 +707,10 @@ Page({
                   },
                   success(res) {
                     wx.showToast({
-                        title: "Confirmed",
-                        icon: 'success',
-                        duration: 3000
-                      }),
+                      title: "Confirmed",
+                      icon: 'success',
+                      duration: 3000
+                    }),
                       that.onLoad()
                   },
                   fail: console.error
@@ -726,7 +726,7 @@ Page({
     })
   },
 
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return {
       title: '点机坊', // 转发后 所显示的title
       path: '/pages/index_landing/index'
@@ -753,9 +753,9 @@ Page({
     }
   },
 
-  locales_visible_change: function() {
+  locales_visible_change: function () {
     wx.navigateTo({
-      url: "../location/location"  
+      url: "../location/location"
     })
   },
 
@@ -765,7 +765,7 @@ Page({
   //   })
   // },
 
-  disable_touch_move: function() {
+  disable_touch_move: function () {
 
   },
 
@@ -776,7 +776,7 @@ Page({
     that.$apply();
   },
 
-  onSearch: function(e) {
+  onSearch: function (e) {
     // my_data_devices - 我的设备 
     // all_data_devices - 所有设备
     // my_search_devices - 我的查询设备
@@ -844,14 +844,14 @@ Page({
   },
 
   device_locale_label: function (e) {
-   
+
     wx.navigateTo({
-      
+
       url: "../location/location"
     })
   },
 
-  onCancel:function(){
+  onCancel: function () {
     this.setData({
       alldevices: this.data.all_data_devices,
       mydevices: this.data.my_data_devices
