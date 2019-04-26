@@ -4,6 +4,7 @@ const app = getApp()
 Page({
   data: {
     //参数信息
+    search_condition:[],
     pageIndex: 1,
     pageSize: 50,
     alldevices: [],
@@ -289,6 +290,7 @@ Page({
           alldevices: that.data.alldevices.concat(res.result.data),
           // mydevices: holding,
         })
+        ///hippo fix search if(this.search_condition)
         console.log("hippocheck")
         console.log(fullset)
         // that.setData({
@@ -786,7 +788,7 @@ Page({
     var search_scope
 
     //格式化查询条件并以空格分离查询条件 
-    var search_condition = e.detail.replace(/\s+/g, ' ').replace(/(^\s*)|(\s*$)/g, "").split(' ')
+    that.data.search_condition = e.detail.replace(/\s+/g, ' ').replace(/(^\s*)|(\s*$)/g, "").split(' ')
 
     var my_search_devices
     var all_search_devices
@@ -805,8 +807,8 @@ Page({
 
       able_To_push = true;
 
-      for (var j = 0; j < search_condition.length; j++) {
-        if (search_scope.indexOf(search_condition[j].toLowerCase()) == "-1") {
+      for (var j = 0; j < that.data.search_condition.length; j++) {
+        if (search_scope.indexOf(that.data.search_condition[j].toLowerCase()) == "-1") {
           able_To_push = false;
           j++;
         }
@@ -824,8 +826,8 @@ Page({
 
       able_To_push = true;
 
-      for (var j = 0; j < search_condition.length; j++) {
-        if (search_scope.indexOf(search_condition[j].toLowerCase()) == "-1") {
+      for (var j = 0; j < that.data.search_condition.length; j++) {
+        if (search_scope.indexOf(that.data.search_condition[j].toLowerCase()) == "-1") {
           able_To_push = false;
           j++;
         }
