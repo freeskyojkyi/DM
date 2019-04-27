@@ -8,23 +8,45 @@ Page({
   //se
   data: {
     locationdata: [],
-  
+   // disabled: false,
+   
   },
-  
+
+  chkboxChange:function(e){
+    console.log(e.detail.value)
+
+  },
   //click submit button
-  submit:function(e){
-   var valueobject= e.detail.value
-    console.log(valueobject)
-    var parameter= JSON.stringify(valueobject)
-    wx.redirectTo({
-      url:"../index_landing/index?location=" + parameter
-    })
+  submit: function(e) {
+
+    var valueobject = e.detail.value
+     
+    console.log(valueobject.selectedlocation)
+    if (!valueobject.selectedlocation || valueobject.selectedlocation.length==0){
+      wx.showModal({
+        title: 'Alert Message',
+        showCancel:false,
+        content: 'Please select any one of locations!',
+        confirmText:'Confirm'
+      })
+      return
+    }
+    else{
+      //var valueobject = e.detail.value
+
+      var parameter = JSON.stringify(valueobject.selectedlocation)
+
+        wx.redirectTo({
+          url: "../index_landing/index?location=" + parameter
+        })
+    }
+
   },
-//click reset button
+  //click reset button
   resetbtn() {
     var locationdata = this.data.locationdata
     for (var i = 0; i < locationdata.length; i++) {
-      locationdata[i].checked =undefined
+      locationdata[i].checked = undefined
 
     }
     this.setData({
@@ -63,7 +85,7 @@ Page({
       },
       fail: console.error
     })
-    
+
   },
   // /
   //    * 生命周期函数--监听页面初次渲染完成
@@ -113,9 +135,8 @@ Page({
   onShareAppMessage: function() {
 
   },
-  backEvent: function () {
-    wx.navigateBack({
-    })
+  backEvent: function() {
+    wx.navigateBack({})
     console.log("click back")
   }
 
