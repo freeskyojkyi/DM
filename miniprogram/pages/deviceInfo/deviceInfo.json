@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+      "van-nav-bar": "/lib/vant/nav-bar/index",
+      "van-icon": "/lib/vant/icon/index"
+  },
   "navigationBarTitleText": "设备信息"
 }

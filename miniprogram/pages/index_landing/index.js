@@ -4,8 +4,10 @@ const app = getApp()
 Page({
   data: {
     //参数信息
+    search_condition:[],
     pageIndex: 1,
-    pageSize: 10,
+    pageSize: 50,
+    alldevices: [],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     grade_name: '--请选择Device Group--',
     currentTab: 0,
@@ -25,56 +27,57 @@ Page({
     placeholder_search: "Please input keywords",
     my_device_label: 'Hand',
     all_device_label: 'Store',
-    device_locale_label: 'Locales',
+    device_locale_label: 'Location',
 
     locales_visible: false,
 
     top: 0,
 
     all_data_devices: ['123', '222'],
+    my_data_devices: '???',
     my_data_devices: 'default',
 
     //added checkbox value
     items: [{
-        name: '0',
-        value: 'Group A'
-      },
-      {
-        name: '1',
-        value: 'Group B'
-      },
-      {
-        name: '2',
-        value: 'Group C'
-      },
-      {
-        name: '3',
-        value: 'Group D'
-      },
-      {
-        name: '4',
-        value: 'Group E'
-      },
-      {
-        name: 'others',
-        value: ' Others'
-      },
+      name: '0',
+      value: 'Group A'
+    },
+    {
+      name: '1',
+      value: 'Group B'
+    },
+    {
+      name: '2',
+      value: 'Group C'
+    },
+    {
+      name: '3',
+      value: 'Group D'
+    },
+    {
+      name: '4',
+      value: 'Group E'
+    },
+    {
+      name: 'others',
+      value: ' Others'
+    },
     ],
 
 
     //navigation bar information
     navData: [{
-        text: '机器列表'
-      },
-      {
-        text: '未借出机器'
-      },
+      text: '机器列表'
+    },
+    {
+      text: '未借出机器'
+    },
 
     ],
   },
 
   checkboxChange(e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    //console.log('checkbox发生change事件，携带value值为：', e.detail.value)
     wx.cloud.callFunction({
       // 获取全部设备
       name: 'getLocationDevices',
@@ -83,11 +86,11 @@ Page({
         locationGroup: e.detail.value,
       },
       success: res => {
-        console.log(res)
+        //console.log(res)
         this.setData({
           alldevices: res.result.data,
         })
-        console.log('[数据库] [查询alldevices] 成功: ', res)
+        //console.log('[数据库] [查询alldevices] 成功: ', res)
       },
       fail: err => {
         wx.showToast({
@@ -150,7 +153,7 @@ Page({
    * 已选下拉框
    */
   mySelect(e) {
-    console.log(e)
+    //console.log(e)
     var name = e.currentTarget.dataset.name
     this.setData({
       grade_name: name,
@@ -159,19 +162,19 @@ Page({
   },
 
   //pull down to refresh page to show my devices
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     this.onLoad()
   },
 
-  onLoad: function(options) {
+  onLoad: function (options) {
     var that = this
+    var navH
 
 
-
-    if (app.globalData.operatorInfo) {} else {
+    if (app.globalData.operatorInfo) { } else {
       //console.log("not yet has userinfo")
       wx.getUserInfo({
-        success: function(res) {
+        success: function (res) {
           app.globalData.operatorInfo = res.userInfo.nickName
         }
       })
@@ -199,15 +202,75 @@ Page({
     // })
 
     wx.cloud.callFunction({
-      // 获取全部设备
-      name: 'getAllDevices',
+      // <<<<<<< HEAD
+      // 获取全部设备'getAllDevices',分页请求'paginator'
+      // =======
+      // >>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
+      name: 'paginator2',
       // 传给云函数的参数
       data: {
-        dbName:"devices",
-        pageIndex:1,
-        pageSize:10,
+        dbName: "devices",
+        pageIndex: 1,
+        pageSize: 50,
       },
       success: res => {
+        //console.log(res)
+        let fullset = res.result.data
+        console.log(fullset)
+        var holding = []
+        for (var i = 0; i < fullset.length; i++) {
+          if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
+            holding.push(fullset[i])
+
+            //删除已借机器
+            fullset.splice(i, 1)
+            i--
+          }
+        }
+        //console.log(res)
+        // console.log(res)
+        this.setData({
+          alldevices: fullset,
+          mydevices: holding,
+        })
+        that.setData({
+          all_data_devices: fullset,
+          my_data_devices: holding,
+        })
+        //console.log('[数据库] [查询alldevices] 成功: ', res)
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询alldevices失败'
+        })
+        console.error('[数据库] [查询alldevices] 失败：', err)
+      }
+    })
+    this.setData({
+       navH: app.globalData.navHeight,
+     })
+    //console.log(app.globalData.navHeight)
+  },
+  // 获取分页内容
+  loadPages: function (res) {
+    var that = this;
+    //获取分页信息
+    // var pageIndex = that.data.pageIndex;
+    // var pageSize = that.data.pageSize;
+
+    //发送请求
+
+    wx.cloud.callFunction({
+      name: 'paginator2',
+      // 传给云函数的参数
+      data: {
+        dbName: "devices",
+        pageIndex: that.data.pageIndex++,
+        pageSize: that.data.pageSize,
+      },
+      success: res => {
+        wx.hideLoading()
         console.log(res)
         let fullset = res.result.data
         //console.log(fullset)
@@ -222,15 +285,18 @@ Page({
           }
         }
         console.log(res)
-       // console.log(res)
+        // console.log(res)
         this.setData({
-          alldevices: fullset,
-          mydevices: holding,
+          alldevices: that.data.alldevices.concat(res.result.data),
+          // mydevices: holding,
         })
-        that.setData({
-          all_data_devices: fullset,
-          my_data_devices: holding,
-        })
+        ///hippo fix search if(this.search_condition)
+        console.log("hippocheck")
+        console.log(fullset)
+        // that.setData({
+        //   all_data_devices: fullset,
+        //   my_data_devices: holding,
+        // })
         console.log('[数据库] [查询alldevices] 成功: ', res)
       },
       fail: err => {
@@ -241,40 +307,89 @@ Page({
         console.error('[数据库] [查询alldevices] 失败：', err)
       }
     })
-  },
+    // wechatUtil.req(url, {
+    //   "pageNumber": pageNumber,
+    //   "pageSize": pageSize
+    // }, function (res) {
+    //   if (res.resultCode == 200) {
+    //     //返回成功
+    //     var roomList = that.data.roomList;
+    //     var reqRooms = res.resultContent;
 
+    //     //如果返回数据为空，则提示
+    //     if (reqRooms.length == 0) {
+    //       wx.showToast({
+    //         title: "没有更多的数据了...",
+    //         icon: 'fail',
+    //         duration: 1000
+    //       });
+
+    //       //分页失败，分页数据减1
+    //       if (pageNumber > 1) {
+    //         that.setData({
+    //           pageNumber: --pageNumber
+    //         });
+    //       }
+    //       return;
+    //     }
+
+    //     //如果分页数据不为空，则将新的分页数据追加到原数据智商
+    //     that.setData({
+    //       roomList: roomList.concat(reqRooms)
+    //     });
+
+    //   } else {
+
+    //     //如果数据加载失败，则提示
+    //     wx.showToast({
+    //       title: "加载数据失败",
+    //       icon: 'fail',
+    //       duration: 1000
+    //     });
+
+    //     //分页失败，分页数据回退
+    //     if (pageNumber > 1) {
+    //       that.setData({
+    //         pageNumber: --pageNumber
+    //       });
+    //     }
+    //   }
+    //   console.log(res);
+    // })
+
+  },
   /**
  * 上拉分页
  */
   onReachBottom: function () {
-//调试中
-  //   //上拉分页,将页码加1，然后调用分页函数loadRoom()
-  //   var that = this;
-  //   var pageNumber = that.data.pageNumber;
-  //   that.setData({
-  //     pageNumber: ++pageNumber
-  //   });
+    //调试中
+    //   //上拉分页,将页码加1，然后调用分页函数loadPages()
+    var that = this;
+    var pageIndex = that.data.pageIndex;
+    that.setData({
+      pageIndex: ++pageIndex
+    });
 
-  //   setTimeout(function () {
-  //     wx.showToast({
-  //       title: '加载中..',
-  //     }),
-  //       that.loadRooms();
-  //     that.setData({
-  //       title: "数据加载完毕"
-  //     })
-  //   }, 1000)
+    setTimeout(function () {
+      wx.showLoading({
+        title: '加载中..',
+      }),
+        that.loadPages();
+      // that.setData({
+      //   title: "数据加载完毕"
+      // })
+    }, 1000)
   },
 
-  gotoDeviceInfo: function(e) {
+  gotoDeviceInfo: function (e) {
     wx.navigateTo({
       url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id,
     })
   },
 
-  returnThisDevice: function(e) {
+  returnThisDevice: function (e) {
     var that = this
-    console.log(e)
+    //console.log(e)
     if (e.detail.userInfo) {
       wx.cloud.callFunction({
         name: 'ownByMe',
@@ -290,7 +405,7 @@ Page({
               content: 'You are already holding device ID =' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
               confirmText: 'Confirm',
               cancelText: 'Cancel',
-              success: function(res) {
+              success: function (res) {
                 if (res.confirm) {
                   console.log("确定还机")
                   wx.cloud.callFunction({
@@ -309,9 +424,9 @@ Page({
                       })
                       wx.navigateTo({
                         url: "../index_landing/index",
-                        success: function(res) {},
-                        fail: function(res) {},
-                        complete: function(res) {},
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
                       })
                     },
                     fail: console.error
@@ -326,9 +441,9 @@ Page({
               content: 'You are not currently holding this device!',
               confirmText: 'OK',
               showCancel: false,
-              success: function(res) {
-                if (res.confirm) {} else {
-                  console.log("取消")
+              success: function (res) {
+                if (res.confirm) { } else {
+                  //console.log("取消")
                 }
               }
             })
@@ -336,10 +451,10 @@ Page({
         },
         fail: console.error
       })
-    } else {}
+    } else { }
   },
 
-  returnAllDevice: function(e) {
+  returnAllDevice: function (e) {
     // if (app.globalData.operatorInfo) { } else {
     //   //console.log("not yet has userinfo")
     //   wx.getUserInfo({
@@ -355,9 +470,9 @@ Page({
         content: 'You are going to return all devices you currently holding',
         confirmText: 'Confirm',
         cancelText: 'Cancel',
-        success: function(res) {
+        success: function (res) {
           if (res.confirm) {
-            console.log("确定还ALL机")
+            //console.log("确定还ALL机")
             wx.cloud.callFunction({
               name: 'returnAllDevice',
               data: {
@@ -367,14 +482,14 @@ Page({
               },
               success(res) {
                 if (res.result == 0) {
-                  console.log("result is 0")
+                  //console.log("result is 0")
                   wx.showModal({
                     title: 'ERROR',
                     content: 'You dont have any device holding currently',
                     confirmText: 'Confirm',
                     showCancel: false,
-                    success: function(res) {
-                      if (res.confirm) {}
+                    success: function (res) {
+                      if (res.confirm) { }
                     }
                   })
                 } else {
@@ -383,7 +498,7 @@ Page({
                     content: 'Successfully returned device ID:' + res.result,
                     confirmText: 'Confirm',
                     showCancel: false,
-                    success: function(res) {
+                    success: function (res) {
                       if (res.confirm) {
                         that.onLoad()
                       }
@@ -395,16 +510,16 @@ Page({
               fail: console.error
             })
           } else {
-            console.log("取消")
+            //console.log("取消")
           }
         }
       })
-    } else {}
+    } else { }
   },
 
-  getDevice: function(e) {
-    console.log("This is getDevice")
-    console.log(e.currentTarget.dataset.id)
+  getDevice: function (e) {
+    //console.log("This is getDevice")
+    //console.log(e.currentTarget.dataset.id)
 
     wx.cloud.callFunction({
       // 云函数名称
@@ -414,7 +529,7 @@ Page({
         "id": e.currentTarget.dataset.id,
       },
       success(res) {
-        console.log(res)
+        //console.log(res)
         wx.navigateTo({
           url: "../deviceInfo/deviceInfo?id=" + e.currentTarget.dataset.id,
         })
@@ -429,14 +544,14 @@ Page({
     })
   },
 
-  getUserInfo: function(cb) {
+  getUserInfo: function (cb) {
     var that = this
     if (this.globalData.userInfo) {
       typeof cb == "function" && cb(this.globalData.userInfo)
     } else {
       wx.getUserInfo({
-        success: function(res) {
-          console.log('用户信息', res.userInfo)
+        success: function (res) {
+          //console.log('用户信息', res.userInfo)
           that.globalData.userInfo = res.userInfo
           typeof cb == "function" && cb(that.globalData.userInfo)
           that.setData({
@@ -447,49 +562,49 @@ Page({
     }
   },
 
-  getLogList: function(e) {
+  getLogList: function (e) {
     if (e.detail.userInfo) {
       wx.navigateTo({
         url: "../deviceLogList/deviceLogList",
-        success: function(res) {},
-        fail: function(res) {},
-        complete: function(res) {},
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) { },
       })
     }
   },
 
-  borrowDevice: function(e) {
+  borrowDevice: function (e) {
     if (e.detail.userInfo) {
       var that = this;
       var show;
       wx.scanCode({
         success: (res) => {
           //const scene = decodeURIComponent(res.result.scene)
-          console.log(res.path),
-            //if (res.result.indexOf("data") != -1) {
-            //app.globalData.cResult = res.result.slice(7);
-            //if (app.globalData.operatorInfo == undefined) {
-            //wx.getUserInfo({
-            //success: function (res2) {
-            //console.log(res2.userInfo.nickName)
-            // app.globalData.operatorInfo = res2.userInfo.nickName
-            //console.log(app.globalData.operatorInfo)
-            //}
-            //})
-            //}
-            //wx.navigateTo({
-            //url: "../addFunction/addFunction?id=" + "NA",
-            //success: function (res) { },
-            //fail: function (res) { },
-            //complete: function (res) { },
-            //})
-            wx.showToast({
-              title: '扫码成功',
-              icon: 'success',
-              duration: 2000
-            })
+          //console.log(res.path),
+          //if (res.result.indexOf("data") != -1) {
+          //app.globalData.cResult = res.result.slice(7);
+          //if (app.globalData.operatorInfo == undefined) {
+          //wx.getUserInfo({
+          //success: function (res2) {
+          //console.log(res2.userInfo.nickName)
+          // app.globalData.operatorInfo = res2.userInfo.nickName
+          //console.log(app.globalData.operatorInfo)
+          //}
+          //})
+          //}
+          //wx.navigateTo({
+          //url: "../addFunction/addFunction?id=" + "NA",
+          //success: function (res) { },
+          //fail: function (res) { },
+          //complete: function (res) { },
+          //})
+          wx.showToast({
+            title: '扫码成功',
+            icon: 'success',
+            duration: 2000
+          })
           if (res.path) {
-            console.log(res.path)
+            //console.log(res.path)
             wx.navigateTo({
               url: '/' + res.path
             })
@@ -515,21 +630,21 @@ Page({
             duration: 2000
           })
         },
-        complete: (res) => {}
+        complete: (res) => { }
       })
-    } else {}
+    } else { }
   },
 
-  swipe_to_return_device: function(e) {
+  swipe_to_return_device: function (e) {
     var that = this
     wx.showModal({
       title: 'Return Device?',
       content: 'You are already holding device #' + e.currentTarget.dataset.id + '. Are you want to Return Device?',
       confirmText: 'Confirm',
       cancelText: 'Cancel',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm) {
-          console.log("确定还机")
+          //console.log("确定还机")
           wx.cloud.callFunction({
             name: 'setDeviceReturn',
             data: {
@@ -540,10 +655,10 @@ Page({
             },
             success(res) {
               wx.showToast({
-                  title: "Confirmed",
-                  icon: 'success',
-                  duration: 3000
-                }),
+                title: "Confirmed",
+                icon: 'success',
+                duration: 3000
+              }),
                 that.onLoad()
             },
             fail(e) {
@@ -555,7 +670,7 @@ Page({
     })
   },
 
-  swipe_to_borrow_device: function(e) {
+  swipe_to_borrow_device: function (e) {
     var that = this
     wx.cloud.callFunction({
       name: 'ownByMe',
@@ -571,8 +686,8 @@ Page({
             content: 'You are already holding this device!',
             confirmText: 'OK',
             showCancel: false,
-            success: function(res) {
-              if (res.confirm) {}
+            success: function (res) {
+              if (res.confirm) { }
             }
           })
         } else {
@@ -582,9 +697,9 @@ Page({
             content: 'Are you confirm to borrow device #' + e.currentTarget.dataset.id + '?',
             confirmText: 'Confirm',
             cancelText: 'Cancel',
-            success: function(res) {
+            success: function (res) {
               if (res.confirm) {
-                console.log("确定借机")
+                //console.log("确定借机")
                 wx.cloud.callFunction({
                   name: 'setDeviceBorrow',
                   data: {
@@ -594,16 +709,16 @@ Page({
                   },
                   success(res) {
                     wx.showToast({
-                        title: "Confirmed",
-                        icon: 'success',
-                        duration: 3000
-                      }),
+                      title: "Confirmed",
+                      icon: 'success',
+                      duration: 3000
+                    }),
                       that.onLoad()
                   },
                   fail: console.error
                 })
               } else {
-                console.log("取消")
+                //console.log("取消")
               }
             }
           })
@@ -613,7 +728,7 @@ Page({
     })
   },
 
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return {
       title: '点机坊', // 转发后 所显示的title
       path: '/pages/index_landing/index'
@@ -640,30 +755,30 @@ Page({
     }
   },
 
-  locales_visible_change: function() {
-    this.setData({
-      locales_visible: true
+  locales_visible_change: function () {
+    wx.navigateTo({
+      url: "../location/location"
     })
   },
 
-  locales_hidden_change: function() {
-    this.setData({
-      locales_visible: false
-    })
-  },
+  // locales_hidden_change: function() {
+  //   this.setData({
+  //     locales_visible: false
+  //   })
+  // },
 
-  disable_touch_move: function() {
+  disable_touch_move: function () {
 
   },
 
   scrollTopFun(e) {
     let that = this;
     that.top = e.detail.scrollTop;
-    console.log(e)
+    //console.log(e)
     that.$apply();
   },
 
-  onSearch: function(e) {
+  onSearch: function (e) {
     // my_data_devices - 我的设备 
     // all_data_devices - 所有设备
     // my_search_devices - 我的查询设备
@@ -673,7 +788,7 @@ Page({
     var search_scope
 
     //格式化查询条件并以空格分离查询条件 
-    var search_condition = e.detail.replace(/\s+/g, ' ').replace(/(^\s*)|(\s*$)/g, "").split(' ')
+    that.data.search_condition = e.detail.replace(/\s+/g, ' ').replace(/(^\s*)|(\s*$)/g, "").split(' ')
 
     var my_search_devices
     var all_search_devices
@@ -692,8 +807,8 @@ Page({
 
       able_To_push = true;
 
-      for (var j = 0; j < search_condition.length; j++) {
-        if (search_scope.indexOf(search_condition[j].toLowerCase()) == "-1") {
+      for (var j = 0; j < that.data.search_condition.length; j++) {
+        if (search_scope.indexOf(that.data.search_condition[j].toLowerCase()) == "-1") {
           able_To_push = false;
           j++;
         }
@@ -711,8 +826,8 @@ Page({
 
       able_To_push = true;
 
-      for (var j = 0; j < search_condition.length; j++) {
-        if (search_scope.indexOf(search_condition[j].toLowerCase()) == "-1") {
+      for (var j = 0; j < that.data.search_condition.length; j++) {
+        if (search_scope.indexOf(that.data.search_condition[j].toLowerCase()) == "-1") {
           able_To_push = false;
           j++;
         }
@@ -730,7 +845,15 @@ Page({
     })
   },
 
-  onCancel:function(){
+  device_locale_label: function (e) {
+
+    wx.navigateTo({
+
+      url: "../location/location"
+    })
+  },
+
+  onCancel: function () {
     this.setData({
       alldevices: this.data.all_data_devices,
       mydevices: this.data.my_data_devices

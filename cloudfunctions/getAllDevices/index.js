@@ -23,6 +23,9 @@ exports.main = async (event, context) => {
       nickname: true,
       openid: true
     }).get();
+    let checkLocation = await db.collection('location').field({
+      location: true
+    }).get();
     let devicelist = await db.collection('devices').field({
       _id: true,
       device_name: true,
@@ -34,6 +37,11 @@ exports.main = async (event, context) => {
       for (j = 0; j < checkUser.data.length; j++) {
         if (devicelist.data[i].holding_open_id == checkUser.data[j].openid) {
           devicelist.data[i].holding_open_id = checkUser.data[j].nickname
+        }
+        for (k = 0; k < checkLocation.data.length; k++) {
+          if (devicelist.data[i].location_id == checkLocation.data[k]._id) {
+            devicelist.data[i].location_id = checkLocation.data[k].location
+          }
         }
       }
     }

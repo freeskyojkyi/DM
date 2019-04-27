@@ -1,6 +1,6 @@
 <view>
 <!-- <button class='scanDMSBtn'open-type="getUserInfo" bindgetuserinfo="goToDeviceList">Get Start</button> -->
-  <image class='bg-pic' open-type="getUserInfo" src='cloud://test-f05377.7465-test-f05377/resources/images/device management_big.jpg' bindgetuserinfo="goToDeviceList">
-    <button clase = "transparent" open-type="getUserInfo" bindgetuserinfo="goToDeviceList"></button>
-  </image> 
+  <image class='bg-pic' src='cloud://test-f05377.7465-test-f05377/resources/images/device management_big.jpg'/>
+  
+  <button class = "transparent" open-type="getUserInfo" bindgetuserinfo="goToDeviceList"/>
 </view>

@@ -20,30 +20,23 @@
 <but>
 -->
 
-<!-- <button  bindtap="device_locale_label">{{device_locale_label}}</button> -->
+<!-- <button  bindtap="device_locale_label">{{device_locale_label}}</button> --> 
 
  <!-- <view >
    <button bindtap='device_locale_label'>{{device_locale_label}}</button>
 </view> -->
 
 <!-- 模糊搜索 -->
-<form action="/">
+<van-nav-bar
+  title="Devices"
+  safe-area-inset-top="true"
+  fixed="true"
+/>
+<view class='container' style='margin-top:{{navH}}px'
+>
+<view action="/">
   <van-search v-model="value" placeholder="{{placeholder_search}}" show-action bind:cancel="onCancel" bind:search="onSearch" class="search-field"/>
-</form>
-
-<view class='top1'>
-  <!--checkbox add from here-->
-  <!-- 下拉需要显示的列表 -->
-  <view class="select_box" wx:if="{{select}}">
-    <checkbox-group bindchange="checkboxChange">
-      <label class="checkbox" wx:for="{{items}}">
-        {{item.value}}
-        <checkbox value="{{item.name}}" checked="{{item.checked}}" style='{{index==selectData.length-1&&"border:0;"}}' />
-      </label>
-    </checkbox-group>
-  </view>
 </view>
-
 
 <!-- 借机  -->
 <view class='actionItems'>
@@ -83,8 +76,8 @@
         <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
           <view slot="title">
             <view class="van-cell-text">{{item.device_name}}</view>
-            <van-tag type="success">No.{{item._id}}</van-tag>\n
-            <van-tag type="primary">Location {{item.location_id}}</van-tag>
+            <van-tag type="number">#{{item._id}}</van-tag>\n
+            <van-tag type="location">{{item.location_id}}</van-tag>
           </view>
         </van-cell>
       </van-cell-group>
@@ -99,6 +92,16 @@
           <image class='normal_icon' src='{{all_device_icon}}' mode='{{mode}}' /> {{all_device_label}}
         </view>
 <!-- loceles lable visible controller  -->
+        <!-- <view class='device-locale-container'>
+          <button class='device-locale-button' bindtap='locales_visible_change'>
+            <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
+          </button>
+        </view>
+      </view>
+    </scroll-view> -->
+
+
+<!-- loceles lable visible controller  --> 
         <view class='device-locale-container'>
           <button class='device-locale-button' bindtap='locales_visible_change'>
             <image class='small-icon' src='{{device_locale_icon}}' mode='{{mode}}' /> {{device_locale_label}}
@@ -106,14 +109,13 @@
         </view>
       </view>
     </scroll-view>
-
     <van-swipe-cell wx:for="{{alldevices}}" wx:key="{{item._id}}" id="swipe-cell" right-width="65" :on-close="onClose" class="my-devices-group">
       <van-cell-group>
         <van-cell is-link data-id="{{item._id}}" bindtap="gotoDeviceInfo" value="{{item.holding_open_id}}">
           <view slot="title">
             <view class="van-cell-text">{{item.device_name}}</view>
-            <van-tag type="success">No.{{item._id}}</van-tag>\n
-            <van-tag type="primary">Location {{item.location_id}}</van-tag>
+            <van-tag type="number">#{{item._id}}</van-tag>\n
+            <van-tag type="location">{{item.location_id}}</van-tag>
           </view>
         </van-cell>
       </van-cell-group>
@@ -121,3 +123,4 @@
     </van-swipe-cell>
   </view>
 </view>
+  </view>

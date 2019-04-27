@@ -4,7 +4,9 @@ var DEFAULT_COLOR = '#999';
 var COLOR_MAP = {
   danger: RED,
   primary: BLUE,
-  success: GREEN
+  success: GREEN,
+  number:'#336699',
+  location:'#86BBD8'
 };
 VantComponent({
   props: {

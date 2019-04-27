@@ -1,5 +1,14 @@
 <!--pages/deviceInfo/deviceInfo.wxml-->
-<view class='page-container'>
+
+<van-nav-bar
+  title="Device Details"
+  left-text="Back"
+  left-arrow
+  bind:click-left="backEvent"
+    fixed="true"
+  safe-area-inset-top="true"
+/>
+<view class='page-container' style='margin-top:{{navH}}px'>
   <view class='picture-container'>
     <image class='device-picture' src="{{pic_default}}" mode="{{mode}}"></image>
   </view>

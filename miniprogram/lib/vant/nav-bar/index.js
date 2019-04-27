@@ -1,4 +1,5 @@
 import { VantComponent } from '../common/component';
+const App = getApp();
 VantComponent({
   classes: ['title-class'],
   props: {
@@ -14,8 +15,15 @@ VantComponent({
     zIndex: {
       type: Number,
       value: 1
+    },
+
+    navH:{
+      type: Number,
+      value: App.globalData.navHeight - 46
     }
   },
+
+
   methods: {
     onClickLeft: function onClickLeft() {
       this.$emit('click-left');
@@ -24,4 +32,11 @@ VantComponent({
       this.$emit('click-right');
     }
   }
+  // lifetimes:{
+  //   attached:function() {
+  //     this.setDada({
+  //       navH: App.globalData.navHeight
+  //     })
+  //   }
+  // }
 });

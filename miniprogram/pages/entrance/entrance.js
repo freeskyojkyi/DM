@@ -71,13 +71,17 @@ Page({
    goToDeviceList: function (e) {
      //console.log(this.data.qr)
      if (this.data.qr=="y") {
+       if (e.detail.userInfo) {
        wx.navigateTo({
          url: '../deviceInfo/deviceInfo?qr=y&id=' + this.data.id
        })
+       }
      } else {
+       if (e.detail.userInfo) {
     wx.navigateTo({
       url:'../index_landing/index'
     })
+    }
        wx.getUserInfo({
          success: function (res) {
            app.globalData.operatorInfo = res.userInfo.nickName
