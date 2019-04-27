@@ -1,10 +1,96 @@
 
-.btn{
-margin-top:100rpx;
-padding:20rpx
+page{
+  background-color:#f1f1f1;
 }
+
+/* .btn{
+margin-top:100rpx;
+padding:20rpx；
+
+} */
 .confirmbtn{
-  float:left;
-  width:48%;
+  /* width:40%; */
   margin-right:20rpx
 }
+
+.cu-form-group {
+background-color:#fff;
+padding:1rpx 30rpx;
+display:flex;
+align-items:center;
+min-height:100rpx;
+justify-content:space-between;
+border-top:1rpx solid #eee;
+
+
+}
+
+.cu-form-group .title {
+min-width:calc(4em + 30rpx);
+text-align:justify;
+padding-left: 50rpx;
+padding-right:50rpx;
+font-size:30rpx;
+position:relative;
+height:60rpx;
+line-height:60rpx;
+font-weight: bolder;
+
+}
+checkbox {
+-webkit-tap-highlight-color:transparent;
+display:inline-block;
+
+}
+
+
+.bg-red {
+background-color:orange;
+color:#fff;
+
+}
+
+
+.margin-tb-sm {
+margin-top:20rpx;
+margin-bottom:20rpx;
+
+}
+.cu-btn.lg {
+padding:0 40rpx;
+font-size:32rpx;
+height:80rpx;
+
+}
+.cu-btn {
+/* position:relative; */
+display:inline-flex;
+align-items:center;
+justify-content:center;
+box-sizing:border-box;
+padding:0 30rpx;
+font-size:28rpx;
+height:64rpx;
+line-height:1;
+text-align:center;
+text-decoration:none;
+overflow:visible;
+margin-left:initial;
+transform:translate(0rpx, 0rpx);
+margin-right:initial;
+
+}
+
+.padding {
+padding:30rpx;
+
+}
+.flex-direction {
+flex-direction:column;
+
+}
+.flex {
+display:flex;
+
+}
+
