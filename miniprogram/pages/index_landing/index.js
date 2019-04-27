@@ -20,9 +20,9 @@ Page({
     scan_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/scan_white.png',
     return_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/in_white.png',
     log_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/log_icon_hollowout_white.png',
-    device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/device-locale-icon.png',
+    device_locale_icon: 'cloud://test-f05377.7465-test-f05377/resources/images/device-locale-icon-black.png',
     my_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/my-device-icon.png',
-    all_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png',
+    all_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/images/all-device-icon-white.png',
 
     placeholder_search: "Please input keywords",
     my_device_label: 'Hand',
