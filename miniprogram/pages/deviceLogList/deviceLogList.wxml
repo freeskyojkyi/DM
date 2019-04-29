@@ -11,6 +11,6 @@
 
 <view class='container' style='margin-top:{{navH}}px'>
   <block wx:for="{{checkSummary}}" wx:for-item="item" wx:key="_id">
-    <van-cell title="{{item.deviceid}}     {{item.date}}" label="from: {{item.userfrom}} to: {{item.userto}}" value="{{item.operationtype}}" size="small" />
+    <van-cell title="{{item.deviceid}}     {{item.date}}" label="from: {{item.userfrom}} to: {{item.userto}}" value="{{item.operationtype}}　" size="small" />
   </block>
 </view>
