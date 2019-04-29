@@ -1,1 +1,42 @@
 /* miniprogram/pages/deviceLogList/deviceLogList.wxss */
+
+.log-header{
+  position: fixed;
+  z-index: 999;
+  height: 50rpx;
+  width: 100%;
+
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #3a454d;
+}
+
+.log-header-content{
+  position: relative;
+  left: 30rpx;
+  font-family: '微软雅黑';
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  font-weight: bold;
+  font-size: 69rpx;
+  color: #e6e6e6;
+}
+
+.normal_icon {
+  height: 50rpx;
+  width: 50rpx;
+  margin-right: 10px;
+  padding: 0;
+}
+
+.container{
+  padding-top: 60rpx;
+}
+

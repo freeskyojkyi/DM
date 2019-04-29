@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checkSummary: []
+    checkSummary: [],
+    headerTitle: "Archieve",
+    log_icon: "cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png"
   },
 
   /**

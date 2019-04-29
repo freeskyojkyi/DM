@@ -1,6 +1,14 @@
 <!--miniprogram/pages/deviceLogList/deviceLogList.wxml-->
 <van-nav-bar title="Log" left-text="Back" left-arrow bind:click-left="backEvent" fixed="true" safe-area-inset-top="true" />
 
+<view class='log-header'>
+  <view class='log-header-content'>
+    <image class='normal_icon' src='{{log_icon}}' mode='{{mode}}' /> 
+    {{headerTitle}}
+  </view>
+</view>
+
+
 <view class='container' style='margin-top:{{navH}}px'>
   <block wx:for="{{checkSummary}}" wx:for-item="item" wx:key="_id">
     <van-cell title="{{item.deviceid}}     {{item.date}}" label="from: {{item.userfrom}} to: {{item.userto}}" value="{{item.operationtype}}" size="small" />
