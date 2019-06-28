@@ -154,7 +154,7 @@ Page({
       name: 'getDeviceInfo',
       // 传给云函数的参数
       data: {
-        id: options.id,
+        id: parseInt(options.id)
       },
       success(res) {
         if (res.result.data.pic_url != undefined && res.result.data.pic_url != "") {
