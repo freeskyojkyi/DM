@@ -239,7 +239,7 @@ Page({
     wx.cloud.callFunction({
       name: 'ownByMe',
       data: {
-        deviceid: that.pageid,
+        deviceid: parseInt(that.pageid),
       },
       success(res) {
         //console.log(res)
@@ -267,7 +267,7 @@ Page({
                 wx.cloud.callFunction({
                   name: 'setDeviceBorrow',
                   data: {
-                    deviceid: that.pageid,
+                    deviceid: parseInt(that.pageid),
                     operationtype: 0,
                     operatorNickname: app.globalData.operatorInfo
                   },
@@ -303,7 +303,7 @@ Page({
       wx.cloud.callFunction({
         name: 'ownByMe',
         data: {
-          deviceid: that.pageid,
+          deviceid: parseInt(that.pageid),
         },
         success(res) {
           //console.log(res)
@@ -320,7 +320,7 @@ Page({
                   wx.cloud.callFunction({
                     name: 'setDeviceReturn',
                     data: {
-                      deviceid: that.pageid,
+                      deviceid: parseInt(that.pageid),
                       returnTo: "GZAdmin",
                       operationtype: 1,
                       operatorNickname: app.globalData.operatorInfo
