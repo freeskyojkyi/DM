@@ -25,7 +25,7 @@ Page({
     all_device_icon: 'cloud://test-f05377.7465-test-f05377/resources/images/all-device-icon-white.png',
 
     placeholder_search: "Please input keywords",
-    my_device_label: 'Hand',
+    my_device_label: 'Reserved',
     all_device_label: 'Store',
     device_locale_label: 'Location',
 
