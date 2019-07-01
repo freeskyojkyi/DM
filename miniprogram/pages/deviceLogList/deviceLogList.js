@@ -8,7 +8,7 @@ Page({
    */
   data: {
     checkSummary: [],
-    headerTitle: "Archieve",
+    headerTitle: "Archive",
     log_icon: "cloud://test-f05377.7465-test-f05377/resources/icons/all-device-icon.png"
   },
 
