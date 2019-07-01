@@ -9,11 +9,11 @@ exports.main = async (event, context) => {
   var dbName = event.dbName;
   var filter = event.filter ? event.pageIndex : null;
   var pageIndex = event.pageIndex ? event.pageIndex : 1;
-  var pageSize = event.pageSize ? event.pageSize : 50;
+  var pageSize = event.pageSize ?        event.pageSize : 300;
   var devicelist = ["1", "2", "test"];
   const countResult = await db.collection(dbName).where(filter).count()
   const total = countResult.total
-  const totalPage = Math.ceil(total / 50)
+  const totalPage = Math.ceil(total / 300)
   var hasMore;
   if (pageIndex > totalPage || pageIndex == totalPage) {
     hasMore = false;
@@ -24,6 +24,7 @@ exports.main = async (event, context) => {
   try {
     let devicelist = await db.collection(dbName).where(filter).skip((pageIndex - 1) * pageSize).limit(pageSize).get();
     devicelist.hasMore = hasMore;
+    console.log(devicelist);
     let checkUser = await db.collection('user').field({
       nickname: true,
       openid: true

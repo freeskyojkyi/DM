@@ -6,11 +6,12 @@ Page({
     //参数信息
     search_condition:[],
     pageIndex: 1,
-    pageSize: 50,
+    pageSize: 300,
     alldevices: [],
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     grade_name: '--请选择Device Group--',
     currentTab: 0,
+    hasMore:false,
     borrow_button_name: 'Scan',
     borrow_button_label: 'Borrow',
     log_button_name: 'Log',
@@ -163,14 +164,12 @@ Page({
 
   //pull down to refresh page to show my devices
   onPullDownRefresh: function () {
-    this.onLoad()
+  //  this.onLoad()
   },
 
   onLoad: function (options) {
     var that = this
     var navH
-
-
     if (app.globalData.operatorInfo) { } else {
       //console.log("not yet has userinfo")
       wx.getUserInfo({
@@ -206,17 +205,19 @@ Page({
       // 获取全部设备'getAllDevices',分页请求'paginator'
       // =======
       // >>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
-      name: 'paginator2',
+      name: 'getAllDevicesList',
       // 传给云函数的参数
       data: {
         dbName: "devices",
-        pageIndex: 1,
-        pageSize: 50,
+        //pageIndex: that.data.pageIndex++,
+        //pageSize: 300,
       },
       success: res => {
         //console.log(res)
-        let fullset = res.result.data
-        console.log(fullset)
+        let fullset = res.result
+        //that.data.hasMore = res.result.hasMore
+        console.log(res.result)
+        //console.log(that.data.pageIndex)
         var holding = []
         for (var i = 0; i < fullset.length; i++) {
           if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
@@ -227,6 +228,8 @@ Page({
             i--
           }
         }
+ 
+
         //console.log(res)
         // console.log(res)
         this.setData({
@@ -247,9 +250,64 @@ Page({
         console.error('[数据库] [查询alldevices] 失败：', err)
       }
     })
+
+    //        while (that.data.hasMore){
+    // wx.cloud.callFunction({
+    //   // <<<<<<< HEAD
+    //   // 获取全部设备'getAllDevices',分页请求'paginator'
+    //   // =======
+    //   // >>>>>>> c5558e7d670b99279cbdf3ee567d13cb13bf8c9d
+    //   name: 'paginator2',
+    //   // 传给云函数的参数
+    //   data: {
+    //     dbName: "devices",
+    //     pageIndex: that.data.pageIndex++,
+    //     pageSize: 100,
+    //   },
+    //   success: res => {
+    //     //console.log(res)
+    //     fullset = res.result.data
+    //     that.data.hasMore = res.result.hasMore
+    //     console.log(that.data.hasMore)
+    //     console.log(that.data.pageIndex)
+    //     var holding = []
+    //     for (var i = 0; i < fullset.length; i++) {
+    //       if (fullset[i].holding_open_id == app.globalData.operatorInfo) {
+    //         holding.push(fullset[i])
+
+    //         //删除已借机器
+    //         fullset.splice(i, 1)
+    //         i--
+    //       }
+    //     }
+
+
+    //     //console.log(res)
+    //     // console.log(res)
+    //     this.setData({
+    //       alldevices: fullset,
+    //       mydevices: holding,
+    //     })
+    //     that.setData({
+    //       all_data_devices: fullset,
+    //       my_data_devices: holding,
+    //     })
+    //     //console.log('[数据库] [查询alldevices] 成功: ', res)
+    //   },
+    //   fail: err => {
+    //     wx.showToast({
+    //       icon: 'none',
+    //       title: '查询alldevices失败'
+    //     })
+    //     console.error('[数据库] [查询alldevices] 失败：', err)
+    //   }
+    // })
+
+    //     }
     this.setData({
        navH: app.globalData.navHeight,
      })
+    
     //console.log(app.globalData.navHeight)
   },
   // 获取分页内容
@@ -261,7 +319,7 @@ Page({
 
     //发送请求
 
-    wx.cloud.callFunction({
+    wx.cloud.callFunction( {
       name: 'paginator2',
       // 传给云函数的参数
       data: {
@@ -271,7 +329,7 @@ Page({
       },
       success: res => {
         wx.hideLoading()
-        console.log(res)
+        //console.log(res)
         let fullset = res.result.data
         //console.log(fullset)
         var holding = []
@@ -284,20 +342,20 @@ Page({
             i--
           }
         }
-        console.log(res)
+        //console.log(res)
         // console.log(res)
         this.setData({
           alldevices: that.data.alldevices.concat(res.result.data),
           // mydevices: holding,
         })
         ///hippo fix search if(this.search_condition)
-        console.log("hippocheck")
-        console.log(fullset)
+        //console.log("hippocheck")
+        //console.log(fullset)
         // that.setData({
         //   all_data_devices: fullset,
         //   my_data_devices: holding,
         // })
-        console.log('[数据库] [查询alldevices] 成功: ', res)
+        //console.log('[数据库] [查询alldevices] 成功: ', res)
       },
       fail: err => {
         wx.showToast({
