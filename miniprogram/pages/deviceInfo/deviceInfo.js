@@ -154,7 +154,7 @@ Page({
       name: 'getDeviceInfo',
       // 传给云函数的参数
       data: {
-        id: parseInt(options.id)
+        id: options.id
       },
       success(res) {
         if (res.result.data.pic_url != undefined && res.result.data.pic_url != "") {
@@ -239,7 +239,7 @@ Page({
     wx.cloud.callFunction({
       name: 'ownByMe',
       data: {
-        deviceid: parseInt(that.pageid),
+        deviceid: that.pageid,
       },
       success(res) {
         //console.log(res)
@@ -267,7 +267,7 @@ Page({
                 wx.cloud.callFunction({
                   name: 'setDeviceBorrow',
                   data: {
-                    deviceid: parseInt(that.pageid),
+                    deviceid: that.pageid,
                     operationtype: 0,
                     operatorNickname: app.globalData.operatorInfo
                   },
@@ -303,7 +303,7 @@ Page({
       wx.cloud.callFunction({
         name: 'ownByMe',
         data: {
-          deviceid: parseInt(that.pageid),
+          deviceid: that.pageid,
         },
         success(res) {
           //console.log(res)

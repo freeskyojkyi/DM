@@ -178,6 +178,8 @@ Page({
         }
       })
     }
+
+    console.log(app.globalData.operatorInfo)
     // wx.cloud.callFunction({
     //      // 获取我的设备
     //   name: 'getmyDevices',
@@ -229,9 +231,6 @@ Page({
           }
         }
  
-
-        //console.log(res)
-        // console.log(res)
         this.setData({
           alldevices: fullset,
           mydevices: holding,
@@ -240,7 +239,7 @@ Page({
           all_data_devices: fullset,
           my_data_devices: holding,
         })
-        //console.log('[数据库] [查询alldevices] 成功: ', res)
+        console.log('[数据库] [查询alldevices] 成功: ', res)
       },
       fail: err => {
         wx.showToast({

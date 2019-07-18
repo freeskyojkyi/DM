@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/entrance/entrance",
+    "pages/location/location",
     "pages/index_landing/index",
     "pages/deviceInfo/deviceInfo",
-    "pages/location/location",
     "pages/deviceLogList/deviceLogList"
   ],
   "window": {

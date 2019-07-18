@@ -5,21 +5,19 @@
 
   <form bindsubmit='submit'>
     <view class='location'>
-      <view class='data'>
-        <checkbox-group name="selectedlocation" bindchange="chkboxChange">
+      <checkbox-group name="selectedlocation" bindchange="chkboxChange">
 
-          <block wx:for="{{locationdata}}" wx:for-item="item" wx:key="_id">
-            <label>
-              <view class="cu-form-group margin-top">
-                <view class="title">{{item.location}}</view>
-                <checkbox value="{{item.location}}" checked="{{item.checked}}" />
-              </view>
-            </label>
+        <block wx:for="{{locationdata}}" wx:for-item="item" wx:key="_id">
+          <label>
+            <view class="cu-form-group margin-top">
+              <view class="title">{{item.location}}</view>
+              <checkbox value="{{item.location}}" checked="{{item.checked}}" />
+            </view>
+          </label>
+        </block>
+      </checkbox-group>
 
-          </block>
-        </checkbox-group>
-      </view>
-      <view class="padding flex flex-direction">
+      <view class="padding flex flex-direction bottom">
         <button class="confirmbtn cu-btn bg-red margin-tb-sm lg" form-type='submit' disabled="{{disabled}}">Submit</button>
         <button class=" cu-btn bg-reset margin-tb-sm lg" bindtap='resetbtn'>Reset</button>
 
