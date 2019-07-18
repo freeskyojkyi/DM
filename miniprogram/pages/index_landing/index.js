@@ -637,25 +637,6 @@ Page({
       var show;
       wx.scanCode({
         success: (res) => {
-          //const scene = decodeURIComponent(res.result.scene)
-          //console.log(res.path),
-          //if (res.result.indexOf("data") != -1) {
-          //app.globalData.cResult = res.result.slice(7);
-          //if (app.globalData.operatorInfo == undefined) {
-          //wx.getUserInfo({
-          //success: function (res2) {
-          //console.log(res2.userInfo.nickName)
-          // app.globalData.operatorInfo = res2.userInfo.nickName
-          //console.log(app.globalData.operatorInfo)
-          //}
-          //})
-          //}
-          //wx.navigateTo({
-          //url: "../addFunction/addFunction?id=" + "NA",
-          //success: function (res) { },
-          //fail: function (res) { },
-          //complete: function (res) { },
-          //})
           wx.showToast({
             title: '扫码成功',
             icon: 'success',
