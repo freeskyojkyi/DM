@@ -12,6 +12,7 @@
   <view class='picture-container'>
     <image class='device-picture' src="{{pic_default}}" mode="{{mode}}"></image>
   </view>
+  
   <view class='device-information-container'>
     <view class='device-information name-padding'>
       <view class='informaion-title device-name'>
